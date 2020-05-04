@@ -45,3 +45,26 @@
 - **Cultural Sensitivity**: 
   
 ### 2. Details
+
+- **Usage & States**
+  - inactive: *normal*
+  - hover
+  - active: *pressed*
+  - selected
+ 
+- Style
+  - realism: use of shadows
+  - friendly: roundness, curves
+  
+## Animations
+ - opacity
+ - two dimensional transform
+ - scale
+ - rotate
+ - skew
+ - motion path
+ - morphing
+ - line drawing
+ - clipping and masking
+ - Filter & Effects
+ - Distorsion
