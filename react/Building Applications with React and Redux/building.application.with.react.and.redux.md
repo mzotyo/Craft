@@ -207,8 +207,10 @@ function Hi() {
 ### ESLint
 
 **package.json**
+
 ```
 {
+  ...
   "eslintConfig": {
     "extends": [
       "eslint:recommended",
@@ -328,7 +330,8 @@ const HelloWorld = (props) => <h1>Hello World</h1>
 >  receive but merely forward them
 >  down ... it's a good time to introduce
 >  some container components."
->  - Dan Ambarmov -
+>
+>  -Dan Ambarmov-
 
 ## 3. Initial App Structure
 
@@ -429,23 +432,21 @@ render(
 **Header.js**
 
 ```
-import React from 'react';
-import {Route} from 'react-router-dom';
-import HomePage from './home/HomePage';
-import AboutPage from './about/AboutPage';
-import Header from './common/Header';
+import React from "react";
+import { NavLink } from "react-router-dom";
 
-function App() {
+const Header = () => {
+    const activeStyle = { color: "#F15B2A"};
+
     return (
-        <div className="container-fluid">
-            <Header />
-            <Route exact path="/" component={HomePage} />
-            <Route path="/about" component={AboutPage} />
-        </div>
+        <nav>
+            <NavLink to="/" activeStyle={activeStyle} exact>Home</NavLink> {" | "}
+            <NavLink to="/about" activeStyle={activeStyle}>About</NavLink>
+        </nav>
     )
 }
 
-export default App;
+export default Header;
 ```
 
 **App.js**
@@ -547,7 +548,8 @@ Redux is a cetralized client side local database (store).
 
 > "... If you aren't sure if you need it,
 >  you don't need it"
->  Pete Hunt
+>
+>  -Pete Hunt-
 
 #### Redux core proinciples
 
@@ -612,7 +614,7 @@ function myReducer(state, action) {
 }
 ```
 
-All reducers are called when an action is dispatched. The switch statements make sure that the intended one will be executed.
+All reducers are called when an action is dispatched. The switch statements makes sure that the intended one will be executed.
 
 > "Write independent small reducer
 >  functions that are each responsible for
@@ -620,7 +622,7 @@ All reducers are called when an action is dispatched. The switch statements make
 >  We call this pattern 'reducer composition'.
 >  A given action could be handled by all, some, or non of them."
 >  
->  Redux FAQ
+>  -Redux FAQ-
 
 ## 5. Connect React to Redux
 
@@ -632,7 +634,7 @@ All reducers are called when an action is dispatched. The switch statements make
 - Focus on how things work
 - Aware of Redux
 - Subscribe to Redux State
-- Dispatch redux actions
+- Dispatch Redux actions
 
 **Presentational**
 
@@ -891,3 +893,96 @@ export default function courseReducer(state = [], action) {
   }
 }
 ```
+
+## 7. Async in Redux
+
+**package.json**
+
+```
+...
+"scripts": {
+    "start": "run-p start:dev start:api",
+    "start:dev": "webpack-dev-server --config webpack.config.dev.js --port 3000",
+    "prestart:api": "node tools/createMockDb.js",
+    "start:api": "node tools/apiServer.js"
+  },
+...
+```
+
+**webpack.config.dv.js**
+
+```
+...
+plugins: [
+    new webpack.DefinePlugin({
+      "process.env.API_URL": JSON.stringify("http://localhost:3001"),
+    }),
+	...
+```
+
+### Middleware and Async Library Options
+
+Redux Middleware runs between dispatching an action and the moment when it reaches the reducer.
+
+ 
+Handles crosscutting concerns:
+
+- Handling async API calls
+- Logging
+- Crash reporting
+- Routing
+
+Popular libraries for handling async in Redux:
+
+- **redux-thunk**: Return functions from action creators
+- redux-promise: Use promises for async
+- redux-observable: Use RxJS observables
+- **redux-saga**: Use generators
+
+The two most popular choises:
+
+**redux-thunk**
+
+- Functions
+- Clunkcy to test
+- Easy to learm
+
+**redux-saga**
+
+- Generators
+- Easy to test
+- Hard to learn
+
+### Thunk
+
+Thunk is a function that wraps an expression in order to delay its evaluation.
+
+```
+export function deleteAuthor(authorId) {
+	return (dispath, getState) => {
+		return AuthorApi.deleteAuthor(authorId)
+		.then(() => {
+			dispatch(deleteAuthor(authorId));
+		})
+		.catch(handleError);
+	}
+}
+```
+
+Without thunk would be
+
+```
+export function deleteAuthor(dispatch, authorId) {
+	return AuthorApi.deleteAuthor(authorId)
+	.then(() => {
+		dispatch(deleteAuthor(authorId));
+	})
+	.catch(handleError);
+}
+```
+
+Reasons to use Middleware:
+
+- **Consistency**: Without Middleware signatures of dispatch calls will differ depending on whether they are sync or async calls.
+- **Purity**: Avoids binding our code to side effects.
+- **Easier testing** 
