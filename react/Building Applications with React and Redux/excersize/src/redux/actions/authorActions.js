@@ -6,13 +6,13 @@ export function loadAuthorsSuccess(authors) {
 }
 
 export function loadAuthors() {
-  return function (dispatch) {
+  return function(dispatch) {
     return authorApi
       .getAuthors()
-      .then((authors) => {
+      .then(authors => {
         dispatch(loadAuthorsSuccess(authors));
       })
-      .catch((error) => {
+      .catch(error => {
         throw error;
       });
   };
