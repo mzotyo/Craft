@@ -986,3 +986,118 @@ Reasons to use Middleware:
 - **Consistency**: Without Middleware signatures of dispatch calls will differ depending on whether they are sync or async calls.
 - **Purity**: Avoids binding our code to side effects.
 - **Easier testing** 
+
+### Refactor code
+
+**CoursePage.js**
+```
+import React from "react";
+import { connect } from "react-redux";
+import * as courseActions from "../../redux/actions/courseActions";
+import PropTypes from "prop-types";
+import { bindActionCreators } from "redux";
+
+class CoursesPage extends React.Component {
+  componentDidMount() {
+    this.props.actions.loadCourses().catch((error) => {
+      alert("Loading courses failed" + error);
+    });
+  }
+
+  render() {
+    return (
+      <>
+        <h2>Courses</h2>
+        {this.props.courses.map((course) => (
+          <div key={course.title}>{course.title}</div>
+        ))}
+      </>
+    );
+  }
+}
+
+CoursesPage.propTypes = {
+  courses: PropTypes.array.isRequired,
+  actions: PropTypes.object.isRequired,
+};
+
+function mapStateToProps(state) {
+  return {
+    courses: state.courses,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(courseActions, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
+```
+
+**configureStore.js**
+
+```
+...
+import thunk from "redux-thunk";
+
+...
+  return createStore(
+    ...
+    composeEnhancers(applyMiddleware(thunk, reduxImmutableStateInvariant()))
+  );
+}
+```
+
+**actionTypes.js**
+
+```
+...
+export const LOAD_COURSES_SUCCESS = "LOAD_COURSES_SUCCESS";
+```
+
+**courseActions.js**
+
+```
+import * as types from "./actionTypes";
+import * as courseApi from "../../api/courseApi";
+
+export function createCourse(course) {
+  return { type: types.CREATE_COURSE, course };
+}
+
+export function loadCoursesSuccess(courses) {
+  return { type: types.LOAD_COURSES_SUCCESS, courses };
+}
+
+export function loadCourses() {
+  return function (dispatch) {
+    return courseApi
+      .getCourses()
+      .then((courses) => {
+        dispatch(loadCoursesSuccess(courses));
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
+}
+```
+
+**courseReducer.js**
+
+```
+import * as types from "../actions/actionTypes";
+
+export default function courseReducer(state = [], action) {
+  switch (action.type) {
+    case types.CREATE_COURSE:
+      return [...state, { ...action.course }];
+    case types.LOAD_COURSES_SUCCESS:
+      return action.courses;
+    default:
+      return state;
+  }
+}
+```
