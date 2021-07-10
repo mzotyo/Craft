@@ -987,30 +987,42 @@ Reasons to use Middleware:
 - **Purity**: Avoids binding our code to side effects.
 - **Easier testing** 
 
-### Refactor code
+### Loading Data with async
 
 **CoursePage.js**
+
 ```
 import React from "react";
 import { connect } from "react-redux";
 import * as courseActions from "../../redux/actions/courseActions";
+import * as authorActions from "../../redux/actions/authorActions";
+
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
+import CourseList from "./CourseList";
 
 class CoursesPage extends React.Component {
   componentDidMount() {
-    this.props.actions.loadCourses().catch((error) => {
-      alert("Loading courses failed" + error);
-    });
+    const { courses, authors, actions } = this.props;
+
+    if (courses.length === 0) {
+      actions.loadCourses().catch((error) => {
+        alert("Loading courses failed" + error);
+      });
+    }
+
+    if (authors.length === 0) {
+      actions.loadAuthors().catch((error) => {
+        alert("Loading authorss failed" + error);
+      });
+    }
   }
 
   render() {
     return (
       <>
         <h2>Courses</h2>
-        {this.props.courses.map((course) => (
-          <div key={course.title}>{course.title}</div>
-        ))}
+        <CourseList courses={this.props.courses} />
       </>
     );
   }
@@ -1018,23 +1030,86 @@ class CoursesPage extends React.Component {
 
 CoursesPage.propTypes = {
   courses: PropTypes.array.isRequired,
+  authors: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    courses: state.courses,
+    courses:
+      state.authors.length === 0
+        ? []
+        : state.courses.map((course) => {
+            return {
+              ...course,
+              authorName: state.authors.find((a) => a.id === course.authorId)
+                .name,
+            };
+          }),
+    authors: state.authors,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(courseActions, dispatch),
+    actions: {
+      loadCourses: bindActionCreators(courseActions.loadCourses, dispatch),
+      loadAuthors: bindActionCreators(authorActions.loadAuthors, dispatch),
+    },
   };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
 ```
+
+**CourseList.js**
+
+```
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+
+const CourseList = ({ courses }) => (
+  <table className="table">
+    <thead>
+      <tr>
+        <th />
+        <th>Title</th>
+        <th>Author</th>
+        <th>Category</th>
+      </tr>
+    </thead>
+    <tbody>
+      {courses.map(course => {
+        return (
+          <tr key={course.id}>
+            <td>
+              <a
+                className="btn btn-light"
+                href={"http://pluralsight.com/courses/" + course.slug}
+              >
+                Watch
+              </a>
+            </td>
+            <td>
+              <Link to={"/course/" + course.slug}>{course.title}</Link>
+            </td>
+            <td>{course.authorName}</td>
+            <td>{course.category}</td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+);
+
+CourseList.propTypes = {
+  courses: PropTypes.array.isRequired
+};
+
+export default CourseList;
+```
+
 
 **configureStore.js**
 
@@ -1055,7 +1130,35 @@ import thunk from "redux-thunk";
 ```
 ...
 export const LOAD_COURSES_SUCCESS = "LOAD_COURSES_SUCCESS";
+export const LOAD_AUTHORS_SUCCESS = "LOAD_AUTHORS_SUCCESS";
 ```
+
+
+**authorActions.js**
+
+```
+import * as types from "./actionTypes";
+import * as authorApi from "../../api/authorApi";
+
+export function loadAuthorsSuccess(authors) {
+  return { type: types.LOAD_AUTHORS_SUCCESS, authors };
+}
+
+export function loadAuthors() {
+  return function (dispatch) {
+    return authorApi
+      .getAuthors()
+      .then((authors) => {
+        dispatch(loadAuthorsSuccess(authors));
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
+}
+
+```
+
 
 **courseActions.js**
 
@@ -1085,12 +1188,29 @@ export function loadCourses() {
 }
 ```
 
+**authorReducer.js**
+
+```
+import * as types from "../actions/actionTypes";
+import initialState from "./initialState";
+
+export default function authorReducer(state = initialState.authors, action) {
+  switch (action.type) {
+    case types.LOAD_AUTHORS_SUCCESS:
+      return action.authors;
+    default:
+      return state;
+  }
+}
+```
+
 **courseReducer.js**
 
 ```
 import * as types from "../actions/actionTypes";
+import initialState from "./initialState";
 
-export default function courseReducer(state = [], action) {
+export default function courseReducer(state = initialState.courses, action) {
   switch (action.type) {
     case types.CREATE_COURSE:
       return [...state, { ...action.course }];
@@ -1100,4 +1220,134 @@ export default function courseReducer(state = [], action) {
       return state;
   }
 }
+```
+
+**index.js**
+
+```
+import { combineReducers } from "redux";
+import courses from "./courseReducer";
+import authors from "./authorReducer";
+
+const rootReducer = combineReducers({
+  courses,
+  authors,
+});
+
+export default rootReducer;
+```
+
+**initialState.js**
+
+```
+export default {
+  courses: [],
+  authors: [],
+};
+```
+
+## 8. Aync Writes in Redux
+
+**ManageCoursePage.js**
+
+```
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { loadCourses, saveCourse } from "../../redux/actions/courseActions";
+import { loadAuthors } from "../../redux/actions/authorActions";
+import PropTypes from "prop-types";
+import CourseForm from "./CourseForm";
+import { newCourse } from "../../../tools/mockData";
+
+function ManageCoursePage({
+  courses,
+  authors,
+  loadAuthors,
+  loadCourses,
+  saveCourse,
+  history,
+  ...props
+}) {
+  const [course, setCourse] = useState({ ...props.course });
+  const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    if (courses.length === 0) {
+      loadCourses().catch(error => {
+        alert("Loading courses failed" + error);
+      });
+    } else {
+      setCourse({ ...props.course });
+    }
+
+    if (authors.length === 0) {
+      loadAuthors().catch(error => {
+        alert("Loading authors failed" + error);
+      });
+    }
+  }, [props.course]);
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setCourse(prevCourse => ({
+      ...prevCourse,
+      [name]: name === "authorId" ? parseInt(value, 10) : value
+    }));
+  }
+
+  function handleSave(event) {
+    event.preventDefault();
+    saveCourse(course).then(() => {
+      history.push("/courses");
+    });
+  }
+
+  return (
+    <CourseForm
+      course={course}
+      errors={errors}
+      authors={authors}
+      onChange={handleChange}
+      onSave={handleSave}
+    />
+  );
+}
+
+ManageCoursePage.propTypes = {
+  course: PropTypes.object.isRequired,
+  authors: PropTypes.array.isRequired,
+  courses: PropTypes.array.isRequired,
+  loadCourses: PropTypes.func.isRequired,
+  loadAuthors: PropTypes.func.isRequired,
+  saveCourse: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired
+};
+
+export function getCourseBySlug(courses, slug) {
+  return courses.find(course => course.slug === slug) || null;
+}
+
+function mapStateToProps(state, ownProps) {
+  const slug = ownProps.match.params.slug;
+  const course =
+    slug && state.courses.length > 0
+      ? getCourseBySlug(state.courses, slug)
+      : newCourse;
+  return {
+    course,
+    courses: state.courses,
+    authors: state.authors
+  };
+}
+
+const mapDispatchToProps = {
+  loadCourses,
+  loadAuthors,
+  saveCourse
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ManageCoursePage);
 ```
