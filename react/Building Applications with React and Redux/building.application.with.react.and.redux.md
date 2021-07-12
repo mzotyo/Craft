@@ -1351,3 +1351,35 @@ export default connect(
   mapDispatchToProps
 )(ManageCoursePage);
 ```
+
+## 9. Testing React
+
+Frameworks:
+
+- Jest
+- Mocha
+- Jasmin
+- Tape
+- AVA
+
+### Jest
+
+Helper libraries:
+
+- React Test Utils
+	+ Specifically for React
+	+ Built by Facebook
+	+ Verbose API
+	+ Two Rendering Options
+		* shallow Render: 
+			- renders without children
+			- no DOM is required
+			- fast and simple
+		* renderIntoDocument
+			- render component and children
+			- DOM required
+			- supports simulating multiple interactions
+	
+- Enzyme
+	+ 
+- React Testing Library
