@@ -1383,3 +1383,445 @@ Helper libraries:
 - Enzyme
 	+ 
 - React Testing Library
+
+### Testing connected components
+
+Two golas:
+
+- Test markup
+- Test behavior
+
+They are wrapped in a call to connect! What do I do?
+
+1. Wrap with `<Provider>` : A custom store can be created for the test. This is usefull when the Redux related portion of the test is tested.
+2. Add named export for unconnected component: This is simpler.
+
+### Testing connected React component
+
+```
+import React from "react";
+import { mount } from "enzyme";
+import { authors, newCourse, courses } from "../../../tools/mockData";
+import { ManageCoursePage } from "./ManageCoursePage";
+
+function render(args) {
+  const defaultProps = {
+    authors,
+    courses,
+    history: {},
+    saveCourse: jest.fn(),
+    loadCourses: jest.fn(),
+    loadAuthors: jest.fn(),
+    course: newCourse,
+    match: {},
+  };
+
+  const props = { ...defaultProps, ...args };
+  return mount(<ManageCoursePage {...props} />);
+}
+
+it("sets error when attempting to save an empty title field", () => {
+  const wrapper = render();
+  wrapper.find("form").simulate("submit");
+
+  const error = wrapper.find(".alert").first();
+  expect(error.text()).toBe("Title is required");
+});
+```
+
+### Testing Action Creators
+
+```
+import * as courseActions from "./courseActions";
+import * as types from "./actionTypes";
+import { courses } from "../../../tools/mockData";
+
+describe("createCoursesSuccess", () => {
+  it("should create a CREATE_COURSE_SUCCESS action", () => {
+    // arrange
+    const course = courses[0];
+    const expectedAction = {
+      type: types.CREATE_COURSE_SUCCESS,
+      course,
+    };
+
+    // act
+    const action = courseActions.createCourseSuccess(course);
+
+    // assert
+    expect(action).toEqual(expectedAction);
+  });
+});
+```
+
+### Testing a Thunk
+
+It Requires mocking:
+
+- Redux store: redux-mock-store
+- HTTP calls: fetch-mock
+
+```
+import * as courseActions from "./courseActions";
+import * as types from "./actionTypes";
+import { courses } from "../../../tools/mockData";
+import thunk from "redux-thunk";
+import fetchMock from "fetch-mock";
+import configureMockStore from "redux-mock-store";
+
+const middleware = [thunk];
+const mockStore = configureMockStore(middleware);
+
+describe("Async Actions", () => {
+  afterEach(() => {
+    fetchMock.restore();
+  });
+
+  it("should create BEGIN_API_CALL and LOAD_COURSES_SUCCESS when loading courses", () => {
+    fetchMock.mock("*", {
+      body: courses,
+      headers: { "content-type": "application/json" },
+    });
+
+    const expectedActions = [
+      { type: types.BEGIN_API_CALL },
+      { type: types.LOAD_COURSES_SUCCESS, courses },
+    ];
+
+    const store = mockStore({ courses: [] });
+
+    return store.dispatch(courseActions.loadCourses()).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+});
+```
+
+### Testing Redux reducer
+
+```
+import courseReducer from "./courseReducer";
+import * as actions from "../actions/courseActions";
+
+it("should add course when passed CREATE_COURSE_SUCCESS", () => {
+  const initialState = [{ title: "A" }, { title: "B" }];
+  const newCourse = {
+    title: "C",
+  };
+
+  const action = actions.createCourseSuccess(newCourse);
+
+  const newState = courseReducer(initialState, action);
+
+  expect(newState.length).toEqual(3);
+  expect(newState[0].title).toEqual("A");
+  expect(newState[1].title).toEqual("B");
+  expect(newState[2].title).toEqual("C");
+});
+
+it("should update course when passed UPDATE_COURSE_SUCCESS", () => {
+  const initialState = [
+    { id: 1, title: "A" },
+    { id: 2, title: "B" },
+    { id: 3, title: "C" },
+  ];
+  const course = { id: 2, title: "New Title" };
+  const action = actions.updateCourseSuccess(course);
+
+  const newState = courseReducer(initialState, action);
+  const updatedCourse = newState.find((a) => a.id == course.id);
+  const untouchedCourse = newState.find((a) => a.id == 1);
+
+  expect(updatedCourse.title).toEqual("New Title");
+  expect(untouchedCourse.title).toEqual("A");
+  expect(newState.length).toEqual(3);
+});
+```
+
+### Testing the redux Store
+
+```
+import { createStore } from "redux";
+import rootReducer from "./reducers";
+import initialState from "./reducers/initialState";
+import * as courseActoins from "./actions/courseActions";
+
+it("Should handle creating courses", function () {
+  const store = createStore(rootReducer, initialState);
+  const course = {
+    title: "Clean Code",
+  };
+
+  const action = courseActoins.createCourseSuccess(course);
+  store.dispatch(action);
+
+  const createdCourse = store.getState().courses[0];
+  expect(createdCourse).toEqual(course);
+});
+```
+
+## Production build
+
+```
+/src
+	lots of files        << source code
+	
+/build 
+	index.html           << production build
+	boundle.js
+	style.css
+```
+
+### Automated build
+
+- Lint and run tests
+- Boundle and minify JS and CSS
+- Generate JS and CSS sourcemaps
+- Excludes dev-specific concerns
+- Build React in production mode
+- Generate a boundle  report
+- Run the production build on a local webserver
+
+**configureStore.dev.js**
+
+```
+import { createStore, applyMiddleware, compose } from "redux";
+import rootReducer from "./reducers";
+import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
+import thunk from "redux-thunk";
+
+export default function configureStore(initialState) {
+  const composeEnhancers =
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // add support for Redux dev tools
+
+  return createStore(
+    rootReducer,
+    initialState,
+    composeEnhancers(applyMiddleware(thunk, reduxImmutableStateInvariant()))
+  );
+}
+```
+
+**configureStore.prod.js**
+
+```
+import { createStore, applyMiddleware } from "redux";
+import rootReducer from "./reducers";
+import thunk from "redux-thunk";
+
+export default function configureStore(initialState) {
+  return createStore(rootReducer, initialState, applyMiddleware(thunk));
+}
+```
+
+**configureStore.js**
+
+```
+// Use CommonJS require below so we can dynamically import during build-time
+if (process.env.NODE_ENV === "production") {
+  module.exports = require("./configureStore.prod");
+} else {
+  module.exports = require("./configureStore.dev");
+}
+```
+
+**webpack.config.prod.js**
+
+```
+const webpack = require("webpack");
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const webpackBundleAnalyzer = require("webpack-bundle-analyzer");
+
+process.env.NODE_ENV = "production";
+
+module.exports = {
+  mode: "production",
+  target: "web",
+  devtool: "source-map",
+  entry: "./src/index",
+  output: {
+    path: path.resolve(__dirname, "build"),
+    publicPath: "/",
+    filename: "bundle.js",
+  },
+  plugins: [
+    // Display bundle stats
+    new webpackBundleAnalyzer.BundleAnalyzerPlugin({ analyzerMode: "static" }),
+
+    new MiniCssExtractPlugin({
+      filename: "[name].[contenthash].css",
+    }),
+    new webpack.DefinePlugin({
+      // This global makes sure React is built in prod mode
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+      "process.env.API_URL": JSON.stringify("http://localhost:3001"),
+    }),
+    new HtmlWebpackPlugin({
+      template: "src/index.html",
+      favicon: "src/favicon.ico",
+      minify: {
+        // see https://github.com/kangax/html-minifier#options-guick-reference
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
+      },
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: ["babel-loader", "eslint-loader"],
+      },
+      {
+        test: /(\.css)$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: "css-loader",
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
+            loader: "postcss-loader",
+            options: {
+              plugins: () => [require("cssnano")],
+              sourceMap: true,
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+**package.json**
+
+```
+{
+  "name": "ps-redux",
+  "description": "React and Redux Pluralsight course by Cory House",
+  "scripts": {
+    "start": "run-p start:dev start:api",
+    "start:dev": "webpack-dev-server --config webpack.config.dev.js --port 3000",
+    "prestart:api": "node tools/createMockDb.js",
+    "start:api": "node tools/apiServer.js",
+    "test": "jest --watch",
+    "test:ci": "jest",
+    "clean:build": "rimraf ./build && mkdir build",
+    "prebuild": "run-p clean:build test:ci",
+    "build": "webpack --config webpack.config.prod.js",
+    "postbuild": "run-p start:api serve:build",
+    "serve:build": "http-server ./build"
+  },
+  "jest": {
+    "setupFiles": [
+      "./tools/testSetup.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/tools/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/tools/styleMock.js"
+    }
+  },
+  "dependencies": {
+    "bootstrap": "4.3.1",
+    "immer": "2.1.3",
+    "prop-types": "15.7.2",
+    "react": "16.8.4",
+    "react-dom": "16.8.4",
+    "react-redux": "6.0.1",
+    "react-router-dom": "5.0.0",
+    "react-toastify": "4.5.2",
+    "redux": "4.0.1",
+    "redux-thunk": "2.3.0",
+    "reselect": "4.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "7.3.4",
+    "babel-eslint": "10.0.1",
+    "babel-loader": "8.0.5",
+    "babel-preset-react-app": "7.0.2",
+    "css-loader": "2.1.1",
+    "cssnano": "4.1.10",
+    "enzyme": "3.9.0",
+    "enzyme-adapter-react-16": "1.11.2",
+    "eslint": "5.15.2",
+    "eslint-loader": "2.1.2",
+    "eslint-plugin-import": "2.16.0",
+    "eslint-plugin-react": "7.12.4",
+    "fetch-mock": "7.3.1",
+    "html-webpack-plugin": "3.2.0",
+    "http-server": "0.9.0",
+    "jest": "24.5.0",
+    "json-server": "0.14.2",
+    "mini-css-extract-plugin": "0.5.0",
+    "node-fetch": "^2.3.0",
+    "npm-run-all": "4.1.5",
+    "postcss-loader": "3.0.0",
+    "react-test-renderer": "16.8.4",
+    "react-testing-library": "6.0.0",
+    "redux-immutable-state-invariant": "2.1.0",
+    "redux-mock-store": "1.5.3",
+    "rimraf": "2.6.3",
+    "style-loader": "0.23.1",
+    "webpack": "4.29.6",
+    "webpack-bundle-analyzer": "3.1.0",
+    "webpack-cli": "3.3.0",
+    "webpack-dev-server": "3.2.1"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "babel": {
+    "presets": [
+      "babel-preset-react-app"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:import/errors",
+      "plugin:import/warnings"
+    ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true,
+      "jest": true
+    },
+    "rules": {
+      "no-debugger": "off",
+      "no-console": "off",
+      "no-unused-vars": "warn",
+      "react/prop-types": "warn"
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "root": true
+  }
+}
+```
