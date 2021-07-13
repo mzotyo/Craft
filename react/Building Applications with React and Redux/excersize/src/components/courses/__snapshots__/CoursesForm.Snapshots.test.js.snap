@@ -90,10 +90,10 @@ exports[`sets submit button label 'Save' when saving is false 1`] = `
   </div>
   <button
     className="btn btn-primary"
-    disabled={true}
+    disabled={false}
     type="submit"
   >
-    Saving...
+    Save
   </button>
 </form>
 `;
