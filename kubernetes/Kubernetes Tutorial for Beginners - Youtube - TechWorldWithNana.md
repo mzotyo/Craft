@@ -808,16 +808,651 @@ $ kubectl apply -f mongo.yaml
 deployment.apps/mongodb-deployment created
 ```
 
+
+**mongo.yaml**:
+
+Two configurations can be added in one file. Service configuration will be added at th end of the service configuration. Actually thy belong together. They will be separated with 3 dashes: `---`
+
+```
+...
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: mongodb-service
+spec:
+    selector:
+        app: mongodb
+    ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
+```
+
+Creating the service by applying the same file as before:
+
+```
+$ kubectl apply -f mongo.yaml
+deployment.apps/mongodb-deployment unchanged
+service/mongodb-service created
+
+$ kubectl get service
+NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE
+kubernetes        ClusterIP   10.96.0.1       <none>        443/TCP     35h
+mongodb-service   ClusterIP   10.99.195.192   <none>        27017/TCP   12m
+
+$ kubectl describe service
+Name:              kubernetes
+Namespace:         default
+Labels:            component=apiserver
+                   provider=kubernetes
+Annotations:       <none>
+Selector:          <none>
+Type:              ClusterIP
+IP Family Policy:  SingleStack
+IP Families:       IPv4
+IP:                10.96.0.1
+IPs:               10.96.0.1
+Port:              https  443/TCP
+TargetPort:        8443/TCP
+Endpoints:         192.168.99.100:8443
+Session Affinity:  None
+Events:            <none>
+
+
+Name:              mongodb-service
+Namespace:         default
+Labels:            <none>
+Annotations:       <none>
+Selector:          app=mongodb
+Type:              ClusterIP
+IP Family Policy:  SingleStack
+IP Families:       IPv4
+IP:                10.99.195.192
+IPs:               10.99.195.192
+Port:              <unset>  27017/TCP
+TargetPort:        27017/TCP
+Endpoints:         172.17.0.3:27017
+Session Affinity:  None
+Events:            <none>
+```
+
+**mongo-express.yaml**:
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: mongo-express
+    labels: 
+        app: mongo-express
+spec:
+    replicas: 1
+    selector:
+        matchLabels: 
+            app: mongo-express
+    template:
+        metadata:
+            labels:
+                app: mongo-express
+        spec:
+            containers:
+            - name: mongo-express
+              image: mongo-express
+              ports: 
+              - containerPort: 8081
+              env:
+              - name: ME_CONFIG_MONGODB_ADMINUSERNAME
+                valueFrom: 
+                    secretKeyRef:
+                        name: mongodb-secret
+                        key: mongo-root-username
+              - name: ME_CONFIG_MONGODB_ADMINPASSWORD
+                valueFrom: 
+                    secretKeyRef:
+                        name: mongodb-secret
+                        key: mongo-root-password
+              - name: ME_CONFIG_MONGODB_SERVER
+                value:
+```
+
+**mongo-configmap.yaml**:
+
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: mongodb-configmap
+data:
+    database_url: mongodb-service
+```
+
+
+**mongo-express.yaml**:
+
+```
+...
+- name: ME_CONFIG_MONGODB_SERVER
+valueFrom: 
+    configMapKeyRef:
+        name: mongodb-configmap
+        key: database_url
+```
+
+Creating the config map:
+
+```
+$ kubectl apply -f mongo-configmap.yaml
+configmap/mongodb-configmap created
+
+$ kubectl apply -f mongo-express.yaml
+deployment.apps/mongo-express created
+
+$ kubectl get pod
+NAME                                 READY   STATUS    RESTARTS   AGE
+mongo-express-78fcf796b8-hqtzf       1/1     Running   0          79s
+mongodb-deployment-8f6675bc5-tnvhb   1/1     Running   1          20h
+
+$ kubectl logs mongo-express-78fcf796b8-hqtzf
+Welcome to mongo-express
+------------------------
+
+
+(node:10) [MONGODB DRIVER] Warning: Current Server Discovery and Monitoring engine is deprecated, and will be removed in a future version. To use the new Server Discover and Monitoring engine, pass option { useUnifiedTopology: true } to the MongoClient constructor.
+Mongo Express server listening at http://0.0.0.0:8081
+[31mServer is open to allow connections from anyone (0.0.0.0)[39m
+[31mbasicAuth credentials are "admin:pass", it is recommended you change this in your config.js![39m
+```
+
+**mongo-express.yaml**:
+
+```
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: mongo-express-service
+spec:
+    selector:
+        app: mongo-express
+    type: LoadBalancer
+    ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8081
+      nodePort: 30000
+```
+
+By setting the type of the service to `LoadBalancer` it will make the service external. The `nodePort` will be the port where the external IP address will be open. The node port has a valid range: 30000-32767.
+
+Start the extenal service:
+
+```
+$ kubectl apply -f mongo-express.yaml
+deployment.apps/mongo-express unchanged
+service/mongo-express-service created
+
+$ kubectl get service
+NAME                    TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+kubernetes              ClusterIP      10.96.0.1       <none>        443/TCP          37h
+mongo-express-service   LoadBalancer   10.97.45.3      <pending>     8081:30100/TCP   85s
+mongodb-service         ClusterIP      10.99.195.192   <none>        27017/TCP        113m
+
+$ minikube service mongo-express-service
+|-----------|-----------------------|-------------|-----------------------------|
+| NAMESPACE |         NAME          | TARGET PORT |             URL             |
+|-----------|-----------------------|-------------|-----------------------------|
+| default   | mongo-express-service |        8081 | http://192.168.99.100:30100 |
+|-----------|-----------------------|-------------|-----------------------------|
+* Opening service default/mongo-express-service in default browser...
+```
+
 ## Advanced Concepts
 
 ### K8s Namespaces - Organize your Components
 
-### K8s Ingress
+What is a namespace? 
+- organize resources in namespaces
+- virtual cluster inside a cluster
+- 4 namespaces out of the box
+    + kubernetes-dashboard is shipped only with minikube
+    + kube-system
+        * Is not ment for your use. Don't create or modify anything in it.
+        * Components deployed: system processes, managing processes
+    + kube-public
+        * publicly accessable data
+    + kube-node-lease
+        * information of each node availability
+    + default
+        * will be used for your resources if you don't create expicitly a namespace
+
+```
+$ kubectl get namespace
+NAME                   STATUS   AGE
+default                Active   37h
+kube-node-lease        Active   37h
+kube-public            Active   37h
+kube-system            Active   37h
+kubernetes-dashboard   Active   37h
+
+$ kubectl create namespace my-namespace
+namespace/my-namespace created
+```
+
+Namespace configuration file
+
+**mysql-configmap.yaml**:
+
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: mysql-configmap
+    namespace: my-namespace
+data:
+    db_url: mysql-service.database
+```
+
+What is the need for creating namespaces?
+![](namespace-usefulness.png)
+
+- Group resources into namspaces
+    + Database
+    + Monitoring
+    + Elastik Stack
+    + Nginx-Ingress
+- Many teams same application
+    + Project A
+    + Project B
+- Resource Sharing: Both Staging and Environment can use the Nginx-Ingress Controller and Elastick Stack
+    + Staging
+    + Development
+    + Nginx-Ingress Controller
+    + Elastick Stack
+- Resource Sharing: Blue/Green Deployment
+    + Active Production Version
+    + Next Production version
+- Access and Resource Limits on Namespaces: Limit the resources each namespace consumes
+    + Project A
+    + Project B
+
+Characteristics of namespaces
+- You can't access most of the resources from another namespace
+- Services can be access in another namespace
+- There are some components in kubernetes which can't be created within a namespace. Listing such services with the command: `kubectl api-resources --namespaced=false`
+    + volume
+    + node
+
+How to create components in a namespace?
+
+```
+$ kubectl apply -f mysql-configmap.yaml --namespace=my-namespace
+configmap/mysql-configmap created
+```
+
+or inside the configuration file itself. 
+
+**mysql-configmap.yaml**:
+
+```
+...
+metadata:
+    name: mysql-configmap
+    namespace: my-namespace
+...
+```
+
+Test the namespace
+```
+$ kubectl get mysql-configmap -n my-namespace
+NAME              DATA   AGE
+mysql-configmap   1      5m37s
+```
+
+Changing the active namespace
+
+Under windows actually it was quite difficult to install [kubens](https://github.com/ahmetb/kubectx#installation). So I din't do it.
+
+```
+$ kubens my-namespace
+```
+
+
+### Kubernetes Ingress
+
+External request to be able to reach your application.
+- Easy way: external service
+    + See the example above the service with type: *LoadBalancer*
+- Ingress (a kubernetes component)
+
+**myapp-ingress.yaml**:
+
+```
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+    name: myapp-ingress
+spec:
+    rules:
+    - host: myapp.com
+    http:
+        paths:
+        - backend:
+            serviceName: myapp-internal-servcie
+            servicePort: 8080
+```
+
+We need an *ingress implementation* too called *ingress controller*. Ingress controller are a pod or a set of pods which evaluates and processes ingress rules and this way manages all the redirections. This will be the entry point into the cluster.
+It has to be decided which of many third party implamentation to choose.
+- Kubernetes Nginx Ingress Controller (is on of them)
+
+Install **Ingress Controller** in minikube. Automatically configures and starts the *K8s Nginx Ingress Contreller*.
+
+```
+$ minikube addons enable ingress
+  - Using image k8s.gcr.io/ingress-nginx/controller:v0.44.0
+  - Using image docker.io/jettech/kube-webhook-certgen:v1.5.1
+  - Using image docker.io/jettech/kube-webhook-certgen:v1.5.1
+* Verifying ingress addon...
+* The 'ingress' addon is enabled
+
+$ kubectl get pod -n ingress-nginx
+NAME                                        READY   STATUS      RESTARTS   AGE
+ingress-nginx-admission-create-fgcsf        0/1     Completed   0          7m34s
+ingress-nginx-admission-patch-99h7v         0/1     Completed   2          7m34s
+ingress-nginx-controller-59b45fb494-z8mz6   1/1     Running     0          7m34s
+```
+
+Creating an Ingress Rule that the Ingress Controller can evaluate
+
+```
+$ kubectl get all -n kubernetes-dashboard
+NAME                                             READY   STATUS    RESTARTS   AGE
+pod/dashboard-metrics-scraper-7976b667d4-5xxkh   1/1     Running   3          39h
+pod/kubernetes-dashboard-6fcdf4f6d-sn5ds         1/1     Running   4          39h
+
+NAME                                TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/dashboard-metrics-scraper   ClusterIP   10.97.146.149   <none>        8000/TCP   39h
+service/kubernetes-dashboard        ClusterIP   10.111.22.219   <none>        80/TCP     39h
+
+NAME                                        READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/dashboard-metrics-scraper   1/1     1            1           39h
+deployment.apps/kubernetes-dashboard        1/1     1            1           39h
+
+NAME                                                   DESIRED   CURRENT   READY   AGE
+replicaset.apps/dashboard-metrics-scraper-7976b667d4   1         1         1       39h
+replicaset.apps/kubernetes-dashboard-6fcdf4f6d         1         1         1       39h
+```
+
+**dashboard-ingress.yaml**:
+
+```
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+    name: dashboard-ingress
+    namespace: kubernetes-dashboard
+spec:
+    rules:
+    - host: dashboard.com
+      http:
+        paths:
+        - backend: 
+            serviceName: kubernetes-dashboard
+            servicePort: 80
+```
+
+Creating the ingress rule: 
+
+```
+$ kubectl apply -f dashboard-ingress.yaml
+Warning: networking.k8s.io/v1beta1 Ingress is deprecated in v1.19+, unavailable in v1.22+; use networking.k8s.io/v1 Ingress
+ingress.networking.k8s.io/dashboard-ingress created
+
+$ kubectl get ingress -n kubernetes-dashboard
+NAME                CLASS    HOSTS           ADDRESS          PORTS   AGE
+dashboard-ingress   <none>   dashboard.com   192.168.99.100   80      107s
+```
+
+Edit the *[hosts](C:\Windows\System32\drivers\etc)* file
+
+```
+...
+192.168.99.100		dashboard.com
+```
+
+```
+$ kubectl describe ingress dashboard-ingress -n kubernetes-dashboard
+Name:             dashboard-ingress
+Namespace:        kubernetes-dashboard
+Address:          192.168.99.100
+Default backend:  default-http-backend:80 (<error: endpoints "default-http-backend" not found>)
+Rules:
+  Host           Path  Backends
+  ----           ----  --------
+  dashboard.com
+                    kubernetes-dashboard:80 (172.17.0.4:9090)
+Annotations:     <none>
+Events:
+  Type    Reason  Age                From                      Message
+  ----    ------  ----               ----                      -------
+  Normal  Sync    14m (x2 over 14m)  nginx-ingress-controller  Scheduled for sync
+```
+
+Default http backend
+
+![](default-backend.png)
+
+More Usecases for Ingress
+
+- multiple paths for same hosts
+![](multiple-paths-same-host.png)
+
+- multiple subdomains
+![](multiple-subdomains.png)
+
+- configuring TLS Certificates
+![](tls-certificates.png)
+
 
 ### Helm Package Manager
 
-### Volumes - Persisting Data in K8s
+What is helm?
+- package manager for kubernetes: packaging kubernetes yaml files and distribuiting them in public and private repositories.
+- The boundle of yamle files is called *Heml chart*
+- Create your own Helm chart with Helm
+- Push them to some helm repository 
+- Download and use existing ones
+
+It's a templating engine
+1) Given multiple microservices with identical deployment files only the name of the service is different. 
+    + With helm it can be defined a common blueprint for all the microservices.
+    + Dynamic values are replaced by placeholders 
+
+![](template-yaml.png)
+
+2) Deploying the same set of apps in different cluseter environments
+
+   Directory structure of Helm:
+
+```
+mychart/              toplevel mychart folder -> name of the chart
+    Chart.yaml        meta info about chart
+    values.yaml       values for the template file
+    charts/           chart dependencies folder
+    templates/        tempate folder -> the actual template files
+```
+
+3) Release management
+
+```
+$ helm upgrade <chartname>
+```
+
+The changes will be applied to existing deployment instead of creating new one. **Tiller** is a service which makes this part.
+
+```
+$ helm rollback <chartname>
+```
+
+Rolls back deployment
+
+### Volumes - Persisting Data in Kubernetes
+
+Persisting data with storage
+
+- Persistent Volume
+- Persistent Volume Claim
+- Storage Class
+
+The need for Volumes
+
+- Data stored in databases will be gone when we restart changes will be gone. You have to explicitly configure for each application that needs saving data between restarts so that the storage doesn't depend on the pod lifecycle. 
+    + If a pod restarts it will read data from that storage to get up to date data.
+    + Storage must also be available on all nodes. 
+    + Highly available storage that will survive even if the cluster crashes.
+- Having an application that writes and reads from pre configured directory, session files for application, ...
+    + you can configure any of these type of storage using kubernetes component called **Persistent volume**
+    + Persistent volume can be tought as a cluster resource like: RAM, CPU that is used to store data.
+
+Persistet volume gets created via yaml file. Since persisten volume is just an abstract component it must take the storage from the actual phisical storage, like: local hard drive from the cluster nodes, or your external nfs server or maybe cloud storage. 
+
+Where does this storage backend come from? Who configures it? Who makes it available to the cluster?
+Kubernetes doesn't care about your actual storage, it gives you a persistent volume component as 
+an interface to the actual storage that you as a mantainer have to take care of. 
+
+So you have to decide, what type of storage your cluster needs? You need to create and manage them by yourself. Think of storage as an external plugin to your cluster.
+
+**storage-nfs-server.yaml**:
+
+```
+apiVersion: v1
+kind: PersistentVolume
+metadata: 
+    name: pv-name
+spec:
+    capacity:
+        storage: 1Gi
+    volumeMode: Filesystem
+    accessMode:
+      - ReadWriteOnce
+    persistentVolumeReclaimPolicy: Recycle
+    storageClassName: slow
+    mountOption:
+      - hard
+      - nfsvers=4.0
+    nfs:
+        path: /dir/path/on/nfs/server
+        server: nfs-server-ip-address
+```
+
+**storage-google-cloud.yaml**:
+
+```
+apiVersion: v1
+kind: PersistentVolume
+metadata: 
+    name: test-volume
+    labels:
+        failure-domain.beta.kubernetes.io/zone: us-centrall-a__us-centrall-b
+spec:
+    capacity:
+        storage: 1Gi
+    accessMode:
+      - ReadWriteOnce
+    gcePersistentDisk:
+        pdName: my-data-disk
+        fsType: ext4
+```
+
+**storage-local.yaml**:
+
+```
+apiVersion: v1
+kind: PersistentVolume
+metadata: 
+    name: example-pv
+spec:
+    capacity:
+        storage: 1Gi
+    volumeMode: Filesystem
+    accessMode:
+      - ReadWriteOnce
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: local-storage
+    local:
+        path: /mnt/disks/ssd1
+    nodeAffinity:
+        required:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - example node
+```
+
+Persistem volumes are not namespaced. They are accessible for the whole cluster.
+
+Local vs. Remote volumes:
+- The local volume types violate the 2nd and 3rd requiments for data persitance
+    + not being tied to one specific node rather to each node equally
+    + surviving in cluster crash scenarios, therefore for database persistance you should always use remote storage.
+    
+Persistent volume are resourcces like CPU or RAM it have to be already there in the cluster when the pod that depend on it or uses it is created.
+
+>Two main roles in Kubernetes: 
+> - administrator: sets up and maintains the cluster and make sure that has enough resourcces
+> - kubernetes user: deploys application in a cluster
+
+In this case the kubernetes administrator would be the one 
+- which configures the persistent storage. Make sure that the nfs-server is there and configured, create and configure a cloud storage which will be available for the cluster. 
+- creates the persistent volume from this storage backends.
+
+Delevopers expicitly need to configure their application yaml files to use those persistent volume components. Application has to claim that volume storage in another component naming *Persisten Volume Claim*. Persistent Volume Claims are also created with yaml file configurations.
+
+**persitent-volume-claim.yaml**:
+
+```
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: pvc-name
+spec:
+    storageClassName: manual
+    volumeMode: Filesystem
+    accessModes: 
+      - ReadWriteOnce
+    resources:
+        requests:
+            storage: 1Gi
+```
+
+In the pods specificcation you have to use that claim
+
+**pod.yaml**:
+
+```
+apiVersion: v1
+kind: Pod
+metadata: 
+    name: mypod
+spec:
+    containers:
+      - name: myfrontend
+        image: nginx
+        volumeMounts: 
+        - mountPath: "/var/www/html"
+          name: mypd
+    volumes:
+      - name: mypd
+      persistentVolumeClaim: 
+        claimName: pvc-name
+```
+
+Claims must exist in the same cluster in which the pod is.
 
 ### K8s StatefulSet - Deploying Stateful Apps
 
-### K8s Services
+It is a kubernetes component which is used specifically for statful apps. Examples of stateful apps are all databases. 
+
