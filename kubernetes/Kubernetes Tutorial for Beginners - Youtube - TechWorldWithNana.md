@@ -1257,6 +1257,8 @@ More Usecases for Ingress
 
 ### Helm Package Manager
 
+[install](https://github.com/helm/helm/releases)
+
 What is helm?
 - package manager for kubernetes: packaging kubernetes yaml files and distribuiting them in public and private repositories.
 - The boundle of yamle files is called *Heml chart*
