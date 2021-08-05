@@ -1,7 +1,6 @@
 # Clean Code
 
 ## Functions
-
 - **Function names** should be verbs.
 - Every line of a function should be at the **same level of abstraction**.
 - A function should do only **one thing**.
@@ -14,17 +13,15 @@
 - **DRY**: don't repeat yourself.
 
 ## Variables
-
 - Don't use noise words like *data*, *info*.
+- Names should be ponouncable
 
 ## Length of names
-
 - A variable name should be **proportional to the scope** that contains it.
 - Function names should be **inversly proportional to the scope** that contains it.
 - Class names are similar to function names.
 
 ## Comments
-
 - Comments should explain the code if the **code can not explain itself**.
 - **TODO** comments should not be checked in. Once they are checked in they become a DO NOT comment.
 - **Java docs** are fine especially when writing an API for the outside world.
@@ -32,7 +29,6 @@
 - **Commented out code** is not allowed.
 
 ## Tests
-
 - Software should be **easely changeble**.
 - Code should **improve** with time.
 - **Fearless competence** with tests.
@@ -43,5 +39,11 @@
 - **Honest estimates**: best case, nominal case, worst case.
 
 ## Formatting
-
 - 40 character long lines. All the code should fit on a screen.
+
+## Code review
+- Code reviews require roughly the time required to write them.
+- A programmer should be able to say no.
+
+## Test driven development
+- 
