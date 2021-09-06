@@ -1,7 +1,7 @@
 # Install Virtual Box
 1. Download: [ubuntu-18.04.4-live-server-amd64.iso](http://www.mirrorservice.org/sites/releases.ubuntu.com/18.04.4/ubuntu-18.04.4-live-server-amd64.iso)
 
-2. Create a new **Ubuntu 64 bit** virtual machine. Leave evry settings on default.
+2. Create a new **Ubuntu 64 bit** virtual machine. Leave every settings on default.
 
 3. Username: developer Password: developer
 
@@ -25,3 +25,4 @@ sudo apt-get install vim -y
 
 ## Maker a restore ponit to the linux environment
 From the **Oracle VM VirtualBox Manager** crate a snapshot with a title. E.x. **Clean install**
+
