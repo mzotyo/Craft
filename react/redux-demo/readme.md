@@ -80,9 +80,9 @@ const BUY_CAKE = 'BUY_CAKE'
 4. Create an action creator: a function that creates an action.
 
 ```js
-function buyCacke() {
+function buyCake() {
     return {
-        type: BUY_CACKE,
+        type: BUY_CAKE,
         info: 'First redu action'
     }
 }
@@ -146,3 +146,5 @@ Updated state:  { numOfCakes: 9 }
 Updated state:  { numOfCakes: 8 }
 Updated state:  { numOfCakes: 7 }
 ```
+
+https://www.youtube.com/watch?v=q-SQRR-UjnY&list=PLC3y8-rFHvwheJHvseC3I0HuYI2f46oAK&index=8
