@@ -1,1 +1,1 @@
-console.log('hello world')
+const BUY_CAKE = 'BUY_CAKE'

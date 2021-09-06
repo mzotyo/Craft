@@ -51,3 +51,11 @@ console.log('hello world')
 > node index
 hello world
 ```
+
+## Actions
+
+1. Define our fitst action type
+
+```js
+const BUY_CAKE = 'BUY_CAKE'
+```
