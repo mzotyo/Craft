@@ -11,3 +11,7 @@ function buyCacke() {
         info: 'First redu action'
     }
 }
+
+const initialState = {
+    numOfCakes: 10
+}

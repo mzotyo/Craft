@@ -87,3 +87,13 @@ function buyCacke() {
     }
 }
 ```
+
+## Reducers
+
+1. Defineing the state of the application
+
+```js
+const initialState = {
+    numOfCakes: 10
+}
+```
