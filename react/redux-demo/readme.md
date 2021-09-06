@@ -59,3 +59,11 @@ hello world
 ```js
 const BUY_CAKE = 'BUY_CAKE'
 ```
+
+2. Define our first action
+
+```js
+{
+    type: BUY_CAKE
+}
+```
