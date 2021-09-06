@@ -76,3 +76,14 @@ const BUY_CAKE = 'BUY_CAKE'
     info: 'First redux action'
 }
 ```
+
+4. Create an action creator: a function that creates an action.
+
+```js
+function buyCacke() {
+    return {
+        type: BUY_CACKE,
+        info: 'First redu action'
+    }
+}
+```
