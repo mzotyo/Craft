@@ -40,3 +40,14 @@ This will initialize a `package.json` with default settings.
   }
 }
 ```
+
+4. Create the `index.js` JavaScript file
+
+```js
+console.log('hello world')
+```
+
+```shell
+> node index
+hello world
+```
