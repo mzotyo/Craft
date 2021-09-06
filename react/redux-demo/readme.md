@@ -67,3 +67,12 @@ const BUY_CAKE = 'BUY_CAKE'
     type: BUY_CAKE
 }
 ```
+
+3. The additional property of an action
+
+```js
+{
+    type: BUY_CAKE
+    info: 'First redux action'
+}
+```
