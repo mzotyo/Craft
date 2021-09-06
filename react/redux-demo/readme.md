@@ -112,3 +112,37 @@ const reducer = (state = initialState, action) => {
     }
 }
 ```
+
+## Redux Store
+
+1. Implementing the responsabilities of a redux store:
+    - holds application state
+    - allows access to state via *getState()*
+    - registers listeners via *subscribe(listener)*
+    - allows state to be updated via *dispatch(action)*
+    - handles unregistering of listeners via the function returned by *subscribe(listener)*
+
+```js
+const redux = require('redux')
+
+...
+
+const store = redux.createStore(reducer)
+console.log('Inital state: ', store.getState())
+const unsubscribe = store.subscribe(
+    () => console.log('Updated state: ', store.getState()))
+store.dispatch(buyCake())
+store.dispatch(buyCake())
+store.dispatch(buyCake())
+unsubscribe()
+```
+
+Test the application with the following shell command:
+
+```shell
+> node index
+Inital state:  { numOfCakes: 10 }
+Updated state:  { numOfCakes: 9 }
+Updated state:  { numOfCakes: 8 }
+Updated state:  { numOfCakes: 7 }
+```
