@@ -16,5 +16,8 @@
     "url": "https://github.com/mzotyo/Craft/issues"
   },
   "homepage": "https://github.com/mzotyo/Craft#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "redux": "^4.1.1"
+  }
 }

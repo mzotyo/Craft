@@ -26,3 +26,17 @@ This will initialize a `package.json` with default settings.
 }
 
 ```
+
+3. Add redux as a dependency for our project
+
+```shell
+> npm install redux
+```
+
+```json
+  ...
+  "dependencies": {
+    "redux": "^4.1.1"
+  }
+}
+```
