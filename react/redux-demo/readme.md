@@ -24,7 +24,6 @@ This will initialize a `package.json` with default settings.
   "author": "",
   "license": "ISC"
 }
-
 ```
 
 3. Add redux as a dependency for our project
@@ -147,4 +146,69 @@ Updated state:  { numOfCakes: 8 }
 Updated state:  { numOfCakes: 7 }
 ```
 
-https://www.youtube.com/watch?v=q-SQRR-UjnY&list=PLC3y8-rFHvwheJHvseC3I0HuYI2f46oAK&index=8
+## Multiple Reducers
+
+1. Adding another property to the initial state of the application:
+
+```js
+const initialState = {
+    numOfCakes: 10,
+    numOfIceCreams: 20
+}
+```
+
+2. Adding another switch case into the reducer:
+
+```js
+const reducer = (state = initialState, action) => {
+    switch(action.type) {
+        ...
+
+        case BUY_ICECREAM: return {
+            ...state,
+            numOfIceCreams: state.numOfCakes - 1
+        }
+
+        default: return state
+    }
+}
+```
+
+3. Define action type
+
+```js
+const BUY_ICECREAM = 'BUY_ICECREAM'
+```
+
+4. Create the action creator
+
+```js
+function buyIceCream() {
+    return {
+        type: BUY_ICECREAM,
+    }
+}
+```
+
+5. Dispatch the new action
+
+```js
+const redux = require('redux')
+
+...
+
+store.dispatch(buyIceCream())
+store.dispatch(buyIceCream())
+unsubscribe()
+```
+
+Test the application with the following shell command:
+```shell
+> node index
+Inital state:  { numOfCakes: 10, numOfIceCreams: 20 }
+Updated state:  { numOfCakes: 9, numOfIceCreams: 20 }
+Updated state:  { numOfCakes: 8, numOfIceCreams: 20 }
+Updated state:  { numOfCakes: 7, numOfIceCreams: 20 }
+Updated state:  { numOfCakes: 7, numOfIceCreams: 6 } 
+Updated state:  { numOfCakes: 7, numOfIceCreams: 6 } 
+```
