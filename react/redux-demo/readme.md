@@ -148,6 +148,8 @@ Updated state:  { numOfCakes: 7 }
 
 ## Multiple Reducers
 
+### Multiple states in one initial state
+
 1. Adding another property to the initial state of the application:
 
 ```js
@@ -209,6 +211,46 @@ Inital state:  { numOfCakes: 10, numOfIceCreams: 20 }
 Updated state:  { numOfCakes: 9, numOfIceCreams: 20 }
 Updated state:  { numOfCakes: 8, numOfIceCreams: 20 }
 Updated state:  { numOfCakes: 7, numOfIceCreams: 20 }
-Updated state:  { numOfCakes: 7, numOfIceCreams: 6 } 
-Updated state:  { numOfCakes: 7, numOfIceCreams: 6 } 
+Updated state:  { numOfCakes: 7, numOfIceCreams: 6 }
+Updated state:  { numOfCakes: 7, numOfIceCreams: 6 }
+```
+
+### Splitting the state and the reducers
+
+1. Splitting the state:
+
+```js
+const initialCakeState = {
+    numOfCakes: 10
+}
+
+const initialIceCreamState = {
+    numOfIceCreams: 20
+}
+```
+
+2. Splitting the reducers:
+
+```js
+const cakeReducer = (state = initialCakeState, action) => {
+    switch (action.type) {
+        case BUY_CAKE: return {
+            ...state,
+            numOfCakes: state.numOfCakes - 1
+        }
+
+        default: return state
+    }
+}
+
+const iceCreamReducer = (state = initialIceCreamState, action) => {
+    switch (action.type) {
+        case BUY_ICECREAM: return {
+            ...state,
+            numOfIceCreams: state.numOfCakes - 1
+        }
+
+        default: return state
+    }
+}
 ```
