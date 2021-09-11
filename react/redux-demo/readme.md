@@ -254,3 +254,33 @@ const iceCreamReducer = (state = initialIceCreamState, action) => {
     }
 }
 ```
+
+### Combine reducers
+
+1. Combine the splitted reducer
+
+```js
+const combineReducers = redux.combineReducers
+
+... 
+
+const rootReducer = combineReducers({
+    cake: cakeReducer,
+    iceCream: iceCreamReducer
+})
+const store = redux.createStore(rootReducer)
+
+...
+```
+
+2. Run the command
+
+```shell
+> node index
+Inital state:  { cake: { numOfCakes: 10 }, iceCream: { numOfIceCreams: 20 } }
+Updated state:  { cake: { numOfCakes: 9 }, iceCream: { numOfIceCreams: 20 } }
+Updated state:  { cake: { numOfCakes: 8 }, iceCream: { numOfIceCreams: 20 } }
+Updated state:  { cake: { numOfCakes: 7 }, iceCream: { numOfIceCreams: 20 } }
+Updated state:  { cake: { numOfCakes: 7 }, iceCream: { numOfIceCreams: NaN } }
+Updated state:  { cake: { numOfCakes: 7 }, iceCream: { numOfIceCreams: NaN } }
+```

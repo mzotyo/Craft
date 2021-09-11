@@ -29,6 +29,8 @@ const initialIceCreamState = {
     numOfIceCreams: 20
 }
 
+const combineReducers = redux.combineReducers
+
 const cakeReducer = (state = initialCakeState, action) => {
     switch (action.type) {
         case BUY_CAKE: return {
@@ -51,7 +53,12 @@ const iceCreamReducer = (state = initialIceCreamState, action) => {
     }
 }
 
-const store = redux.createStore(reducer)
+const rootReducer = combineReducers({
+    cake: cakeReducer,
+    iceCream: iceCreamReducer
+})
+
+const store = redux.createStore(rootReducer)
 console.log('Inital state: ', store.getState())
 const unsubscribe = store.subscribe(
     () => console.log('Updated state: ', store.getState()))
