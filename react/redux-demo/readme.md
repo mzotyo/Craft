@@ -284,3 +284,84 @@ Updated state:  { cake: { numOfCakes: 7 }, iceCream: { numOfIceCreams: 20 } }
 Updated state:  { cake: { numOfCakes: 7 }, iceCream: { numOfIceCreams: NaN } }
 Updated state:  { cake: { numOfCakes: 7 }, iceCream: { numOfIceCreams: NaN } }
 ```
+
+## Middleware
+
+- Is the suggested way to extend Redux with custom functionality.
+- Provides a third-party extension point between dispatching an action, and the moment it reaches the reducer.
+- Use middleware for logging, crash reporting, performing aynchronous tasks etc.
+
+### Redux Logger (middleware)
+
+1. Install the logger library
+
+```shell
+npm install redux-logger
+```
+
+2. Creating a redux logger
+
+```js
+const reduxLogger = require('redux-logger');
+
+...
+
+const logger = reduxLogger.createLogger();
+
+...
+
+const applyMiddleware = redux.applyMiddleware
+
+...
+
+const store = redux.createStore(rootReducer, applyMiddleware(logger))
+const unsubscribe = store.subscribe(() => { }) // remove the original logger
+```
+
+3. Run the command:
+
+```shell
+> node index
+Inital state:  { cake: { numOfCakes: 10 }, iceCream: { numOfIceCreams: 20 } }
+...
+ action BUY_ICECREAM @ 18:10:26.036
+   prev state { cake: { numOfCakes: 7 }, iceCream: { numOfIceCreams: NaN } }
+   action     { type: 'BUY_ICECREAM' }
+   next state { cake: { numOfCakes: 7 }, iceCream: { numOfIceCreams: NaN } }
+```
+
+4. Fix the error
+
+```js
+case BUY_ICECREAM: return {
+            ...state,
+            numOfIceCreams: state.numOfIceCreams - 1
+        }
+```
+
+5. Run the command again
+
+```shell
+> node index
+Inital state:  { cake: { numOfCakes: 10 }, iceCream: { numOfIceCreams: 20 } }
+ action BUY_CAKE @ 18:13:12.224
+   prev state { cake: { numOfCakes: 10 }, iceCream: { numOfIceCreams: 20 } }
+   action     { type: 'BUY_CAKE', info: 'First redu action' }
+   next state { cake: { numOfCakes: 9 }, iceCream: { numOfIceCreams: 20 } }
+ action BUY_CAKE @ 18:13:12.227
+   prev state { cake: { numOfCakes: 9 }, iceCream: { numOfIceCreams: 20 } }
+   action     { type: 'BUY_CAKE', info: 'First redu action' }
+   next state { cake: { numOfCakes: 8 }, iceCream: { numOfIceCreams: 20 } }
+ action BUY_CAKE @ 18:13:12.228
+   prev state { cake: { numOfCakes: 8 }, iceCream: { numOfIceCreams: 20 } }
+   action     { type: 'BUY_CAKE', info: 'First redu action' }
+   next state { cake: { numOfCakes: 7 }, iceCream: { numOfIceCreams: 20 } }
+ action BUY_ICECREAM @ 18:13:12.229
+   prev state { cake: { numOfCakes: 7 }, iceCream: { numOfIceCreams: 20 } }
+   action     { type: 'BUY_ICECREAM' }
+   next state { cake: { numOfCakes: 7 }, iceCream: { numOfIceCreams: 19 } }
+ action BUY_ICECREAM @ 18:13:12.230
+   prev state { cake: { numOfCakes: 7 }, iceCream: { numOfIceCreams: 19 } }
+   action     { type: 'BUY_ICECREAM' }
+   next state { cake: { numOfCakes: 7 }, iceCream: { numOfIceCreams: 18 } }
+```
