@@ -383,3 +383,10 @@ state = {
 - **loading** - Displays a loading spinner in your component
 - **data** - List of users
 - **error** - Display the error to the user
+
+### Actions
+
+- **FETCH_USERS_REQUEST** - fetching list of users
+- **FETCH_USERS_SUCCESS** - Fetched successfully
+- **FETCH_USERS_FAILURE** - Error fetching the data
+
