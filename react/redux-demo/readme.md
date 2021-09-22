@@ -365,3 +365,21 @@ Inital state:  { cake: { numOfCakes: 10 }, iceCream: { numOfIceCreams: 20 } }
    action     { type: 'BUY_ICECREAM' }
    next state { cake: { numOfCakes: 7 }, iceCream: { numOfIceCreams: 18 } }
 ```
+
+## Async Actions
+
+Asynchronous API calls to fetch data from an endpoint and use that data in your application. The task is to fetch a list of users from an API end point and store it in the redux store.
+
+### State
+
+```js
+state = {
+    loading: true,
+    data[],
+    error: ''
+}
+```
+
+- **loading** - Displays a loading spinner in your component
+- **data** - List of users
+- **error** - Display the error to the user
