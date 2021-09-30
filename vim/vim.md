@@ -15,5 +15,5 @@ set tabstop=4 softtabstop=0 noexpandtab shiftwidth=4 smarttab
 ## Color schemes
 
 ```bash
-git clone https://github.com/rafi/awesome-vim-colorscheme
+git clone https://github.com/rafi/awesome-vim-colorschemes
 ```
