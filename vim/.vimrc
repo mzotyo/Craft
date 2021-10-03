@@ -7,6 +7,7 @@ Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
 Plug 'https://github.com/tpope/vim-repeat' " Repeate vim-surrounding commands 
 Plug 'https://github.com/preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'https://github.com/ap/vim-css-color' " CSS Color Preview
+Plug 'https://github.com/tpope/vim-fugitive' " git tool
 
 call plug#end()
 
