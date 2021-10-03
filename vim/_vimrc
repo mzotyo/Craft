@@ -2,7 +2,7 @@
 " PLUGINS: 
 
 call plug#begin('~/.vim/bundle')
- 
+
 Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
 Plug 'https://github.com/tpope/vim-repeat', " repeats surround commands
 Plug 'https://github.com/preservim/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -158,7 +158,4 @@ nnoremap ,html :-1read $HOME/.vim/snippets/.skeleton.html<CR>3jwf>a
 " NOW WE CAN:
 " - Take over the world!
 "   (with much fewer keystrokes)
-
-" -----------------------------------------------------------
-
 

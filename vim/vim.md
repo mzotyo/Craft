@@ -82,7 +82,7 @@ Execute inside vim:
 
 | Plugin | Source |
 |-|-|
-|vim-plug|https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation|
+|vim-plug|https://github.com/junegunn/vim-plug|
 |fugitive|https://github.com/tpope/vim-fugitive|
 |vim-surround|https://github.com/tpope/vim-surround| 
 
