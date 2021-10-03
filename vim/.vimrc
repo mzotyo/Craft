@@ -8,6 +8,7 @@ Plug 'https://github.com/tpope/vim-repeat' " Repeate vim-surrounding commands
 Plug 'https://github.com/preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'https://github.com/ap/vim-css-color' " CSS Color Preview
 Plug 'https://github.com/tpope/vim-fugitive' " git tool
+Plug 'https://github.com/vim-syntastic/syntastic' " sytnax checker / linter
 
 call plug#end()
 
@@ -152,3 +153,4 @@ nnoremap ,html :-1read $HOME/.vim/snippets/.skeleton.html<CR>3jwf>a
 " NOW WE CAN:
 " - Take over the world!
 "   (with much fewer keystrokes)
+
