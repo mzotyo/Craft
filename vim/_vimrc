@@ -12,6 +12,8 @@ Plug 'https://github.com/vim-syntastic/syntastic' " Syntax checker / linter
 
 call plug#end()
 
+nnoremap <C-e> :NERDTreeToggle<CR>
+
 " -----------------------------------------------------------
 " Vim with all enhancements
 source $VIMRUNTIME/vimrc_example.vim
