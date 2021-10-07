@@ -61,6 +61,7 @@ set nowrap
 set guifont=Lucida\ Console:h11
 set relativenumber
 set tabstop=4 softtabstop=0 noexpandtab shiftwidth=4 smarttab
+" set cursorline
 
 " -----------------------------------------------------------
 " BACKUP DIR:
