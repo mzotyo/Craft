@@ -60,8 +60,9 @@ set encoding=utf-8
 set nowrap
 set guifont=Lucida\ Console:h11
 set relativenumber
-set tabstop=4 softtabstop=0 noexpandtab shiftwidth=4 smarttab
+set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab
 " set cursorline
+" syn clear markdownError
 
 " -----------------------------------------------------------
 " BACKUP DIR:
