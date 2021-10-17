@@ -3,7 +3,6 @@
 " -----------------------------------------------------------
 
 call plug#begin('~/.vim/bundle')
-    Plug 'neovim/nvim-lspconfig'
     Plug 'http://github.com/tpope/vim-surround'                                 " Surrounding ysw)
     Plug 'https://github.com/tpope/vim-repeat'                                  " Repeate vim-surrounding commands 
     Plug 'https://github.com/preservim/nerdtree', { 'on': 'NERDTreeToggle' }    " Open file browse
