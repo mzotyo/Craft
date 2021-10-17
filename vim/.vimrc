@@ -3,6 +3,7 @@
 " -----------------------------------------------------------
 
 call plug#begin('~/.vim/bundle')
+    Plug 'neovim/nvim-lspconfig'
     Plug 'http://github.com/tpope/vim-surround'                                 " Surrounding ysw)
     Plug 'https://github.com/tpope/vim-repeat'                                  " Repeate vim-surrounding commands 
     Plug 'https://github.com/preservim/nerdtree', { 'on': 'NERDTreeToggle' }    " Open file browse
@@ -85,22 +86,34 @@ nnoremap ,html :-1read $HOME/.vim/snippets/.skeleton.html<CR>3jwf>a
 " -----------------------------------------------------------
 
 " Toggles file browsing window on and off
-nnoremap <C-e> :NERDTreeToggle<CR>
+nnoremap <C-e>      :NERDTreeToggle<CR>
+
+" Create and navigate tabs
+nnoremap <C-t>      :tabnew<CR>
+nnoremap <C-Left>   :tabprevious<CR>                                                                            
+nnoremap <C-Right>  :tabnext<CR>
+nnoremap <C-h>      :tabprevious<CR>                                                                            
+nnoremap <C-l>      :tabnext<CR>
+
+" Save & exit
+nnoremap <C-s>      <ESC>:w<CR>
+nnoremap <C-c>      <ESC>:wq!<CR>
+nnoremap <C-x>      <ESC>:q!<CR>
 
 " -----------------------------------------------------------
 " BACKUP:
 " -----------------------------------------------------------
 
 set noswapfile                                                                  " disable creating swap file
-set dir=/c/tmp,/c/temp
-set backupdir=/c/tmp,/c/temp
+set dir=/tmp,/c/tmp,/c/temp
+set backupdir=/tmp,/c/tmp,/c/temp
 set udf
-set udir=/c/tmp,/c/temp
+set udir=/tmp,/c/tmp,/c/temp
 
 " -----------------------------------------------------------
 " THINGS TO EXPLORE:
 " -----------------------------------------------------------
 " set cursorline
-" set cc=130                                                                      " set an 130 column border for good coding style
+" set cc=130                                                                    " set an 130 column border for good coding style
 " syn clear markdownError
 

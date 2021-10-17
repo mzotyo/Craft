@@ -34,13 +34,12 @@ Copy at the beginnig of the file `~/_vimrc`
 ```js
 " -----------------------------------------------------------
 " PLUGINS: 
+" -----------------------------------------------------------
 
 call plug#begin('~/.vim/bundle')
- 
-Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
-Plug 'https://github.com/preservim/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'https://github.com/ap/vim-css-color' " CSS Color Preview
- 
+    Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
+    Plug 'https://github.com/preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+    Plug 'https://github.com/ap/vim-css-color' " CSS Color Preview
 call plug#end()
 ```
 
@@ -60,13 +59,13 @@ Copy at the beginnig of the file `~/.vimrc`
 ```js
 " -----------------------------------------------------------
 " PLUGINS: 
+" -----------------------------------------------------------
 
 call plug#begin('~/.vim/bundle')
- 
-Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
-Plug 'https://github.com/preservim/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'https://github.com/ap/vim-css-color' " CSS Color Preview
- 
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
+    Plug 'https://github.com/preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+    Plug 'https://github.com/ap/vim-css-color' " CSS Color Preview
 call plug#end()
 ```
 
@@ -86,3 +85,16 @@ Execute inside vim:
 |fugitive|https://github.com/tpope/vim-fugitive|
 |vim-surround|https://github.com/tpope/vim-surround| 
 
+## LSP 
+
+### Typescript
+
+[Jose Alvarez](https://jose-elias-alvarez.medium.com/configuring-neovims-lsp-client-for-typescript-development-5789d58ea9c)
+
+```js
+npm install -g typescript typescript-language-server diagnostic-languageserver eslint_d
+```
+
+```
+Plug 'neovim/nvim-lspconfig'
+```
