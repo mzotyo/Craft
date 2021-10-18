@@ -87,6 +87,9 @@ nnoremap ,html :-1read $HOME/.vim/snippets/.skeleton.html<CR>3jwf>a
 " Toggles file browsing window on and off
 nnoremap <C-e>      :NERDTreeToggle<CR>
 
+" Open init.vim
+nnoremap <C-i>      :e ~/.config/nvim/init.vim<CR>
+
 " Create and navigate tabs
 nnoremap <C-t>      :tabnew<CR>
 nnoremap <C-Left>   :tabprevious<CR>                                                                            
@@ -95,9 +98,13 @@ nnoremap <C-h>      :tabprevious<CR>
 nnoremap <C-l>      :tabnext<CR>
 
 " Save & exit
-nnoremap <C-s>      <ESC>:w<CR>
-nnoremap <C-c>      <ESC>:wq!<CR>
-nnoremap <C-x>      <ESC>:q!<CR>
+nnoremap <C-s>      :w<CR>
+nnoremap <C-c>      :wq!<CR>
+nnoremap <C-x>      :q!<CR>
+
+inoremap <C-s>      <ESC>:w<CR>
+inoremap <C-c>      <ESC>:wq!<CR>
+inoremap <C-x>      <ESC>:q!<CR>
 
 " -----------------------------------------------------------
 " BACKUP:
