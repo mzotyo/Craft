@@ -8,6 +8,7 @@ call plug#begin('~/.vim/bundle')
     Plug 'https://github.com/preservim/nerdtree', { 'on': 'NERDTreeToggle' }    " Open file browse
     Plug 'https://github.com/ap/vim-css-color'                                  " CSS Color Preview
     Plug 'https://github.com/vim-syntastic/syntastic'                           " sytnax checker / linter
+    Plug 'https://github.com/junegunn/goyo.vim'                                 " Distraction free vim
 call plug#end()
 
 " -----------------------------------------------------------
@@ -105,6 +106,9 @@ nnoremap <C-x>      :q!<CR>
 inoremap <C-s>      <ESC>:w<CR>
 inoremap <C-c>      <ESC>:wq!<CR>
 inoremap <C-x>      <ESC>:q!<CR>
+
+nnoremap <C-g>      :Goyo<CR>
+inoremap <C-g>      <ESC>:Goyo<CR>
 
 " -----------------------------------------------------------
 " BACKUP:
