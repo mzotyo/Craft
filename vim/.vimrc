@@ -21,10 +21,7 @@ set encoding=utf-8
 set guifont=Lucida\ Console:h11
 
 set nowrap
-set wildmode=longest,list                                                       " get bash-like tab completions
-
-set number                                                                      " add line numbers
-" set relativenumber
+set number relativenumber                                                       " add line numbers
 
 syntax enable                                                                   " enable syntax and plugins (for netrw)
 filetype plugin on                                                              " reocgnizing the file type
@@ -49,6 +46,7 @@ set path+=**
 
 " Display all matching files when tab complete
 set wildmenu
+set wildmode=longest,list                                                       " get bash-like tab completions
 
 " NOW WE CAN:
 " - Hit tab to :find by partial match
