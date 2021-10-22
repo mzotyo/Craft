@@ -140,6 +140,21 @@ inoremap <C-x>      <ESC>:q!<CR>
 nnoremap <C-g>      :Goyo<CR>
 inoremap <C-g>      <ESC>:Goyo<CR>
 
+" Git commands
+nnoremap <C-g><C-s>     :Git status<CR>
+nnoremap <C-g><C-a>     :Git add *<CR>
+nnoremap <C-g><C-i>     :Git add --interactive<CR>
+nnoremap <C-g><C-c>     :Git commit<CR>
+nnoremap <C-g><C-p>     :Git push<CR>
+nnoremap <C-g><C-l>     :Git pull<CR>
+
+inoremap <C-g><C-s>     <ESC>:w<CR>:Git status<CR>
+inoremap <C-g><C-a>     <ESC>:w<CR>:Git add<CR>
+inoremap <C-g><C-i>     <ESC>:w<CR>:Git add --interactive<CR>
+inoremap <C-g><C-c>     <ESC>:w<CR>:Git commit<CR>
+inoremap <C-g><C-p>     <ESC>:w<CR>:Git push<CR>
+inoremap <C-g><C-l>     <ESC>:w<CR>:Git pull<CR>
+
 " -----------------------------------------------------------
 " BACKUP:
 " -----------------------------------------------------------
