@@ -137,11 +137,12 @@ inoremap <C-c>      <ESC>:wq!<CR>
 inoremap <C-x>      <ESC>:q!<CR>
 
 " Distraction free
-nnoremap <C-d>      :Goyo<CR>
-inoremap <C-d>      <ESC>:Goyo<CR>
+nnoremap <C-y>      :Goyo<CR>
+inoremap <C-y>      <ESC>:Goyo<CR>
 
 " Git commands
 nnoremap <C-g><C-s>     :Git status<CR>
+nnoremap <C-g><C-d>     :Git diff<CR>
 nnoremap <C-g><C-a>     :Git add --all<CR>
 nnoremap <C-g><C-i>     :Git add --interactive<CR>
 nnoremap <C-g><C-c>     :Git commit<CR>
@@ -150,6 +151,7 @@ nnoremap <C-g><C-u>     :Git pull<CR>
 nnoremap <C-g><C-l>     :Git log --decorate --all<CR>
 
 inoremap <C-g><C-s>     <ESC>:w<CR>:Git status<CR>
+inoremap <C-g><C-d>     <ESC>:w<CR>:Git diff<CR>
 inoremap <C-g><C-a>     <ESC>:w<CR>:Git add --all<CR>
 inoremap <C-g><C-i>     <ESC>:w<CR>:Git add --interactive<CR>
 inoremap <C-g><C-c>     <ESC>:w<CR>:Git commit<CR>
