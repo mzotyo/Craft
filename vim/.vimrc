@@ -137,8 +137,8 @@ inoremap <C-c>      <ESC>:wq!<CR>
 inoremap <C-x>      <ESC>:q!<CR>
 
 " Distraction free
-nnoremap <C-g>      :Goyo<CR>
-inoremap <C-g>      <ESC>:Goyo<CR>
+nnoremap <C-d>      :Goyo<CR>
+inoremap <C-d>      <ESC>:Goyo<CR>
 
 " Git commands
 nnoremap <C-g><C-s>     :Git status<CR>
