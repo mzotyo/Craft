@@ -9,6 +9,7 @@ call plug#begin('~/.vim/bundle')
     Plug 'https://github.com/ap/vim-css-color'                                  " CSS Color Preview
     Plug 'https://github.com/vim-syntastic/syntastic'                           " sytnax checker / linter
     Plug 'https://github.com/junegunn/goyo.vim'                                 " Distraction free vim
+    Plug 'https://github.com/tpope/vim-fugitive'                                " git tool
 call plug#end()
 
 " -----------------------------------------------------------
@@ -71,6 +72,36 @@ let g:netrw_list_hide.=',\(^|\s\s\)zs\.\S\+'
 " - :edit a folder to open a file browser
 " - <CR>/v/t to open in an h-split/v-split/tab
 " - check |netrw-browse-maps| for more mappings
+
+" -----------------------------------------------------------
+"  TAG JUMPING:
+" -----------------------------------------------------------
+
+" Create the `tags` file (may need to install cttags first)
+command! MakeTags !ctags -R .
+
+" NOW WE CAN:
+" - Use ^] to jump to tag under cursor
+" - Use g^] for ambiguous tags
+" - Use ^t to jump back up the tag stack
+
+" THINGS TO CONSIDER:
+" - This doesn't help if you want a visual list of tags
+
+" -----------------------------------------------------------
+"  AUTOCOMPLETE:
+" -----------------------------------------------------------
+
+" The good stuff is documented in |ins-completion|
+
+" HIGHLIGHTS:
+" - ^x^n for JUST this file
+" - ^x^f for filenames (works with out path trick!)
+" - ˘x^] for tags only
+" - ^n for anything specified by the 'complete option
+
+" NOW WE CAN:
+" - Use ^n and ^p to go back and forth in the suggestion list
 
 " -----------------------------------------------------------
 "  SNIPPETS:
