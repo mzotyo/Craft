@@ -5,14 +5,15 @@
 call plug#begin('~/.vim/bundle')
 	Plug 'http://github.com/tpope/vim-surround' 								" Surrounding ysw)
 	Plug 'https://github.com/tpope/vim-repeat', 								" Repeats surround commands
-	Plug 'https://github.com/preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+	Plug 'https://github.com/preservim/nerdtree', { 'on': 'NERDTreeToggle' }    " Open file browse
 	Plug 'https://github.com/ap/vim-css-color' 									" CSS Color Preview
 	Plug 'https://github.com/vim-syntastic/syntastic' 							" Syntax checker / linter
+    Plug 'https://github.com/junegunn/goyo.vim'                                 " Distraction free vim
     Plug 'https://github.com/tpope/vim-fugitive'                                " Git tool
 call plug#end()
 
 " -----------------------------------------------------------
-" PERSONAL SETTINGS:
+" BASIC SETTINGS:
 " -----------------------------------------------------------
 
 set nocompatible                                                                " enter the current millenium
@@ -21,11 +22,7 @@ set encoding=utf-8
 set guifont=Lucida\ Console:h11
 
 set nowrap
-set wildmode=longest,list                                                       " get bash-like tab completions
-
-set cursorline																	" highlight current line
-set number                                                                      " add line numbers
-" set relativenumber
+set number relativenumber                                                       " add line numbers
 
 syntax enable                                                                   " enable syntax and plugins (for netrw)
 filetype plugin on                                                              " reocgnizing the file type
@@ -78,6 +75,37 @@ let g:netrw_list_hide.=',\(^|\s\s\)zs\.\S\+'
 " - check |netrw-browse-maps| for more mappings
 
 " -----------------------------------------------------------
+"  TAG JUMPING:
+" -----------------------------------------------------------
+
+" Create the `tags` file (may need to install cttags first)
+command! MakeTags !ctags -R .
+
+" NOW WE CAN:
+" - Use ^] to jump to tag under cursor
+" - Use g^] for ambiguous tags
+" - Use ^t to jump back up the tag stack
+
+" THINGS TO CONSIDER:
+" - This doesn't help if you want a visual list of tags
+
+" -----------------------------------------------------------
+"  AUTOCOMPLETE:
+" -----------------------------------------------------------
+
+" The good stuff is documented in |ins-completion|
+
+" HIGHLIGHTS:
+" - ^x^n for JUST this file
+" - ^x^f for filenames (works with out path trick!)
+" - ˘x^] for tags only
+" - ^n for anything specified by the 'complete option
+
+" NOW WE CAN:
+" - Use ^n and ^p to go back and forth in the suggestion list
+
+
+" -----------------------------------------------------------
 "  SNIPPETS:
 " -----------------------------------------------------------
 
@@ -109,6 +137,10 @@ nnoremap <C-x>      :q!<CR>
 inoremap <C-s>      <ESC>:w<CR>
 inoremap <C-c>      <ESC>:wq!<CR>
 inoremap <C-x>      <ESC>:q!<CR>
+
+" Distraction free
+nnoremap <C-g>      :Goyo<CR>
+inoremap <C-g>      <ESC>:Goyo<CR>
 
 " -----------------------------------------------------------
 " BACKUP:
