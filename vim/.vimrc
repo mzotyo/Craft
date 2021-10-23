@@ -17,6 +17,7 @@ call plug#end()
 " -----------------------------------------------------------
 
 set nocompatible                                                                " enter the current millenium
+set autochdir
 
 set encoding=utf-8
 set guifont=Lucida\ Console:h11
@@ -114,31 +115,31 @@ nnoremap ,html :-1read $HOME/.vim/snippets/.skeleton.html<CR>3jwf>a
 " KEY BINDING:
 " -----------------------------------------------------------
 
-" Toggles file browsing window on and off
-nnoremap <C-e>      :NERDTreeToggle<CR>
+" Toggles file browsing window on and off 
+nnoremap <C-e>          :NERDTreeToggle<CR>
 
 " Open init.vim
-nnoremap <C-i>      :e ~/.config/nvim/init.vim<CR>
+nnoremap <C-i>          :e C:\Users\magyariz\_vimrc<CR>
 
 " Create and navigate tabs
-nnoremap <C-t>      :tabnew<CR>
-nnoremap <C-Left>   :tabprevious<CR>                                                                            
-nnoremap <C-Right>  :tabnext<CR>
-nnoremap <C-h>      :tabprevious<CR>                                                                            
-nnoremap <C-l>      :tabnext<CR>
+nnoremap <C-t>          :tabnew<CR>
+nnoremap <C-Left>       :tabprevious<CR>                                                                            
+nnoremap <C-Right>      :tabnext<CR>
+nnoremap <C-h>          :tabprevious<CR>                                                                            
+nnoremap <C-l>          :tabnext<CR>
 
 " Save & exit
-nnoremap <C-s>      :w<CR>
-nnoremap <C-c>      :wq!<CR>
-nnoremap <C-x>      :q!<CR>
+nnoremap <C-s>          :w<CR>
+nnoremap <C-c>          :wq!<CR>
+nnoremap <C-x>          :q!<CR>
 
-inoremap <C-s>      <ESC>:w<CR>
-inoremap <C-c>      <ESC>:wq!<CR>
-inoremap <C-x>      <ESC>:q!<CR>
+inoremap <C-s>          <ESC>:w<CR>
+inoremap <C-w><C-c>     <ESC>:wq!<CR>
+inoremap <C-w><C-x>     <ESC>:q!<CR>
 
 " Distraction free
-nnoremap <C-y>      :Goyo<CR>
-inoremap <C-y>      <ESC>:Goyo<CR>
+nnoremap <C-y>          :Goyo<CR>
+inoremap <C-y>          <ESC>:Goyo<CR>
 
 " Git commands
 nnoremap <C-g><C-s>     :Git status<CR>
@@ -150,14 +151,8 @@ nnoremap <C-g><C-p>     :Git push<CR>
 nnoremap <C-g><C-u>     :Git pull<CR>
 nnoremap <C-g><C-l>     :Git log --decorate --all<CR>
 
-inoremap <C-g><C-s>     <ESC>:w<CR>:Git status<CR>
-inoremap <C-g><C-d>     <ESC>:w<CR>:Git diff<CR>
-inoremap <C-g><C-a>     <ESC>:w<CR>:Git add --all<CR>
-inoremap <C-g><C-i>     <ESC>:w<CR>:Git add --interactive<CR>
-inoremap <C-g><C-c>     <ESC>:w<CR>:Git commit<CR>
-inoremap <C-g><C-p>     <ESC>:w<CR>:Git push<CR>
-inoremap <C-g><C-u>     <ESC>:w<CR>:Git pull<CR>
-inoremap <C-g><C-l>     <ESC>:w<CR>:Git log --decorate --all<CR>
+" Development environment
+nnoremap <C-d><C-t>     :!npm run test % 
 
 " -----------------------------------------------------------
 " BACKUP:
@@ -167,12 +162,4 @@ set noswapfile                                                                  
 set dir=/tmp,/c/tmp,/c/temp
 set backupdir=/tmp,/c/tmp,/c/temp
 set udf
-set udir=/tmp,/c/tmp,/c/temp
-
-" -----------------------------------------------------------
-" THINGS TO EXPLORE:
-" -----------------------------------------------------------
-" set cursorline
-" set cc=130                                                                    " set an 130 column border for good coding style
-" syn clear markdownError
-
+set udir=/tmp,/c/tmp,/c/temp " ----------------------------------------------------------- " THINGS TO EXPLORE: " ----------------------------------------------------------- " set cursorline " set cc=130                                                                    " set an 130 column border for good coding style " syn clear markdownError
