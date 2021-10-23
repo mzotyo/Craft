@@ -118,6 +118,8 @@ nnoremap ,html :-1read $HOME/.vim/snippets/.skeleton.html<CR>3jwf>a
 " KEY BINDING:
 " -----------------------------------------------------------
 
+let mapleader = "."                                                             " Map leader key to '.'
+
 " Toggles file browsing window on and off 
 nnoremap <C-e>          :NERDTreeToggle<CR>
 
@@ -141,21 +143,24 @@ inoremap <C-c>          <ESC>:wq!<CR>
 inoremap <C-x>          <ESC>:q!<CR>
 
 " Distraction free
-nnoremap <C-y>          :Goyo<CR>
-inoremap <C-y>          <ESC>:Goyo<CR>
+nnoremap <C-d>          :Goyo<CR>
+inoremap <C-d>          <ESC>:Goyo<CR>
 
 " Git commands
-nnoremap <C-g><C-s>     :Git status<CR>
-nnoremap <C-g><C-d>     :Git diff<CR>
-nnoremap <C-g><C-a>     :Git add --all<CR>
-nnoremap <C-g><C-i>     :Git add --interactive<CR>
-nnoremap <C-g><C-c>     :Git commit<CR>
-nnoremap <C-g><C-p>     :Git push<CR>
-nnoremap <C-g><C-u>     :Git pull<CR>
-nnoremap <C-g><C-l>     :Git log --decorate --all<CR>
+nnoremap .gs            :Git status<CR>
+nnoremap .gd            :Git diff<CR>
+nnoremap .ga            :Git add --all<CR>
+nnoremap .gA            :Git add --interactive<CR>
+nnoremap .gc            :Git commit<CR>
+nnoremap .gC            :Git commit --amend<CR>
+nnoremap .gp            :Git push<CR>
+nnoremap .gP            :Git push -f<CR>
+nnoremap .gu            :Git pull<CR>
+nnoremap .gl            :Git log --decorate --all<CR>
+nnoremap .gL            :Git log --decorate --all --stat<CR>
 
 " Development environment
-nnoremap <C-d><C-t>     :!npm run test % 
+nnoremap .nt            :!npm run test %<CR>
 
 " -----------------------------------------------------------
 " BACKUP:
