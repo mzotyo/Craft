@@ -119,7 +119,7 @@ nnoremap ,html :-1read $HOME/.vim/snippets/.skeleton.html<CR>3jwf>a
 nnoremap <C-e>          :NERDTreeToggle<CR>
 
 " Open init.vim
-nnoremap <C-i>          :e C:\Users\magyariz\_vimrc<CR>
+nnoremap <C-i>          :e ~/.config/nvim/init.vim<CR>
 
 " Create and navigate tabs
 nnoremap <C-t>          :tabnew<CR>
