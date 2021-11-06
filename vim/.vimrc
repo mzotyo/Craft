@@ -10,6 +10,9 @@ call plug#begin('~/.vim/bundle')
     Plug 'https://github.com/vim-syntastic/syntastic'                           " sytnax checker / linter
     Plug 'https://github.com/junegunn/goyo.vim'                                 " Distraction free vim
     Plug 'https://github.com/tpope/vim-fugitive'                                " git tool
+    Plug 'https://github.com/HerringtonDarkholme/yats.vim'                      " Basic typescript support
+    Plug 'https://github.com/MaxMEllon/vim-jsx-pretty'                          " JSX support
+    Plug 'https://github.com/neoclide/coc.nvim'                                 " LSP client
 call plug#end()
 
 " -----------------------------------------------------------
@@ -132,7 +135,7 @@ nnoremap <C-h>          :tabprevious<CR>
 nnoremap <C-l>          :tabnext<CR>
 
 " Save & exit
-nnoremap <C-s>          :w<CR>
+nnoremap <C-s>          :w<CR> 
 nnoremap <C-c>          :wq!<CR>
 nnoremap <C-x>          :q!<CR>
 
@@ -158,10 +161,12 @@ nnoremap <leader>gl     :Git log --decorate --all<CR>
 nnoremap <leader>gL     :Git log --decorate --all --stat<CR>
 
 " Development environment
-nnoremap <leader>nt     :!npm run test %<CR>
+nnoremap <leader>nt     :!npm run test<CR>
+nnoremap <leader>nT     :!npm run test %<CR>
+nnoremap <leader>f      :!npx prettier --write %<CR><CR>
 
 " No highlight
-nnoremap <leader>h      :noh 
+nnoremap <leader>h      :noh<CR>
 
 " -----------------------------------------------------------
 " BACKUP:
@@ -172,4 +177,67 @@ set dir=/tmp,/c/tmp,/c/temp
 set backupdir=/tmp,/c/tmp,/c/temp
 set udf
 set udir=/tmp,/c/tmp,/c/temp 
-" ----------------------------------------------------------- " THINGS TO EXPLORE: " ----------------------------------------------------------- " set cursorline " set cc=130                                                                    " set an 130 column border for good coding style " syn clear markdownError
+
+" ----------------------------------------------------------- 
+" FORMATTERS:
+" ----------------------------------------------------------- 
+autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
+
+" ----------------------------------------------------------- 
+" LSP CONFIGURATIONS:
+" ----------------------------------------------------------- 
+
+" TextEdit might fail if hidden is not set.
+set hidden
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" ----------------------------------------------------------- 
+" THINGS TO EXPLORE: 
+" ----------------------------------------------------------- 
+" set cursorline 
+" set cc=130                                                                    " set an 130 column border for good coding style 
+" syn clear markdownError
