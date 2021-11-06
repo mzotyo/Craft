@@ -109,11 +109,14 @@ command! MakeTags !ctags -R .
 " -----------------------------------------------------------
 
 " Read an empty HTML template and more cursor to title
-nnoremap ,html :-1read $HOME/.vim/snippets/.skeleton.html<CR>3jwf>a
+nnoremap <leader>html   :-1read $HOME/.vim/snippets/.skeleton.html<CR>3jwf>a
 
 " -----------------------------------------------------------
 " KEY BINDING:
 " -----------------------------------------------------------
+
+" Leader key
+let mapleader = ","
 
 " Toggles file browsing window on and off 
 nnoremap <C-e>          :NERDTreeToggle<CR>
@@ -142,21 +145,23 @@ nnoremap <C-y>          :Goyo<CR>
 inoremap <C-y>          <ESC>:Goyo<CR>
 
 " Git commands
-
-nnoremap .gs            :Git status<CR>
-nnoremap .gd            :Git diff<CR>
-nnoremap .ga            :Git add --all<CR>
-nnoremap .gA            :Git add --interactive<CR>
-nnoremap .gc            :Git commit<CR>
-nnoremap .gC            :Git commit --amend<CR>
-nnoremap .gp            :Git push<CR>
-nnoremap .gP            :Git push -f<CR>
-nnoremap .gu            :Git pull<CR>
-nnoremap .gl            :Git log --decorate --all<CR>
-nnoremap .gL            :Git log --decorate --all --stat<CR>
+nnoremap <leader>gs     :Git status<CR>
+nnoremap <leader>gd     :Git diff<CR>
+nnoremap <leader>ga     :Git add --all<CR>
+nnoremap <leader>gA     :Git add --interactive<CR>
+nnoremap <leader>gc     :Git commit<CR>
+nnoremap <leader>gC     :Git commit --amend<CR>
+nnoremap <leader>gp     :Git push<CR>
+nnoremap <leader>gP     :Git push -f<CR>
+nnoremap <leader>gu     :Git pull<CR>
+nnoremap <leader>gl     :Git log --decorate --all<CR>
+nnoremap <leader>gL     :Git log --decorate --all --stat<CR>
 
 " Development environment
-nnoremap .nt            :!npm run test %<CR>
+nnoremap <leader>nt     :!npm run test %<CR>
+
+" No highlight
+nnoremap <leader>h      :noh 
 
 " -----------------------------------------------------------
 " BACKUP:
@@ -166,4 +171,5 @@ set noswapfile                                                                  
 set dir=/tmp,/c/tmp,/c/temp
 set backupdir=/tmp,/c/tmp,/c/temp
 set udf
-set udir=/tmp,/c/tmp,/c/temp " ----------------------------------------------------------- " THINGS TO EXPLORE: " ----------------------------------------------------------- " set cursorline " set cc=130                                                                    " set an 130 column border for good coding style " syn clear markdownError
+set udir=/tmp,/c/tmp,/c/temp 
+" ----------------------------------------------------------- " THINGS TO EXPLORE: " ----------------------------------------------------------- " set cursorline " set cc=130                                                                    " set an 130 column border for good coding style " syn clear markdownError
