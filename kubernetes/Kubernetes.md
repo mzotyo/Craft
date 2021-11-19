@@ -36,10 +36,18 @@ It is ment for stateFULL apps or databases. Would take care of replicating, scal
 ```shell
 kubectl get <component>
 
-# examples
+# For more information
+kubectl get <component> -o wide
+
+# Examples
 kubectl get nodes
+kubectl get nodes -o wide
+
 kubectl get pod
+kubectl get pod -o wide
+
 kubectl get services
+kubectl get services -o wide
 ```
 
 ```shell
@@ -186,3 +194,22 @@ kubectl create namespace <name>
     # Change active namespace
     kubens <namespace name>
     ```
+  
+## More examples
+
+```shell
+# Gets all events
+kubectl get events
+
+# Get detailed information from pod
+kubectl describen pod <pod name>
+ 
+# Edits the deployment an then redeploys the pods
+kubectl edit deployment <name>
+
+# Follow the logs
+kubectl logs --follow pod/sqms-db2-goldimage-db-78...7dvr -n sqms-application
+
+# Get a console to the pod
+kubectl exec -it pod/sqms-db2-goldimage-db-78...7dvr -n sqms-application
+```
