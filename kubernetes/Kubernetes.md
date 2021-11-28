@@ -213,3 +213,244 @@ kubectl logs --follow pod/sqms-db2-goldimage-db-78...7dvr -n sqms-application
 # Get a console to the pod
 kubectl exec -it pod/sqms-db2-goldimage-db-78...7dvr -n sqms-application
 ```
+
+## Ingress
+
+Reach application from external IP address. App service remains internal. You redirect a host to a internal service.
+
+```yaml
+apiVersion: networking.k8s.io/v1beta1 
+kind: Ingress 
+metadata: 
+    name: myapp-ingress
+spec: 
+    rules:
+    - host: myapp.com
+      http:
+        paths: 
+        -backend:
+            serviceName: myapp-internal-service
+            servicePort: 8080
+```
+
+We need an implementation of ingress too (**Ingress Controller**) pod. 
+- Evaluates all the rules
+- Managese redirections
+- Entrypoint to cluster
+- Many third party implementation
+    + K8s Nginx Ingress Controller
+- A proxy server should redirect the requests to the Ingress Server.
+
+```shell
+# Istall ingress
+minikube addons enable ingress
+```
+
+
+### Configure Ingress rules
+
+**dashboard-ingress.yaml**
+
+```yaml
+apiVersion: networking.k8s.io/v1beta1 
+kind: Ingress 
+metadata: 
+    name: dashboard-ingress
+    namespace: kubernetes-dashboard
+spec: 
+    rules:
+    - host: dashboard.com
+      http:
+        paths: 
+        -backend:
+            serviceName: kubernetes-dashboard
+            servicePort: 80
+```
+
+```shell
+kubectl apply -f dashboard-ingress.yaml 
+```
+
+### Default backen
+
+Create an error handler backend.
+
+```yaml
+apiVersion: v1 
+kind: Service
+metadata: 
+    name: default-http-backend
+spec: 
+    selector:
+        app: default-response-app
+    ports:
+      - protocol: TCP
+        port: 80
+        targetPort: 8080
+```
+
+### Multiple subdomains can be configured.
+
+```yaml
+apiVersion: networking.k8s.io/v1beta1 
+kind: Ingress 
+metadata: 
+    name: simple-fanout-example
+    annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: /
+spec: 
+    rules:
+    - host: myapp.com
+      http:
+        - path: /analytics
+          backend:
+            serviceName: analytics-service
+            servicePort: 3000
+        - path: /shopping
+          backend: 
+            serviceName: shopping-service
+            servicePort: 8080
+```
+
+
+### Configure TLS Certificate
+
+**ingress**
+```yaml
+apiVersion: networking.k8s.io/v1beta1 
+kind: Ingress 
+metadata: 
+    name: tls-example-ingress
+spec: 
+  tls:
+  - hosts
+    - myapp.com
+    secretName: myapp-secret-tls
+    
+  rules:
+    - host: myapp.com
+      http:
+        paths:
+        - path 
+          backend:
+            serviceName: myapp-internalservice
+            servicePort: 8080
+```
+
+**secret**
+```yaml
+apiVersion: v1
+kind: Secret
+metadata: 
+    name: myapp-secret-tls
+    namespace: default
+data:
+    tls.crt: base64 encoded cert
+    tls.key: base64 encoded key
+type: kubernetes.io/tls
+```
+
+## Volumes
+
+**persistance volume claim**
+```yaml
+kind: PeristentVolumeClaim
+apiVersion: v1
+metadata:
+    name: pvc-name
+spec:
+    storageClassName: manual
+    volumeMode: Filesystem
+    accessMode:
+      - ReadWriteOnce
+    resources:
+        requests:
+            storage: 10Gi
+```
+
+**reference a pvc**
+```yaml 
+apiVersoin: v1 
+kind: Pod 
+metadata: 
+    name: mypod
+spec: 
+    containers:
+        - name: myfrontend
+          image: nginix
+          volumeMounts:
+          - mountPath: "/var/www/html"
+    volumes:
+        - name: mypod
+          persistentVolumeClaim: 
+            claimName: pvc-name
+```
+
+### ConfigMap and Secret
+
+```yaml 
+apiVersion: v1 
+kind: Pod 
+metadata: 
+    name: mypod
+spec: 
+    containers:
+     - name: busybox-container
+       image: busybox
+       volumeMounts:
+         - name: config-dir
+           mountPath: /etc/config
+    volumes:
+     - name: config-dir
+       configMap:
+         name: bb-configmap 
+ ```
+
+### Storage Class
+
+Is another abstarction level on the top of the persistance volumes.
+
+## StatefulSet
+
+Used specifically for stateful applications. Stateful applications are databases or any application that stores state.
+
+Sateless applications are deployed using *Deployment*. Stateful applications are deployed using *StatefulSet* components.
+
+## Routing Securities
+
+### I3-Access
+
+## Observability
+
+### Monitoring
+
+- Services create metrics and make them available via an API
+- **Prometheus** collects the metrics and shares via a Datasource
+    - Push metrics to **Pushgateway**
+    - Graphana
+
+### Logging
+
+- Services ouput collected by fluentBit
+- Fluentd service reads the logs and forwards them to elasticsearch
+- Kibana enables graphical visualization of logs
+- Elasticsearch & Kibana are not deployed by us
+
+### Trace
+
+- ~20 Services communication with each other
+- Issues occuring across multiple services are a chore to track via logs
+- Daemon in each service's wildfly server keeps track of transactons
+- Jaeger
+- Grafana
+
+## Groundworks
+
+- Namespaces: k8s isolation machanism
+- Reloader: service wich ensures apps restart on configmap/secret update
+- Service Accounts: tool enabling the creation of k8s account for dashboard
+- Network policies: need to create networking rules to enables communication
+- Secrets: any confidential configuration
+    - Deployed either via tool or via k8s job
+
+## Cluster setup
