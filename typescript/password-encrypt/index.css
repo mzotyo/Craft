@@ -1,0 +1,30 @@
+label {
+    display: block;
+    margin-top: 20px;
+    font-size: x-large;
+    font-family: "arial";
+}
+
+input, textarea {
+    margin-top: 5px;
+}
+
+button {
+    margin-top: 10px;
+    font-family: "arial";
+}
+
+.passphrase, .encrypted {
+    width: 450px;
+    height: 200px;
+    resize: none;
+}
+
+.password {
+    width: 450px;
+}
+
+.error {
+    color: red;
+    font-family: "arial"
+}
