@@ -1,4 +1,4 @@
-import { encryptChar, encryptWord, encrypt, slice, permutate } from './encryption';
+import { encryptChar, encryptWord, encrypt, permutate } from './encryption';
 
 describe('TDD', () => {
     it('encrypting single character', () => {
@@ -40,28 +40,24 @@ describe('TDD', () => {
         expect(encryptWord('AA', 'AA')).toBe('AA  ');
     });
 
-    it('', () => {
-        expect(slice('A', 'A')).toEqual([{ word: 'A', pass: 'A'}]);
-        expect(slice('ABCD', 'EFGH')).toEqual([{ word: 'ABCD', pass: 'EFGH'}]);
-        expect(slice('ABCDEF', 'EFGH')).toEqual([{ word: 'ABCD', pass: 'EFGH'}]);
-        expect(slice('ABCDEF ABCD', 'EFGHIJKL')).toEqual([{ word: 'ABCD', pass: 'EFGH'}, { word: 'ABCD', pass: 'IJKL'}]);
-        expect(() => { slice(' ABCD', 'EFGHIJKL') }).toThrow('[slice] Whitespace characters at the beginning or at the end of the text are not allowed');
-        expect(() => { slice('ABCD ', 'EFGHIJKL') }).toThrow('[slice] Whitespace characters at the beginning or at the end of the text are not allowed');
-        expect(() => { slice('ABCDEF', 'EF GH') }).toThrow('[slice] Whitespace characters ar not allowed in the passphrase');
-        expect(slice('ALMAFA KORTEFA CSERESZNYE', 'PASSWOR')).toEqual([{ word: 'ALMA', pass: 'PASS'}, { word: 'KORT', pass: 'WORP'}, { word: 'CSER', pass: 'ASSW'}]);
-        expect(slice('ALMAFA     KORTEFA CSERESZNYE', 'PASSWOR')).toEqual([{ word: 'ALMA', pass: 'PASS'}, { word: 'KORT', pass: 'WORP'}, { word: 'CSER', pass: 'ASSW'}]);
-    });
-
     it('encrypt', () => {
-       expect(encrypt('acid skill page ginger hospital ripple green cup fine finger other pipe envelope refuse bike year put multiply harsh churn claw display move improve', 'PASSWORD'))
-        .toBe('LRPS CRNA QMDZ LMMA WGVG WGQT RYOD I_RO AQMN AIIL OVSI MMME KJCH UUQU WWJB DDOM SZAX OTUO APBD XM_M VTQM UUGY YYUY MBQO');
-//         expect(encrypt('acid skill page ginger', 'PASSWORD')).toBe('LWAK CWAU QROW LIMD');
+        expect(encrypt('acid skill page ginger hospital ripple green cup fine finger other pipe envelope refuse bike year put multiply harsh churn claw display move improve', 'PASSWORD'))
+             .toBe('LRPS CRNA QMDZ LMMA WGVG WGQT RYOD I_RO AQMN AIIL OVSI MMME KJCH UUQU WWJB DDOM SZAX OTUO APBD XM_M VTQM UUGY YYUY MBQO');
+        expect(encrypt('acid skill page ginger', 'PASSWORD')).toBe('LWAK CWAU QROW LIMD');
     })
 
     it('permutation', () => {
         expect(permutate(['LCQL', 'WWRI'], 2)).toEqual(['LW', 'CW', 'QR', 'LI']);
         expect(permutate(['LCQL', 'WWRI', 'AAOM', 'KUWD'], 2)).toEqual(['LA', 'CA', 'QO', 'LM', 'WK', 'WU', 'RW', 'ID']);
-        expect(permutate(['LCQL', 'WWRI', 'AAOM', 'KUWD', 'SOAX', 'VUYM', 'RRMM', 'GGY', 'QIVM', 'JUWD', 'ZTPM', 'TUYB', 'PNDM', 'VQOR', 'MISM', 'CQJO', 'AUB', 'QGUQ', 'SAZA', 'GTDO', 'NLIE', 'HUBM', 'XODM', 'MYYO'], 4))
-            .toEqual(['LRPS','CRNA', 'QMDZ', 'LMMA', 'WGVG', 'WGQT', 'RYOD', 'I_RO', 'AQMN', 'AIIL', 'OVSI', 'MMME', 'KJCH', 'UUQU', 'WWJB', 'DDOM', 'SZAX', 'OTUO', 'APBD', 'XM_M', 'VTQM', 'UUGY', 'YYUY', 'MBQO']);
+
+        expect(permutate(['LCQL', 'WWRI', 'AAOM', 'KUWD', 'SOAX', 'VUYM',
+                          'RRMM', 'GGY',  'QIVM', 'JUWD', 'ZTPM', 'TUYB', 
+                          'PNDM', 'VQOR', 'MISM', 'CQJO', 'AUB',  'QGUQ',
+                          'SAZA', 'GTDO', 'NLIE', 'HUBM', 'XODM', 'MYYO'], 4))
+
+            .toEqual(['LRPS', 'CRNA', 'QMDZ', 'LMMA', 'WGVG', 'WGQT',
+                      'RYOD', 'I_RO', 'AQMN', 'AIIL', 'OVSI', 'MMME', 
+                      'KJCH', 'UUQU', 'WWJB', 'DDOM', 'SZAX', 'OTUO', 
+                      'APBD', 'XM_M', 'VTQM', 'UUGY', 'YYUY', 'MBQO']);
     });
 });
