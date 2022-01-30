@@ -33,20 +33,16 @@ function validateWord(text: string, password: string) {
     }
 }
 
-
 export function encryptChar(char: string, pass: string): string {
     const character = char.toUpperCase();
     const password = pass.toUpperCase();
 
     validateChar(character, password);
 
-    let passShiftedAscii = ascii(character) - passShift(password);
-
-    if(ascii(password) > ascii(character)) {
-        passShiftedAscii += ASCII_OFFSET;
-    }
-
-    return toChar(passShiftedAscii);
+    const encOffset = (ascii(password) - ascii('A'));
+    const shiftedAscii = ascii(character) + encOffset;
+    const correctedAscii = shiftedAscii > ascii('Z') ? shiftedAscii - ASCII_OFFSET : shiftedAscii;
+    return toChar(correctedAscii);
 }
 
 function validateChar(text: string, password: string) {
