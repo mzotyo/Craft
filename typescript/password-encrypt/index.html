@@ -9,11 +9,11 @@
         <form id="encryption" name="encryptionForm" action="/" method="GET">
             <div>
                 <label for="passphrase">Passphrase</label>
-                <textarea id="passphrase" name="passphrase" class="passphrase" ></textarea>
+                <textarea id="passphrase" class="textinput" ></textarea>
             </div>
             <div>
                 <label for="password">Password</label>
-                <input id="password" name="password" type="text" class="password"/>
+                <input id="password" type="text" class="textinput"/>
             </div>
             <div>
                 <button type="submit">Encrypt</button>
@@ -21,7 +21,7 @@
             </div>
             <div>
                 <label for="encrypted">Encrypted passphrase</label>
-                <textarea id="encrypted" name="encrypted" class="encrypted"></textarea>
+                <textarea id="encrypted" class="textinput"></textarea>
             </div>
         </form>
         <div id="error" class="error"></div>

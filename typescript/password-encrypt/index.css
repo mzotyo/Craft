@@ -5,8 +5,9 @@ label {
     font-family: "arial";
 }
 
-input, textarea {
-    margin-top: 5px;
+textarea {
+    height: 200px;
+    resize: none;
 }
 
 button {
@@ -14,13 +15,8 @@ button {
     font-family: "arial";
 }
 
-.passphrase, .encrypted {
-    width: 450px;
-    height: 200px;
-    resize: none;
-}
-
-.password {
+.textinput {
+    margin-top: 5px;
     width: 450px;
 }
 
