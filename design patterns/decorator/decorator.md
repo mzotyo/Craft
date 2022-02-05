@@ -109,16 +109,25 @@ describe('Example usage of decorator pattern', () => {
     const decorator1 = new ConcreteDecoratorA(simple);
     const decorator2 = new ConcreteDecoratorB(decorator1);
 
+    const mockLog = jest.fn();
+    console.log = mockLog;
+    beforeEach(() => {
+        mockLog.mockClear();
+    });
+
     test('Simple component', () => {
-        expect(simple.operation()).toEqual('ConcreteComponent');
+        clientCode(simple);
+        expect(console.log).toHaveBeenCalledWith('RESULT: ConcreteComponent');
     });
     
     test('Decorated with Decorator1', () => {
-        expect(decorator1.operation()).toEqual('ConcreteDecoratorA( ConcreteComponent )');
+        clientCode(decorator1);
+        expect(console.log).toHaveBeenCalledWith('RESULT: ConcreteDecoratorA( ConcreteComponent )');
     });
 
     test('Decorated with Decorator2', () => {
-        expect(decorator2.operation()).toEqual('ConcreteDecoratorB( ConcreteDecoratorA( ConcreteComponent ) )');
+        clientCode(decorator2);
+        expect(console.log).toHaveBeenCalledWith('RESULT: ConcreteDecoratorB( ConcreteDecoratorA( ConcreteComponent ) )');
     });
 });
 ```
