@@ -2,9 +2,6 @@ import { Component, ConcreteComponent, ConcreteDecoratorA, ConcreteDecoratorB } 
 
 describe('Example usage of decorator pattern', () => {
 
-    const mockLog = jest.fn();
-    console.log = mockLog;
-
     /**
      * The client code works with all objects using the Component interface. This 
      * way it can stay independent of the concrete classes of components it works 
@@ -28,6 +25,8 @@ describe('Example usage of decorator pattern', () => {
     const decorator1 = new ConcreteDecoratorA(simple);
     const decorator2 = new ConcreteDecoratorB(decorator1);
 
+    const mockLog = jest.fn();
+    console.log = mockLog;
     beforeEach(() => {
         mockLog.mockClear();
     });
