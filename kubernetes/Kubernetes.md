@@ -454,3 +454,35 @@ Sateless applications are deployed using *Deployment*. Stateful applications are
     - Deployed either via tool or via k8s job
 
 ## Cluster setup
+
+
+## Kubernetes Services
+
+- Stable IP address
+- Loadbalancing
+
+### Cluster IP type
+
+Service with no type specification.
+
+```shell
+kubectl get pod -o wide 
+```
+
+
+### Headless Services
+
+Communication with specific PODs. Ex: Statefull PODs.
+
+### NodePort Service
+
+Ports open on the workernodes
+
+### LoadBalancer Service
+
+Services are accessable via LoadBalancer of the Cloud.
+
+## Helm
+
+package manager for Kubernetes
+
