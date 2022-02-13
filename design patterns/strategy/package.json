@@ -6,7 +6,7 @@
   "scripts": {
     "test": "clear && jest",
     "build": "clear && tsc",
-    "deploy": "clear && tsc && cp strategy.* ~/Host"
+    "deploy": "clear && tsc && cp strategy.* ~/Host/design-patterns"
   },
   "keywords": [],
   "author": "",

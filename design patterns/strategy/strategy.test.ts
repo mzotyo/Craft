@@ -9,7 +9,7 @@ console.log = jest.fn();
  * concrete Strategy implementation. The context then it will 
  * use it without knowing which implementation it is.
  */
- function clientCode(strategy: Strategy) {
+function clientCode(strategy: Strategy) {
     const context = new Context(strategy);
     context.executeStrategy();
 }
