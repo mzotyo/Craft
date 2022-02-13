@@ -110,10 +110,6 @@ describe('Example usage of decorator pattern', () => {
     const decorator1 = new ConcreteDecoratorA(simple);
     const decorator2 = new ConcreteDecoratorB(decorator1);
 
-    beforeEach(() => {
-        mockLog.mockClear();
-    });
-
     test('Simple component', () => {
         clientCode(simple);
         
