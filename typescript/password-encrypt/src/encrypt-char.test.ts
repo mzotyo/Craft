@@ -29,6 +29,8 @@ describe('TDD', () => {
         expect(() => { encrypt(';', 'T') }).toThrow('[encrypt-char] Invalid character: ;');
         expect(() => { encrypt('A', '#') }).toThrow('[encrypt-char] Invalid character in the password: #');
         expect(() => { encrypt('', 'A') }).toThrow('[encrypt-char] Text length of 0 is not allowed!');
+        expect(() => { encrypt('AA', 'A') }).toThrow('[encrypt-char] Text length of 2 is not allowed!');
         expect(() => { encrypt('A', '') }).toThrow('[encrypt-char] Password length of 0 is not allowed!');
+        expect(() => { encrypt('A', 'AA') }).toThrow('[encrypt-char] Password length of 2 is not allowed!');
     });
 });
