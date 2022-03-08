@@ -6,7 +6,7 @@
 # Initialize package.json
 > npm init --yes
 
-# Install jest, ts-jest, @types/jest dependency
+# Install jest dependency
 > npm install --save-dev jest
 ```
 
