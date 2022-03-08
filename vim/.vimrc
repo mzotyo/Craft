@@ -112,7 +112,7 @@ command! MakeTags !ctags -R .
 " -----------------------------------------------------------
 
 " Read an empty HTML template and more cursor to title
-nnoremap <leader>html   :-1read $HOME/.vim/snippets/.skeleton.html<CR>3jwf>a
+nnoremap <leader>html   :-1read $HOME/.vim/snippets/.skeleton.html<Enter>3jwf>a
 
 " -----------------------------------------------------------
 " KEY BINDING:
@@ -122,51 +122,51 @@ nnoremap <leader>html   :-1read $HOME/.vim/snippets/.skeleton.html<CR>3jwf>a
 let mapleader = ","
 
 " Toggles file browsing window on and off 
-nnoremap <C-e>          :NERDTreeToggle<CR>
+nnoremap <C-e>          :NERDTreeToggle<Enter>
 
 " Open init.vim
-nnoremap <C-i>          :e ~/.config/nvim/init.vim<CR>
+nnoremap <C-i>          :e ~/.config/nvim/init.vim<Enter>
 
 " Create and navigate tabs
-nnoremap <C-t>          :tabnew<CR>
-nnoremap <C-Left>       :tabprevious<CR>                                                                            
-nnoremap <C-Right>      :tabnext<CR>
-nnoremap <C-h>          :tabprevious<CR>                                                                            
-nnoremap <C-l>          :tabnext<CR>
+nnoremap <C-t>          :tabnew<Enter>
+nnoremap <C-Left>       :tabprevious<Enter>                                                                            
+nnoremap <C-Right>      :tabnext<Enter>
+nnoremap <C-h>          :tabprevious<Enter>                                                                            
+nnoremap <C-l>          :tabnext<Enter>
 
 " Save & exit
-nnoremap <C-s>          :w<CR> 
-nnoremap <C-c>          :wq!<CR>
-nnoremap <C-x>          :q!<CR>
+nnoremap <C-s>          :w<Enter> 
+nnoremap <C-c>          :wq!<Enter>
+nnoremap <C-x>          :q!<Enter>
 
-inoremap <C-s>          <ESC>:w<CR>
-inoremap <C-w><C-c>     <ESC>:wq!<CR>
-inoremap <C-w><C-x>     <ESC>:q!<CR>
+inoremap <C-s>          <ESC>:w<Enter>
+inoremap <C-w><C-c>     <ESC>:wq!<Enter>
+inoremap <C-w><C-x>     <ESC>:q!<Enter>
 
 " Distraction free
-nnoremap <C-y>          :Goyo<CR>
-inoremap <C-y>          <ESC>:Goyo<CR>
+nnoremap <C-y>          :Goyo<Enter>
+inoremap <C-y>          <ESC>:Goyo<Enter>
 
 " Git commands
-nnoremap <leader>gs     :Git status<CR>
-nnoremap <leader>gd     :Git diff<CR>
-nnoremap <leader>ga     :Git add --all<CR>
-nnoremap <leader>gA     :Git add --interactive<CR>
-nnoremap <leader>gc     :Git commit<CR>
-nnoremap <leader>gC     :Git commit --amend<CR>
-nnoremap <leader>gp     :Git push<CR>
-nnoremap <leader>gP     :Git push -f<CR>
-nnoremap <leader>gu     :Git pull<CR>
-nnoremap <leader>gl     :Git log --decorate --all<CR>
-nnoremap <leader>gL     :Git log --decorate --all --stat<CR>
+nnoremap <leader>gs     :Git status<Enter>
+nnoremap <leader>gd     :Git diff<Enter>
+nnoremap <leader>ga     :Git add --all<Enter>
+nnoremap <leader>gA     :Git add --interactive<Enter>
+nnoremap <leader>gc     :Git commit<Enter>
+nnoremap <leader>gC     :Git commit --amend<Enter>
+nnoremap <leader>gp     :Git push<Enter>
+nnoremap <leader>gP     :Git push -f<Enter>
+nnoremap <leader>gu     :Git pull<Enter>
+nnoremap <leader>gl     :Git log --decorate --all<Enter>
+nnoremap <leader>gL     :Git log --decorate --all --stat<Enter>
 
 " Development environment
-nnoremap <leader>nt     :!npm run test<CR>
-nnoremap <leader>nT     :!npm run test %<CR>
-nnoremap <leader>f      :!npx prettier --write %<CR><CR>
+nnoremap <leader>nt     :!npm run test<Enter>
+nnoremap <leader>nT     :!npm run test %<Enter>
+nnoremap <leader>f      :!npx prettier --write %<Enter><Enter>
 
 " No highlight
-nnoremap <leader>h      :noh<CR>
+nnoremap <leader>h      :noh<Enter>
 
 " -----------------------------------------------------------
 " BACKUP:
@@ -230,10 +230,10 @@ else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" Make <Enter> auto-select the first completion item and notify coc.nvim to
+" format on enter, <Enter> could be remapped by other vim plugin
+inoremap <silent><expr> <Enter> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<Enter>\<c-r>=coc#on_enter()\<Enter>"
 
 " ----------------------------------------------------------- 
 " THINGS TO EXPLORE: 

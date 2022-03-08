@@ -112,7 +112,7 @@ command! MakeTags !ctags -R .
 " -----------------------------------------------------------
 
 " Read an empty HTML template and more cursor to title
-nnoremap ,html :-1read $HOME/.vim/snippets/.skeleton.html<CR>3jwf>a
+nnoremap ,html :-1read $HOME/.vim/snippets/.skeleton.html<Enter>3jwf>a
 
 " -----------------------------------------------------------
 " KEY BINDING:
@@ -121,46 +121,49 @@ nnoremap ,html :-1read $HOME/.vim/snippets/.skeleton.html<CR>3jwf>a
 let mapleader = "."                                                             " Map leader key to '.'
 
 " Toggles file browsing window on and off 
-nnoremap <C-e>          :NERDTreeToggle<CR>
+nnoremap <C-e>          :NERDTreeToggle<Enter>
 
 " Open init.vim
-nnoremap <C-i>          :e C:\Users\magyariz\_vimrc<CR>
+nnoremap <C-i>          :e C:\Users\magyariz\_vimrc<Enter>
 
 " Create and navigate tabs
-nnoremap <C-t>          :tabnew<CR>
-nnoremap <C-Left>       :tabprevious<CR>                                                                            
-nnoremap <C-Right>      :tabnext<CR>
-nnoremap <C-h>          :tabprevious<CR>                                                                            
-nnoremap <C-l>          :tabnext<CR>
+nnoremap <C-t>          :tabnew<Enter>
+nnoremap <C-Left>       :tabprevious<Enter>                                                                            
+nnoremap <C-Right>      :tabnext<Enter>
+nnoremap <C-h>          :tabprevious<Enter>                                                                            
+nnoremap <C-l>          :tabnext<Enter>
 
 " Save & exit
-nnoremap <C-s>          :w<CR>
-nnoremap <C-c>          :wq!<CR>
-nnoremap <C-x>          :q!<CR>
+nnoremap <C-s>          :w<Enter>
+nnoremap <C-c>          :wq!<Enter>
+nnoremap <C-x>          :q!<Enter>
 
-inoremap <C-s>          <ESC>:w<CR>
-inoremap <C-c>          <ESC>:wq!<CR>
-inoremap <C-x>          <ESC>:q!<CR>
+inoremap <C-s>          <ESC>:w<Enter>
+inoremap <C-c>          <ESC>:wq!<Enter>
+inoremap <C-x>          <ESC>:q!<Enter>
 
 " Distraction free
-nnoremap <C-d>          :Goyo<CR>
-inoremap <C-d>          <ESC>:Goyo<CR>
+nnoremap <C-d>          :Goyo<Enter>
+inoremap <C-d>          <ESC>:Goyo<Enter>
 
 " Git commands
-nnoremap .gs            :Git status<CR>
-nnoremap .gd            :Git diff<CR>
-nnoremap .ga            :Git add --all<CR>
-nnoremap .gA            :Git add --interactive<CR>
-nnoremap .gc            :Git commit<CR>
-nnoremap .gC            :Git commit --amend<CR>
-nnoremap .gp            :Git push<CR>
-nnoremap .gP            :Git push -f<CR>
-nnoremap .gu            :Git pull<CR>
-nnoremap .gl            :Git log --decorate --all<CR>
-nnoremap .gL            :Git log --decorate --all --stat<CR>
+nnoremap .gs            :Git status<Enter>
+nnoremap .gd            :Git diff<Enter>
+nnoremap .ga            :Git add --all<Enter>
+nnoremap .gA            :Git add --interactive<Enter>
+nnoremap .gc            :Git commit<Enter>
+nnoremap .gC            :Git commit --amend<Enter>
+nnoremap .gp            :Git push<Enter>
+nnoremap .gP            :Git push -f<Enter>
+nnoremap .gu            :Git pull<Enter>
+nnoremap .gl            :Git log --decorate --all<Enter>
+nnoremap .gL            :Git log --decorate --all --stat<Enter>
 
 " Development environment
-nnoremap .nt            :!npm run test %<CR>
+nnoremap .nt            :!npm run test %<Enter>
+
+" Terminal
+nnoremap .t             :terminal<Enter>
 
 " -----------------------------------------------------------
 " BACKUP:
