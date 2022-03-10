@@ -10,17 +10,21 @@ call plug#begin('~/.vim/bundle')
 	Plug 'https://github.com/vim-syntastic/syntastic' 							" Syntax checker / linter
     Plug 'https://github.com/junegunn/goyo.vim'                                 " Distraction free vim
     Plug 'https://github.com/tpope/vim-fugitive'                                " Git tool
+    Plug 'https://github.com/prettier/vim-prettier', {
+        \ 'do': 'yarn install --frozen-lockfile --production',
+        \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
 call plug#end()
 
 " -----------------------------------------------------------
 " BASIC SETTINGS:
 " -----------------------------------------------------------
+set lines=50 columns=150
 
 set nocompatible                                                                " enter the current millenium
 set autochdir
 
 set encoding=utf-8
-set guifont=Lucida\ Console:h11
+set guifont=Lucida\ Console:h10
 
 set nowrap
 set number relativenumber                                                       " add line numbers
@@ -39,6 +43,7 @@ set hlsearch                                                                    
 set incsearch                                                                   " incremental search
 
 colorscheme gruvbox
+packloadall
 
 " -----------------------------------------------------------
 " FINDING FILES:
@@ -147,23 +152,24 @@ nnoremap <C-d>          :Goyo<Enter>
 inoremap <C-d>          <ESC>:Goyo<Enter>
 
 " Git commands
-nnoremap .gs            :Git status<Enter>
-nnoremap .gd            :Git diff<Enter>
-nnoremap .ga            :Git add --all<Enter>
-nnoremap .gA            :Git add --interactive<Enter>
-nnoremap .gc            :Git commit<Enter>
-nnoremap .gC            :Git commit --amend<Enter>
-nnoremap .gp            :Git push<Enter>
-nnoremap .gP            :Git push -f<Enter>
-nnoremap .gu            :Git pull<Enter>
-nnoremap .gl            :Git log --decorate --all<Enter>
-nnoremap .gL            :Git log --decorate --all --stat<Enter>
+nnoremap <leader>gs            :Git status<Enter>
+nnoremap <leader>gd            :Git diff<Enter>
+nnoremap <leader>ga            :Git add --all<Enter>
+nnoremap <leader>gA            :Git add --interactive<Enter>
+nnoremap <leader>gc            :Git commit<Enter>
+nnoremap <leader>gC            :Git commit --amend<Enter>
+nnoremap <leader>gp            :Git push<Enter>
+nnoremap <leader>gP            :Git push -f<Enter>
+nnoremap <leader>gu            :Git pull<Enter>
+nnoremap <leader>gl            :Git log --decorate --all<Enter>
+nnoremap <leader>gL            :Git log --decorate --all --stat<Enter>
 
 " Development environment
-nnoremap .nt            :!npm run test %<Enter>
+nnoremap <leader>nt            :!npm run test %<Enter>
+nnoremap <leader>nT            :!npm run test-coverage %<Enter>
 
 " Terminal
-nnoremap .t             :terminal<Enter>
+nnoremap <leader>t             :terminal<Enter><C-w><S-j><C-w>20-
 
 " -----------------------------------------------------------
 " BACKUP:

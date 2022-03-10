@@ -163,10 +163,13 @@ nnoremap <leader>gL     :Git log --decorate --all --stat<Enter>
 " Development environment
 nnoremap <leader>nt     :!npm run test<Enter>
 nnoremap <leader>nT     :!npm run test %<Enter>
-nnoremap <leader>f      :!npx prettier --write %<Enter><Enter>
+nnoremap <leader>p      :!npx prettier --write %<Enter><Enter>
 
 " No highlight
 nnoremap <leader>h      :noh<Enter>
+
+" Terminal
+nnoremap <leader>t             :terminal<Enter><C-w><S-j><C-w>20-
 
 " -----------------------------------------------------------
 " BACKUP:
