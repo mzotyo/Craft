@@ -1,4 +1,4 @@
-# Decorator Pattern 
+# Decorator Pattern
 
 ### Description
 
@@ -7,7 +7,6 @@ _Youtube:_ [Design Patterns in Object Oriented Programming](https://youtube.com/
 > A **decorator** class wraps another class called **base class** and extends its ability with new functionalities. The decorator class should have a common ancestor with the base class, whitch means it should be a class of the same type as the base class.
 
 ![decorator.png](decorator.png)
-
 
 ### Example
 
@@ -28,7 +27,7 @@ export interface Component {
  */
 export class ConcreteComponent implements Component {
     public operation(): string {
-        return 'ConcreteComponent';
+        return "ConcreteComponent";
     }
 }
 
@@ -82,20 +81,25 @@ export class ConcreteDecoratorB extends Decorator {
 #### [decorator.test.ts](decorator.test.ts)
 
 ```typescript
-import { Component, ConcreteComponent, ConcreteDecoratorA, ConcreteDecoratorB } from './decorator';
+import {
+    Component,
+    ConcreteComponent,
+    ConcreteDecoratorA,
+    ConcreteDecoratorB,
+} from "./decorator";
 
 console.log = jest.fn();
 
 /**
- * The client code works with all objects using the Component interface. This 
- * way it can stay independent of the concrete classes of components it works 
+ * The client code works with all objects using the Component interface. This
+ * way it can stay independent of the concrete classes of components it works
  * with.
  */
 function clientCode(component: Component) {
     console.log(`RESULT: ${component.operation()}`);
 }
 
-describe('Example usage of decorator pattern', () => {
+describe("Example usage of decorator pattern", () => {
     /**
      * This way the client code can siupport both simple components...
      */
@@ -110,25 +114,26 @@ describe('Example usage of decorator pattern', () => {
     const decorator1 = new ConcreteDecoratorA(simple);
     const decorator2 = new ConcreteDecoratorB(decorator1);
 
-    test('Simple component', () => {
+    test("Simple component", () => {
         clientCode(simple);
-        
-        expect(console.log)
-            .toHaveBeenCalledWith('RESULT: ConcreteComponent');
-    });
-    
-    test('Decorated with Decorator1', () => {
-        clientCode(decorator1);
-        
-        expect(console.log)
-            .toHaveBeenCalledWith('RESULT: ConcreteDecoratorA( ConcreteComponent )');
+
+        expect(console.log).toHaveBeenCalledWith("RESULT: ConcreteComponent");
     });
 
-    test('Decorated with Decorator2', () => {
+    test("Decorated with Decorator1", () => {
+        clientCode(decorator1);
+
+        expect(console.log).toHaveBeenCalledWith(
+            "RESULT: ConcreteDecoratorA( ConcreteComponent )"
+        );
+    });
+
+    test("Decorated with Decorator2", () => {
         clientCode(decorator2);
-        
-        expect(console.log)
-            .toHaveBeenCalledWith('RESULT: ConcreteDecoratorB( ConcreteDecoratorA( ConcreteComponent ) )');
+
+        expect(console.log).toHaveBeenCalledWith(
+            "RESULT: ConcreteDecoratorB( ConcreteDecoratorA( ConcreteComponent ) )"
+        );
     });
 });
 ```

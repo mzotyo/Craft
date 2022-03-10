@@ -10,7 +10,7 @@ export interface Strategy {
  */
 export class ConcreteStrategyA implements Strategy {
     public execute(): void {
-        console.log('ConcreteStrategyA has been executed');
+        console.log("ConcreteStrategyA has been executed");
     }
 }
 
@@ -19,12 +19,12 @@ export class ConcreteStrategyA implements Strategy {
  */
 export class ConcreteStrategyB implements Strategy {
     public execute(): void {
-        console.log('ConcreteStrategyB has been executed');
+        console.log("ConcreteStrategyB has been executed");
     }
 }
 
 /**
- * The Context class which uses one of the strategies. The concrete implementation of 
+ * The Context class which uses one of the strategies. The concrete implementation of
  * the used strategy will be injected runtime through constructor. The Context class
  * has no knowledge about the concrete implementation of the strategy. It uses through
  * the Strategy interface, which makes the strategies interchangeable.
