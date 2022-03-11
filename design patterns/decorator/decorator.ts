@@ -12,7 +12,7 @@ export interface Component {
  */
 export class ConcreteComponent implements Component {
     public operation(): string {
-        return 'ConcreteComponent';
+        return "ConcreteComponent";
     }
 }
 
