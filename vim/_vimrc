@@ -123,7 +123,7 @@ nnoremap ,html :-1read $HOME/.vim/snippets/.skeleton.html<Enter>3jwf>a
 " KEY BINDING:
 " -----------------------------------------------------------
 
-let mapleader = "."                                                             " Map leader key to '.'
+let mapleader = ","                                                             " Map leader key 
 
 " Toggles file browsing window on and off 
 nnoremap <C-e>          :NERDTreeToggle<Enter>
