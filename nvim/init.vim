@@ -3,17 +3,13 @@
 " -----------------------------------------------------------
 
 call plug#begin('~/.vim/bundle')
-    Plug 'http://github.com/tpope/vim-surround'                                 " Surrounding ysw)
-    Plug 'https://github.com/tpope/vim-repeat'                                  " Repeate vim-surrounding commands 
-    Plug 'https://github.com/preservim/nerdtree', { 'on': 'NERDTreeToggle' }    " Open file browse
-    Plug 'https://github.com/ap/vim-css-color'                                  " CSS Color Preview
-    Plug 'https://github.com/vim-syntastic/syntastic'                           " sytnax checker / linter
-    Plug 'https://github.com/junegunn/goyo.vim'                                 " Distraction free vim
-    Plug 'https://github.com/tpope/vim-fugitive'                                " git tool
-    Plug 'https://github.com/HerringtonDarkholme/yats.vim'                      " Basic typescript support
-    Plug 'https://github.com/MaxMEllon/vim-jsx-pretty'                          " JSX support
-    Plug 'https://github.com/neoclide/coc.nvim'                                 " LSP client
-    Plug 'http://github.com/honza/vim-snippets'                                 " Snippets
+    Plug 'tpope/vim-surround'                                                   " Surrounding ysw)
+    Plug 'tpope/vim-repeat'                                                     " Repeate vim-surrounding commands 
+    Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }                       " Open file browse
+    Plug 'junegunn/goyo.vim'                                                    " Distraction free vim
+    Plug 'honza/vim-snippets'                                                   " Snippets
+    Plug 'neovim/nvim-lspconfig'                                                " Install LSP server locally  
+    " Plug 'hrsh7th/nvim-compe'                                                   " Autocomplete
 call plug#end()
 
 " -----------------------------------------------------------
@@ -76,24 +72,6 @@ inoremap <C-c>          <ESC>:q!<Enter>
 nnoremap <C-y>          :Goyo<Enter>
 inoremap <C-y>          <ESC>:Goyo<Enter>
 
-" Git commands
-nnoremap <leader>gs     :Git status<Enter>
-nnoremap <leader>gd     :Git diff<Enter>
-nnoremap <leader>ga     :Git add --all<Enter>
-nnoremap <leader>gA     :Git add --interactive<Enter>
-nnoremap <leader>gc     :Git commit<Enter>
-nnoremap <leader>gC     :Git commit --amend<Enter>
-nnoremap <leader>gp     :Git push<Enter>
-nnoremap <leader>gP     :Git push -f<Enter>
-nnoremap <leader>gu     :Git pull<Enter>
-nnoremap <leader>gl     :Git log --decorate --all<Enter>
-nnoremap <leader>gL     :Git log --decorate --all --stat<Enter>
-
-" Development environment
-nnoremap <leader>nt     :!npm run test<Enter>
-nnoremap <leader>nT     :!npm run test %<Enter>
-nnoremap <leader>p      :!npx prettier --write %<Enter><Enter>
-
 " No highlight
 nnoremap <leader>h      :noh<Enter>
 
@@ -123,10 +101,11 @@ set udir=/tmp,/c/tmp,/c/temp
 " - Use ^n and ^p to go back and forth in the suggestion list
 
 " -----------------------------------------------------------
-" OPTIONAL SETTINGS:
+" PLUGIN SETTINGS:
 " -----------------------------------------------------------
-runtime findfiles.vim
-runtime filebrowsing.vim
-runtime snippets.vim
-runtime lsp.vim
+source ./plug-config/lsp-config.vim
+luafile ./lua/lsp-config.lua
 
+source ./plug-config/findfiles.vim
+source ./plug-config/filebrowsing.vim
+source ./plug-config/snippets.vim
