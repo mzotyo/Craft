@@ -8,7 +8,7 @@ call plug#begin('~/.vim/bundle')
     Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }                       " Open file browse
     Plug 'junegunn/goyo.vim'                                                    " Distraction free vim
     Plug 'honza/vim-snippets'                                                   " Snippets
-    Plug 'neovim/nvim-lspconfig'                                                " Install LSP server locally  
+    " Plug 'neovim/nvim-lspconfig'                                                " Install LSP server locally  
     " Plug 'hrsh7th/nvim-compe'                                                   " Autocomplete
 call plug#end()
 
@@ -103,9 +103,9 @@ set udir=/tmp,/c/tmp,/c/temp
 " -----------------------------------------------------------
 " PLUGIN SETTINGS:
 " -----------------------------------------------------------
-source ./plug-config/lsp-config.vim
-luafile ./lua/lsp-config.lua
+" source ./plug-config/lsp-config.vim
+" luafile ./lua/lsp-config.lua
 
-source ./plug-config/findfiles.vim
-source ./plug-config/filebrowsing.vim
-source ./plug-config/snippets.vim
+" source ./plug-config/findfiles.vim
+" source ./plug-config/filebrowsing.vim
+" source ./plug-config/snippets.vim
