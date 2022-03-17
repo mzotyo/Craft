@@ -6,8 +6,6 @@ call plug#begin('~/.vim/bundle')
 	Plug 'http://github.com/tpope/vim-surround' 								" Surrounding ysw)
 	Plug 'https://github.com/tpope/vim-repeat', 								" Repeats surround commands
 	Plug 'https://github.com/preservim/nerdtree', { 'on': 'NERDTreeToggle' }    " Open file browse
-	Plug 'https://github.com/ap/vim-css-color' 									" CSS Color Preview
-	Plug 'https://github.com/vim-syntastic/syntastic' 							" Syntax checker / linter
     Plug 'https://github.com/junegunn/goyo.vim'                                 " Distraction free vim
     Plug 'https://github.com/tpope/vim-fugitive'                                " Git tool
     Plug 'https://github.com/prettier/vim-prettier', {
@@ -42,82 +40,12 @@ set ignorecase                                                                  
 set hlsearch                                                                    " highlight search 
 set incsearch                                                                   " incremental search
 
+set cursorline 
+" set cc=130                                                                    " set an 130 column border for good coding style 
+
+
 colorscheme gruvbox
 packloadall
-
-" -----------------------------------------------------------
-" FINDING FILES:
-" -----------------------------------------------------------
-
-" Search down into subfolders
-" Provides tab-completion for all file-related tasks
-set path+=**
-set wildmode=longest,list                                                       " get bash-like tab completions
-
-" Display all matching files when tab complete
-set wildmenu
-
-" NOW WE CAN:
-" - Hit tab to :find by partial match
-" - Use * to make it fuzzy
-
-" THINGS TO CONSIDER:
-" - :b lets you autocomlete any open buffer
-
-" -----------------------------------------------------------
-" FILE BROWSING:
-" -----------------------------------------------------------
-
-" Tweaks for browsing
-let g:netrw_banner=0		" disable annoying banner
-let g:netrw_brows_split=4	" open in prior window
-let g:netrwaltv=1			" open splits to the right
-let g:netrw_liststyle=3		" tree view
-let g:netrw_list_hide=netrw_gitignore#Hide()
-let g:netrw_list_hide.=',\(^|\s\s\)zs\.\S\+'
-
-" NOW WE CAN:
-" - :edit a folder to open a file browser
-" - <CR>/v/t to open in an h-split/v-split/tab
-" - check |netrw-browse-maps| for more mappings
-
-" -----------------------------------------------------------
-"  TAG JUMPING:
-" -----------------------------------------------------------
-
-" Create the `tags` file (may need to install cttags first)
-command! MakeTags !ctags -R .
-
-" NOW WE CAN:
-" - Use ^] to jump to tag under cursor
-" - Use g^] for ambiguous tags
-" - Use ^t to jump back up the tag stack
-
-" THINGS TO CONSIDER:
-" - This doesn't help if you want a visual list of tags
-
-" -----------------------------------------------------------
-"  AUTOCOMPLETE:
-" -----------------------------------------------------------
-
-" The good stuff is documented in |ins-completion|
-
-" HIGHLIGHTS:
-" - ^x^n for JUST this file
-" - ^x^f for filenames (works with out path trick!)
-" - ˘x^] for tags only
-" - ^n for anything specified by the 'complete option
-
-" NOW WE CAN:
-" - Use ^n and ^p to go back and forth in the suggestion list
-
-
-" -----------------------------------------------------------
-"  SNIPPETS:
-" -----------------------------------------------------------
-
-" Read an empty HTML template and more cursor to title
-nnoremap ,html :-1read $HOME/.vim/snippets/.skeleton.html<Enter>3jwf>a
 
 " -----------------------------------------------------------
 " KEY BINDING:
@@ -148,28 +76,14 @@ inoremap <C-c>          <ESC>:wq!<Enter>
 inoremap <C-x>          <ESC>:q!<Enter>
 
 " Distraction free
-nnoremap <C-d>          :Goyo<Enter>
-inoremap <C-d>          <ESC>:Goyo<Enter>
+nnoremap <C-y>          :Goyo<Enter>
+inoremap <C-y>          <ESC>:Goyo<Enter>
 
-" Git commands
-nnoremap <leader>gs            :Git status<Enter>
-nnoremap <leader>gd            :Git diff<Enter>
-nnoremap <leader>ga            :Git add --all<Enter>
-nnoremap <leader>gA            :Git add --interactive<Enter>
-nnoremap <leader>gc            :Git commit<Enter>
-nnoremap <leader>gC            :Git commit --amend<Enter>
-nnoremap <leader>gp            :Git push<Enter>
-nnoremap <leader>gP            :Git push -f<Enter>
-nnoremap <leader>gu            :Git pull<Enter>
-nnoremap <leader>gl            :Git log --decorate --all<Enter>
-nnoremap <leader>gL            :Git log --decorate --all --stat<Enter>
-
-" Development environment
-nnoremap <leader>nt            :!npm run test %<Enter>
-nnoremap <leader>nT            :!npm run test-coverage %<Enter>
+" No highlight
+nnoremap <leader>h      :noh<Enter>
 
 " Terminal
-nnoremap <leader>t             :terminal<Enter><C-w><S-j><C-w>20-
+nnoremap <leader>t      :terminal<Enter><C-w><S-j><C-w>20-
 
 " -----------------------------------------------------------
 " BACKUP:
@@ -181,46 +95,16 @@ set backupdir=c:\\tmp,c:\\temp
 set udf
 set udir=c:\\tmp,c:\\temp
 
-" -----------------------------------------------------------
-" VIM WITH ALL ENHANCEMENTS:
-" -----------------------------------------------------------
-source $VIMRUNTIME/vimrc_example.vim
+" ----------------------------------------------------------- 
+" SETTINGS: 
+" ----------------------------------------------------------- 
 
-" Use the internal diff if available.
-" Otherwise use the special 'diffexpr' for Windows.
-if &diffopt !~# 'internal'
-  set diffexpr=MyDiff()
-endif
+source plug-config/findfiles.vim
+source plug-config/filebrowsing.vim
+source plug-config/formatter.vim
+source plug-config/autocomplete.vim
+source plug-config/keybinding-git.vim
+source plug-config/keybinding-npm.vim
 
-function MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg1 = substitute(arg1, '!', '\!', 'g')
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg2 = substitute(arg2, '!', '\!', 'g')
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  let arg3 = substitute(arg3, '!', '\!', 'g')
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      if empty(&shellxquote)
-        let l:shxq_sav = ''
-        set shellxquote&
-      endif
-      let cmd = '"' . $VIMRUNTIME . '\diff"'
-    else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-    endif
-  else
-    let cmd = $VIMRUNTIME . '\diff'
-  endif
-  let cmd = substitute(cmd, '!', '\!', 'g')
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
-  if exists('l:shxq_sav')
-    let &shellxquote=l:shxq_sav
-  endif
-endfunction
+" setting only for windows vim
+source plug-config/wvim-enhancements.vim

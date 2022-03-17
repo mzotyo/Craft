@@ -3,13 +3,14 @@
 " -----------------------------------------------------------
 
 call plug#begin('~/.vim/bundle')
-    Plug 'tpope/vim-surround'                                                   " Surrounding ysw)
-    Plug 'tpope/vim-repeat'                                                     " Repeate vim-surrounding commands 
-    Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }                       " Open file browse
-    Plug 'junegunn/goyo.vim'                                                    " Distraction free vim
+    Plug 'http://github.com/tpope/vim-surround'                                 " Surrounding ysw)
+    Plug 'https://github.com/tpope/vim-repeat'                                  " Repeate vim-surrounding commands 
+    Plug 'https://github.com/preservim/nerdtree', { 'on': 'NERDTreeToggle' }    " Open file browse
+    Plug 'https://github.com/junegunn/goyo.vim'                                 " Distraction free vim
     Plug 'https://github.com/tpope/vim-fugitive'                                " Git tool
-    " Plug 'neovim/nvim-lspconfig'                                                " Install LSP server locally  
-    " Plug 'hrsh7th/nvim-compe'                                                   " Autocomplete
+    Plug 'https://github.com/prettier/vim-prettier', {
+        \ 'do': 'yarn install --frozen-lockfile --production',
+        \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
 call plug#end()
 
 " -----------------------------------------------------------
@@ -17,12 +18,12 @@ call plug#end()
 " -----------------------------------------------------------
 
 set nocompatible                                                                " enter the current millenium
-set autochdir
+set autochdir                                                                   " changes active directory to the directory of the currently opened file
 
 set encoding=utf-8
 set guifont=Lucida\ Console:h11
 
-set nowrap
+set nowrap                                                                      " no line wrapping
 set number relativenumber                                                       " add line numbers
 
 syntax enable                                                                   " enable syntax and plugins (for netrw)
@@ -38,11 +39,8 @@ set ignorecase                                                                  
 set hlsearch                                                                    " highlight search 
 set incsearch                                                                   " incremental search
 
-" set cursorline 
-" set cc=130                                                                    " set an 130 column border for good coding style 
-
 " -----------------------------------------------------------
-" KEY BINDINGS:
+" KEY BINDING:
 " -----------------------------------------------------------
 
 " Leader key
@@ -62,7 +60,7 @@ nnoremap <C-h>          :tabprevious<Enter>
 nnoremap <C-l>          :tabnext<Enter>
 
 " Save & exit
-nnoremap <C-s>          :w<Enter>
+nnoremap <C-s>          :w<Enter> 
 nnoremap <C-c>          :wq!<Enter>
 nnoremap <C-x>          :q!<Enter>
 
