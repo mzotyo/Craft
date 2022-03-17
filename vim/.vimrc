@@ -13,6 +13,7 @@ call plug#begin('~/.vim/bundle')
     Plug 'https://github.com/HerringtonDarkholme/yats.vim'                      " Basic typescript support
     Plug 'https://github.com/MaxMEllon/vim-jsx-pretty'                          " JSX support
     Plug 'https://github.com/neoclide/coc.nvim'                                 " LSP client
+    Plug 'http://github.com/honza/vim-snippets'                                 " Snippets
 call plug#end()
 
 " -----------------------------------------------------------
@@ -41,81 +42,11 @@ set ignorecase                                                                  
 set hlsearch                                                                    " highlight search 
 set incsearch                                                                   " incremental search
 
-" -----------------------------------------------------------
-" FINDING FILES:
-" -----------------------------------------------------------
-
-" Search down into subfolders
-" Provides tab-completion for all file-related tasks
-set path+=**
-
-" Display all matching files when tab complete
-set wildmenu
-set wildmode=longest,list                                                       " get bash-like tab completions
-
-" NOW WE CAN:
-" - Hit tab to :find by partial match
-" - Use * to make it fuzzy
-
-" THINGS TO CONSIDER:
-" - :b lets you autocomlete any open buffer
+" set cursorline 
+" set cc=130                                                                    " set an 130 column border for good coding style 
 
 " -----------------------------------------------------------
-" FILE BROWSING:
-" -----------------------------------------------------------
-
-" Tweaks for browsing
-let g:netrw_banner=0		                                                    " disable annoying banner
-let g:netrw_brows_split=4	                                                    " open in prior window
-let g:netrwaltv=1			                                                    " open splits to the right
-let g:netrw_liststyle=3		                                                    " tree view
-let g:netrw_list_hide=netrw_gitignore#Hide()
-let g:netrw_list_hide.=',\(^|\s\s\)zs\.\S\+'
-
-" NOW WE CAN:
-" - :edit a folder to open a file browser
-" - <CR>/v/t to open in an h-split/v-split/tab
-" - check |netrw-browse-maps| for more mappings
-
-" -----------------------------------------------------------
-"  TAG JUMPING:
-" -----------------------------------------------------------
-
-" Create the `tags` file (may need to install cttags first)
-command! MakeTags !ctags -R .
-
-" NOW WE CAN:
-" - Use ^] to jump to tag under cursor
-" - Use g^] for ambiguous tags
-" - Use ^t to jump back up the tag stack
-
-" THINGS TO CONSIDER:
-" - This doesn't help if you want a visual list of tags
-
-" -----------------------------------------------------------
-"  AUTOCOMPLETE:
-" -----------------------------------------------------------
-
-" The good stuff is documented in |ins-completion|
-
-" HIGHLIGHTS:
-" - ^x^n for JUST this file
-" - ^x^f for filenames (works with out path trick!)
-" - ˘x^] for tags only
-" - ^n for anything specified by the 'complete option
-
-" NOW WE CAN:
-" - Use ^n and ^p to go back and forth in the suggestion list
-
-" -----------------------------------------------------------
-"  SNIPPETS:
-" -----------------------------------------------------------
-
-" Read an empty HTML template and more cursor to title
-nnoremap <leader>html   :-1read $HOME/.vim/snippets/.skeleton.html<Enter>3jwf>a
-
-" -----------------------------------------------------------
-" KEY BINDING:
+" KEY BINDINGS:
 " -----------------------------------------------------------
 
 " Leader key
@@ -136,12 +67,10 @@ nnoremap <C-l>          :tabnext<Enter>
 
 " Save & exit
 nnoremap <C-s>          :w<Enter> 
-nnoremap <C-c>          :wq!<Enter>
-nnoremap <C-x>          :q!<Enter>
+nnoremap <C-c>          :q!<Enter>
 
 inoremap <C-s>          <ESC>:w<Enter>
-inoremap <C-w><C-c>     <ESC>:wq!<Enter>
-inoremap <C-w><C-x>     <ESC>:q!<Enter>
+inoremap <C-c>          <ESC>:q!<Enter>
 
 " Distraction free
 nnoremap <C-y>          :Goyo<Enter>
@@ -168,9 +97,6 @@ nnoremap <leader>p      :!npx prettier --write %<Enter><Enter>
 " No highlight
 nnoremap <leader>h      :noh<Enter>
 
-" Terminal
-nnoremap <leader>t             :terminal<Enter><C-w><S-j><C-w>20-
-
 " -----------------------------------------------------------
 " BACKUP:
 " -----------------------------------------------------------
@@ -181,66 +107,26 @@ set backupdir=/tmp,/c/tmp,/c/temp
 set udf
 set udir=/tmp,/c/tmp,/c/temp 
 
-" ----------------------------------------------------------- 
-" FORMATTERS:
-" ----------------------------------------------------------- 
-autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
+" -----------------------------------------------------------
+"  AUTOCOMPLETE:
+" -----------------------------------------------------------
 
-" ----------------------------------------------------------- 
-" LSP CONFIGURATIONS:
-" ----------------------------------------------------------- 
+" The good stuff is documented in |ins-completion|
 
-" TextEdit might fail if hidden is not set.
-set hidden
+" HIGHLIGHTS:
+" - ^x^n for JUST this file
+" - ^x^f for filenames (works with out path trick!)
+" - ˘x^] for tags only
+" - ^n for anything specified by the 'complete option
 
-" Give more space for displaying messages.
-set cmdheight=2
+" NOW WE CAN:
+" - Use ^n and ^p to go back and forth in the suggestion list
 
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
+" -----------------------------------------------------------
+" OPTIONAL SETTINGS:
+" -----------------------------------------------------------
+runtime findfiles.vim
+runtime filebrowsing.vim
+runtime snippets.vim
+runtime lsp.vim
 
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("nvim-0.5.0") || has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
-
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-" Make <Enter> auto-select the first completion item and notify coc.nvim to
-" format on enter, <Enter> could be remapped by other vim plugin
-inoremap <silent><expr> <Enter> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<Enter>\<c-r>=coc#on_enter()\<Enter>"
-
-" ----------------------------------------------------------- 
-" THINGS TO EXPLORE: 
-" ----------------------------------------------------------- 
-" set cursorline 
-" set cc=130                                                                    " set an 130 column border for good coding style 
-" syn clear markdownError
