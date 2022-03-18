@@ -3,6 +3,7 @@
 ## Startup settings
 
 **.vimrc:**
+
 ```bash
 set encoding=utf-8
 colorscheme carbonized-dark
@@ -33,7 +34,7 @@ Copy at the beginnig of the file `~/_vimrc`
 
 ```js
 " -----------------------------------------------------------
-" PLUGINS: 
+" PLUGINS:
 " -----------------------------------------------------------
 
 call plug#begin('~/.vim/bundle')
@@ -50,6 +51,7 @@ Execute inside vim:
 ```js
 :PlugInstall
 ```
+
 ## Linux
 
 Download [plug.vim](https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim) into `~/.vim/autoload` folder.
@@ -58,7 +60,7 @@ Copy at the beginnig of the file `~/.vimrc`
 
 ```js
 " -----------------------------------------------------------
-" PLUGINS: 
+" PLUGINS:
 " -----------------------------------------------------------
 
 call plug#begin('~/.vim/bundle')
@@ -79,13 +81,13 @@ Execute inside vim:
 
 ## Plugins
 
-| Plugin | Source |
-|-|-|
-|vim-plug|https://github.com/junegunn/vim-plug|
-|fugitive|https://github.com/tpope/vim-fugitive|
-|vim-surround|https://github.com/tpope/vim-surround| 
+| Plugin       | Source                                |
+| ------------ | ------------------------------------- |
+| vim-plug     | https://github.com/junegunn/vim-plug  |
+| fugitive     | https://github.com/tpope/vim-fugitive |
+| vim-surround | https://github.com/tpope/vim-surround |
 
-## LSP 
+## LSP
 
 ### Typescript
 

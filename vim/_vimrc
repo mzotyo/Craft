@@ -99,12 +99,12 @@ set udir=c:\\tmp,c:\\temp
 " SETTINGS: 
 " ----------------------------------------------------------- 
 
-source plug-config/findfiles.vim
-source plug-config/filebrowsing.vim
-source plug-config/formatter.vim
-source plug-config/autocomplete.vim
-source plug-config/keybinding-git.vim
-source plug-config/keybinding-npm.vim
+source ~/Home/Personal/Craft/vim/plug-config/findfiles.vim
+source ~/Home/Personal/Craft/vim/plug-config/filebrowsing.vim
+source ~/Home/Personal/Craft/vim/plug-config/formatter.vim
+source ~/Home/Personal/Craft/vim/plug-config/autocomplete.vim
+source ~/Home/Personal/Craft/vim/plug-config/keybinding-git.vim
+source ~/Home/Personal/Craft/vim/plug-config/keybinding-npm.vim
 
 " setting only for windows vim
-source plug-config/wvim-enhancements.vim
+source ~/Home/Personal/Craft/vim/plug-config/wvim-enhancements.vim
