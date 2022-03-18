@@ -94,9 +94,9 @@ set udir=/tmp,/c/tmp,/c/temp
 " SETTINGS: 
 " ----------------------------------------------------------- 
 
-source plug-config/findfiles.vim
-source plug-config/filebrowsing.vim
-source plug-config/formatter.vim
-source plug-config/autocomplete.vim
-source plug-config/keybinding-git.vim
-source plug-config/keybinding-npm.vim
+source ~/.config/nvim/plug-config/findfiles.vim
+source ~/.config/nvim/plug-config/filebrowsing.vim
+source ~/.config/nvim/plug-config/formatter.vim
+source ~/.config/nvim/plug-config/autocomplete.vim
+source ~/.config/nvim/plug-config/keybinding-git.vim
+source ~/.config/nvim/plug-config/keybinding-npm.vim
