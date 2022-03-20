@@ -30,7 +30,7 @@ filetype plugin on                                                              
 filetype plugin indent on                                                       " allow auto-indenting depending on file type
 
 set autoindent                                                                  " indent a new line the same amount as the line just typed
-set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab                     " tabulator behaviour
+set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab                     " tabulator behaviour
 
 set showmatch                                                                   " show matching 
 set ignorecase                                                                  " case insensitive 
