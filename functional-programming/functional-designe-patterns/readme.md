@@ -156,3 +156,82 @@ let printList3 = (action: Action, array: Array) => {
   }
 };
 ```
+
+### Functions as interfaces
+
+```typescript
+interface Function {
+  (s: string): string;
+}
+
+export function firstChar(s: string): string {
+  return s.charAt(0);
+}
+
+let function: Function = firstChar;
+
+function process(f: Function, t: string) {
+  return f(t);
+}
+
+console.log(process(firstChar, 'text'));
+```
+
+If we take the _Single Responsability Principle_ and _Interface Segragation
+Principle_ to the extreme then every interface should have only one method.
+But this interface is just a function type. Iterfaces with identical
+signatures are compatible with each other.
+
+#### Strategy pattern
+
+```typescript
+interface Strategy {
+  (input: Input): Output;
+}
+
+function strategy(input: Input): Output {
+  return ...
+}
+
+function context(input: Input, strategy: Strategy) {
+  return strategy(input);
+}
+
+const input: Input = ...;
+context(strategy, input);
+```
+
+With functional programming you don't need to create an f(Input) => Output
+interface in advance.
+
+### Decorator pattern
+
+using function parameter
+
+```typescript
+interface Function {
+  (input: Input): Output;
+}
+
+function baseFunction(input: Input): Output {
+  return ...;
+}
+
+interface Decorator {
+  (baseFunction: Function): Function;
+}
+
+function decorator(baseFunction: Function): Function {
+  return function(input: Input): Output {
+    ...
+    baseFunction(input);
+    return ...;
+  }
+}
+```
+
+Decorator pattern is actually a function composition.
+
+Composition patterns only work for functions that have one parameter!
+
+

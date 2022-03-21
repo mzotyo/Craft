@@ -79,3 +79,55 @@ let printList3 = (action: Action, array: Array) => {
     action(i);
   }
 };
+
+// ----------------------------------------------------------------------------
+// Functions as interfaces
+interface Function2 {
+  (x: string): string;
+}
+
+export function firstChar(x: string): string {
+  return x.charAt(0);
+}
+
+export function process(f: Function2): string {
+  return f('text');
+
+}
+
+// ----------------------------------------------------------------------------
+// Strategy pattern
+interface Incrementor {
+  (x: number): number;
+}
+
+export const add6: Incrementor = (x: number) => x + 6;
+
+export function add5(x: number): number {
+  return x + 5;
+}
+
+export function evaluate(x: number, incrementor: Incrementor): number {
+  return incrementor(x);
+}
+
+// ----------------------------------------------------------------------------
+// Decorator pattern
+
+interface TextGenerator {
+  (): string;
+}
+
+export function getText(): string {
+  return 'Hello';
+};
+
+export function prefix(f: TextGenerator): TextGenerator {
+  return function(): string {
+    return '- ' + f();
+  }
+}
+
+export const postfix = (f: TextGenerator) => () => f() + 'Bello';
+
+

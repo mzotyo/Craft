@@ -22,4 +22,17 @@ describe("Core Principles of Functional Programming", () => {
   test("Example of a composition", () => {
     expect(examples.appleToCherry("apple")).toEqual("cherry");
   });
+
+  test("Any function with similar interface as Function2 is compatible with it", () => {
+    expect(examples.process(examples.firstChar)).toEqual('t');
+  });
+
+  test("Strategy pattern", () => {
+    expect(examples.evaluate(10, examples.add6)).toBe(16);
+    expect(examples.evaluate(10, examples.add5)).toBe(15);
+  });
+
+  test("Decorator pattern", () => {
+    expect(examples.prefix(examples.postfix(examples.getText))()).toEqual('- HelloBello');
+  });
 });
