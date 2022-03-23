@@ -232,6 +232,6 @@ function decorator(baseFunction: Function): Function {
 
 Decorator pattern is actually a function composition.
 
-Composition patterns only work for functions that have one parameter!
-
+Composition patterns only work for functions that have one parameter! Every 
+function can be turned into a one parameter function. 
 

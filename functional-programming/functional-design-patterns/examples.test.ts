@@ -1,7 +1,7 @@
 import * as examples from "./examples";
 
 describe("Core Principles of Functional Programming", () => {
-  test("A function is a standalone thing", () => {
+        test("A function is a standalone thing", () => {
     expect(examples.add(2, 3)).toBe(5);
   });
 
