@@ -131,7 +131,7 @@ Static typing help modelling the domain and documenting it at the same time.
 ### Parameterize all the things
 
 ```typescript
-let printList = () => {
+cosnt printList = () => {
   // The numbers 1 to 10 are hardcoded
   for (let i = 1; i < 10; i++) {
     console.log("the number is:", i);
@@ -140,7 +140,7 @@ let printList = () => {
 
 type Array = any[];
 
-let printList2 = (array: Array) => {
+const printList2 = (array: Array) => {
   for (let i = 0; i < array.length; i++) {
     // The behavior is hardcoded too
     console.log("the number is:", i);
@@ -150,16 +150,24 @@ let printList2 = (array: Array) => {
 type Action = (n: number) => string;
 
 // Completly generic array iteration
-let printList3 = (action: Action, array: Array) => {
+const printList3 = (action: Action, array: Array) => {
   for (let i = 0; i < array.length; i++) {
     action(i);
   }
 };
+
+// Completly generic function without array iteration
+const printList4 = (action: Action, array: Array) => {
+    array.forEach(element => action(element));
+};
 ```
 
-### Functions as interfaces
+### Function type are interfaces
 
 ```typescript
+// This is an interface of something that takes as input a string and returns a 
+// string. (srting -> string). An interface with one method is just a function
+// type.
 interface Function {
   (s: string): string;
 }
@@ -168,12 +176,14 @@ export function firstChar(s: string): string {
   return s.charAt(0);
 }
 
+// A function with that type is just compatible with it.
 let function: Function = firstChar;
 
 function process(f: Function, t: string) {
   return f(t);
 }
 
+// A function with that type is just compatible with it.
 console.log(process(firstChar, 'text'));
 ```
 
@@ -204,7 +214,7 @@ context(strategy, input);
 With functional programming you don't need to create an f(Input) => Output
 interface in advance.
 
-### Decorator pattern
+#### Decorator pattern
 
 using function parameter
 
@@ -235,3 +245,70 @@ Decorator pattern is actually a function composition.
 Composition patterns only work for functions that have one parameter! Every 
 function can be turned into a one parameter function. 
 
+### Use partial application to do dependency injection 
+
+```typescript
+// Peristence ignorant, because we don't care how the customer will be get
+type GetCustomer = (customerId: number) => Customer
+
+// The problem is that I have to pass in a connection object too
+function getCustomerFromDatabase(connection: Connection, customerId: number) => {
+  return ...
+}
+
+// I can create a tpye of function which gets in a connection Object and spits 
+// out another function. 
+type GetCustomerFromDatabase = (connection: Connection) => (customerId: number) => Customer
+
+function getCustomerFromDatabase(connection: Connection) {
+  return function (customerId: number) {
+    ...
+    return customer as Customer;
+  }
+}
+
+// This new function no longer will have the Connection object as part of it.
+// It will be baked in into that function.
+const getCustomer = getCustomerFromDatabase(connection);
+```
+
+### The Hollywood Principle
+
+#### Continuations
+
+Don't call us we call you.
+
+```typescript
+// The method decided to throw an exception
+function Divide(top: number, bottom: number): number {
+  if(bottom == 0) {
+    throw 'invalid operation';
+  } else {
+    return top / bottom;
+  }
+}
+
+// Parametrize: pass in something to do if it is zero and something if it is not.
+// Let the caller decide what happens, the problem is we have four parameters. 
+function Devide(top: number, bottom: number, ifZero: Action, ifSuccess: Action): void {
+  if(bottom == 0) {
+    ifZero(); // What happens next
+  } else {
+    ifSuccess(top / bottom); // What happens next
+  }
+}
+
+// It would be nice if we could somehow bake in the action parameters.
+const ifZero = () => console.log('invalid operation');
+const ifSuccess = (result: number) => consol.log('result:', result);
+
+const divide = Divide(ifZero: Action, ifSuccess: Action); 
+
+// Test 
+devide(6, 3); // result: 2
+devide(6, 0); // invalid opertion
+```
+
+#### Chaining callbacks with Continuations
+
+40 min
