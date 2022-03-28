@@ -1,0 +1,6 @@
+ayu
+carbonized-dark
+fogbell_lite
+gruvbox
+hybrid_reverse
+snow
