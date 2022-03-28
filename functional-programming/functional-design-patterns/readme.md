@@ -288,9 +288,9 @@ function Divide(top: number, bottom: number): number {
   }
 }
 
-// Parametrize: pass in something to do if it is zero and something if it is not.
-// Let the caller decide what happens, the problem is we have four parameters. 
-function Devide(top: number, bottom: number, ifZero: Action, ifSuccess: Action): void {
+// Let the caller decide what happens.
+// The problem with this is that now we have four parameters.
+function DivideCallerDecides(top: number, bottom: number, ifZero: Action, ifSuccess: Action): void {
   if(bottom == 0) {
     ifZero(); // What happens next
   } else {
@@ -298,17 +298,73 @@ function Devide(top: number, bottom: number, ifZero: Action, ifSuccess: Action):
   }
 }
 
-// It would be nice if we could somehow bake in the action parameters.
-const ifZero = () => console.log('invalid operation');
-const ifSuccess = (result: number) => consol.log('result:', result);
+const ifZero = (): string  => {
+  console.log('invalid operation');
+  return 'invalid operation';
+}
 
-const divide = Divide(ifZero: Action, ifSuccess: Action); 
+const ifSuccess = (result?: number): string => {
+  console.log('result:', result);
+  return 'result: ' + result;
+}
 
-// Test 
-devide(6, 3); // result: 2
-devide(6, 0); // invalid opertion
+// We backend in the two action parameters
+export function DivideInjectCallerActions(ifZero: Action, ifSuccess: Action) {
+  return function(top: number, bottom: number): void {
+    if(bottom == 0) {
+      ifZero();
+    } else {
+      ifSuccess(top / bottom);
+    }
+  }
+}
+
+const divide = DivideInjectCallerActions(ifZero, ifSuccess); 
+
+console.log("6 / 3 =", divide(6, 3));
+console.log("6 / 0", divide(6, 0));
 ```
 
-#### Chaining callbacks with Continuations
+#### Chaining callbacks with Continuations and the piramid of doom
 
-40 min
+```typescript
+// Piramid of doom
+function example(input: Input): Output {
+  const x = doSomething(input);
+  if(x != null) {
+    const y = doSomethingElse(input);
+    if(y != null) {
+      return doAThirdThing(input);
+    }
+    return null;
+  }
+  return null;
+}
+
+// How to solve?
+type DoSomethingAction = (input: string) => string;
+
+export function ifSomethingDo(f: DoSomethingAction, input?: string): string | undefined {
+  if (input) {
+    return f(input);
+  }
+  return undefined;
+}
+
+function doSomething(input: string) {
+  return input + " doSomething";
+}
+
+function doSomethingElse(input: string) {
+  return input + " doSomethingElse";
+}
+
+function doAThirdThing(input: string) {
+  return input + " doAThirdThing";
+}
+
+let result: string | undefined = "hello";
+result = ifSomethingDo(doSomething, result);
+result = ifSomethingDo(doSomethingElse, result);
+result = ifSomethingDo(doAThirdThing, result);
+```

@@ -1,7 +1,7 @@
 import * as examples from "./examples";
 
 describe("Core Principles of Functional Programming", () => {
-        test("A function is a standalone thing", () => {
+  test("A function is a standalone thing", () => {
     expect(examples.add(2, 3)).toBe(5);
   });
 
@@ -24,7 +24,7 @@ describe("Core Principles of Functional Programming", () => {
   });
 
   test("Any function with similar interface as Function2 is compatible with it", () => {
-    expect(examples.process(examples.firstChar)).toEqual('t');
+    expect(examples.process(examples.firstChar)).toEqual("t");
   });
 
   test("Strategy pattern", () => {
@@ -33,6 +33,46 @@ describe("Core Principles of Functional Programming", () => {
   });
 
   test("Decorator pattern", () => {
-    expect(examples.prefix(examples.postfix(examples.getText))()).toEqual('- HelloBello');
+    expect(examples.prefix(examples.postfix(examples.getText))()).toEqual(
+      "- HelloBello"
+    );
+  });
+
+  test("Turning to single parameter function", () => {
+    const multiply = examples.multiplyBy(3);
+    expect(multiply(2)).toBe(6);
+  });
+
+  test("The Hollywood principle: Continuations", () => {
+    const ifZero = jest.fn();
+    const ifSuccess = jest.fn();
+
+    const divide = examples.DivideInjectCallerActions(ifZero, ifSuccess);
+    divide(6, 3);
+    expect(ifSuccess).toBeCalledWith(2);
+
+    divide(6, 0);
+    expect(ifZero).toBeCalled();
+  });
+
+  test("The Hollywood principle: Piramid of Doom", () => {
+    function doSomething(input: string) {
+      return input + " doSomething";
+    }
+
+    function doSomethingElse(input: string) {
+      return input + " doSomethingElse";
+    }
+
+    function doAThirdThing(input: string) {
+      return input + " doAThirdThing";
+    }
+
+    let result: string | undefined = "hello";
+    result = examples.ifSomethingDo(doSomething, result);
+    result = examples.ifSomethingDo(doSomethingElse, result);
+    result = examples.ifSomethingDo(doAThirdThing, result);
+
+    expect(result).toEqual("hello doSomething doSomethingElse doAThirdThing");
   });
 });
