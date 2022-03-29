@@ -87,3 +87,9 @@ keymap("i", "<C-q>", "<ESC><C-w><C-q>", opts)
 -- NERDTree
 keymap("n", "<C-e>", ":NERDTreeToggle<Enter>", opts)
 keymap("i", "<C-e>", "<ESC>:NERDTreeToggle<Enter>", opts)
+
+-- Open keymap config
+keymap("n", "<C-i>", ":e ~/.config/nvim/lua/user/keymaps.lua<Enter>", opts)
+
+-- Copy active file to ~/Host
+keymap("n", "<C-x>", ":!cp % ~/Host<Enter>", opts)
