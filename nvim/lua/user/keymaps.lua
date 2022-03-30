@@ -93,3 +93,7 @@ keymap("n", "<C-i>", ":e ~/.config/nvim/lua/user/keymaps.lua<Enter>", opts)
 
 -- Copy active file to ~/Host
 keymap("n", "<C-x>", ":!cp % ~/Host<Enter>", opts)
+
+-- Enter a markdown todo
+keymap("n", "<C-t>", "<Home>i- [ ] ", opts)
+keymap("i", "<C-t>", "<ESC><Home>i- [ ] ", opts)
