@@ -2,6 +2,29 @@
 
 ## Concepts
 
+### First-class citizen
+
+- All items can be the actual parameters of functions.
+- All items can be returned as results of functions.
+- All items can be the subject of assignment statements.
+- All items can be tested for equality.
+
+### Function type
+
+In functional programming languages the functions are **first-class citizens**.
+Which means they can have a type.
+
+```haskell
+parseInt :: string -> int
+```
+
+Functions with multiple variables can be represented as functions returning 
+another function. The two are equivalent.
+
+```haskell
+add :: int -> int -> int
+```
+
 ### Pure function
 
 There are three criteria which have to be satisfied with the function to be pure:
@@ -14,102 +37,63 @@ There are three criteria which have to be satisfied with the function to be pure
 ### Function composition
 
 Due to outlined qualities, pure functions can be combined via a **composition**.
-Two methods are composed `f1( f2( x ) )` if the result of the `f2` method is passed
-as input into the `f1` method. 
+Two methods are composed `f( g( x ) )` if the result of the `g` method is passed
+as input into the `f` method. 
 
-It is also possible to extract function composition in a separate stage by 
-defining a function which will compose two functions in a following way:
+```haskell
+f :: A -> B 
+g :: B -> C
 
-```typescript
-function compose<A, B, C>(f1: (value: A) => B, f2: (value: B) => C): (value: A) => C {
-    return value => f2( f1( value ) );
-}
+f o g :: A -> C
 ```
 
-Therefore the order of execution is not expressed in functional programming.
+The composition operator is actually function itself and it is called a 
+**higher order function**.
 
-```typescript
-const initialValue: A = ...;
-
-function f1(value: A): B {
-  return ...
-}
-
-function f2(value: B): C {
-  return ...
-}
-
-// We don't know whether the f1 will be evaluated first or the f2. It depends
-// on the implementation of the compose method which can be changed after wards
-// in regard to optimize for performance for instance.
-const result: C = compose(f1, f2)(initialValue);
+```haskell
+o :: (A->B) -> (B->C) -> (A->C)
 ```
+
+### Higher Order Function
+
+It is a function which either receives a function as an argument and / or 
+returns a function as a result.
 
 ### Functor
 
-The Functor is container which has a constructor and function, which can apply 
-a transformation to the content. This function returns a new functor. 
-```typescript
-const initialValues: A[] = [...];
+A functor is a mapping between types (`F :: type A -> type B`). When the 
+functor `F` is applied, then from `type A` is created new `type B`. 
 
-function f1(value: A): B {
-  return ...
-}
+For something to be a functor it also has to be true that if given the 
+functor `F` it should map a function `f :: A -> A` to `map(f) :: F(A) -> F(A)`.
 
-function f2(value: B): C {
-  return ...
-}
-
-interface Functor<A> {
-    map<B>( transform: (value: A) => B ): Functor<B>
-}
-
-const result: B = new Functor<A>(initialValues)
-  .map(f1)
-  .map(f2);
-```
-
-The function responsible for application is traditionally called map or somehow
-similarly. In our case, for convenience reason, it was defined as a method. It 
-takes a function that is intended for an application to the content of the 
-Functor and applies it. The action produces a new value, which is again wrapped
-in a Functor of the same type, which provides us with a possibility to chain 
-map calls.
-
-It is also possible to define map as an external **pure function**.
-
-```typescript
-
-
-function map<A, B>( functor: Functor<A>, transform: (value: A) => B ): Functor<B>
-
-const result = map( map( new Functor(initialValue), f1 ), f2);
-```
-
-Functors are another way of **composition** which **preservs the execution order**.
+In the programming world the functor is some kind of wrapper type that has a
+`map` function. The `map` returns a new wrapper type and always changes the 
+content of the wrapper type and never the structure.
 
 As you might already notice, the pattern is very similar to **JavaScript's Array**, 
 since Array is one of the most common instances of Functors
 
 ### Monad
 
-A Monad has a similar construct to a Functor, it has a constructor and a
-special function (in mathematics traditionally is called **bind** and in 
-some programming lanuages **flatMap**) capable of applying value to the 
-data hidden inside. The bind method of the Monad has the same signature
-as the map method of the Functor. The Monad however can accept another 
-Monad `Monad<A>` as input value and in this case returns `Monad<Monad<B>>`.
-Because of the flat map it will return only `Monad<B>`.
+The monad is a functor and it needs to have a `flatten` method. The `flatten` 
+method gets rid of unnecessary wrapper objects. It returns only a one wrapper 
+object around the raw type.
 
-```typescript
-interface Monad<A> {
-    bind<B>( transform: (value: A) => Monad<B> ): Monad<B>;
-}
+The problem When composing two functors is that the result will be wrapped two
+times.
+
+```
+F :: A -> W[ B ]
+G :: B -> W[ C ]
+
+map(G) :: W[ B ] -> W[ W[ C ] ]
+
+map(G) o F A -> W[ W[ C ] ]
 ```
 
-A wide-spread example of a Monad is the **JavaScript Promise**. It has a **then**
-method, which satisfies the signature of the bind function (and abstracts the 
-fact that the data might be absent or only available later). 
+This would be the monad `g >=> f :: A -> W[ C ]`.
+Which solves the problem of double wrapping.
 
 ## Principles of Functional Programming
 
