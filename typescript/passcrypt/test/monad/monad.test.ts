@@ -13,7 +13,6 @@ describe("Experiment with Maybe", () => {
 
   test("Test Maybe with none value", () => {
     const x: Maybe<number> = None();
-
     expect(x.isNone()).toBe(true);
   });
 

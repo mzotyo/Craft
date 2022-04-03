@@ -1,13 +1,17 @@
 # Encryption for pincodes, passowrds, seedphrases
-- [ ] Encrypt single character
-- [ ] Limit input domain? (Specify a character set to be valid).
-- [ ] Case sensitivity?
-- [ ] `at()` method
-- [ ] `index()` method
-- [ ] `shift(index)` method
-- [ ] call `at()` with an index greater than the valid character domain length.
-- [ ] call `at()` with a negative index 
-- [ ] handling `defineCharSetDomain('')` method if is called with a zero length initial char set.
-- [ ] Rewrite error handling with Either monad.
-- [ ] Handling the error with error handler?
-- [ ] Case sensitivity in the character set library?
+- [x] Factory method with injected charSet(charSet: string);
+- [x] charFrom(char: Char);
+- [x] char outside charSet
+- [ ] Error messages when create fails
+
+- [x] abstract Char; 
+- [x] get(): string;
+- [x] shift(index: number): Char;
+- [x] index();
+- [x] isValid(): boolean;
+- [x] map((char: srting) => char): Char;
+- [x] equality
+
+- [x] charSet('');
+- [x] charFrom('');
+- [x] charFrom('AA');
