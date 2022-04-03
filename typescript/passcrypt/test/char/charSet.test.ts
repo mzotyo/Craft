@@ -54,4 +54,8 @@ describe('TDD', () => {
     expect(INVALID.error()).toEqual('The input character should be part of the character set!');
     expect(INVALID.shift(0).error()).toEqual('The input character should be part of the character set!');
   });
+
+  test('complex tests', () => {
+    expect(A.shift(1)).toEqual(B);
+  });
 });

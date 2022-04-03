@@ -2,11 +2,13 @@
 - [x] Factory method with injected charSet(charSet: string);
 - [x] charFrom(char: Char);
 - [x] char outside charSet
-- [ ] Error messages when create fails
+- [x] Error messages when create fails
+- [ ] error method in the valid char
+- [ ] at(index: number): Char
 
 - [x] abstract Char; 
 - [x] get(): string;
-- [x] shift(index: number): Char;
+- [ ] shift(index: number): Char;
 - [x] index();
 - [x] isValid(): boolean;
 - [x] map((char: srting) => char): Char;

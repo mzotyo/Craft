@@ -5,6 +5,7 @@ const INVALID_CHARSET_LENGTH = 'The character set should contain at least one ch
 const INVALID_CHAR = 'The input character should be part of the character set!';
 const GET_OPERATION_NOT_ALLOWED = 'Get operation is not allowed on a invalid char!';
 const INDEX_OPERATION_NOT_ALLOWED = 'Index operation is not allowed on a invalid char!';
+const INDEX_OUT_OF_RANGE = 'A char with an index out of range was referenced!'
 
 type CharTransformFunction = (char: string) => string;
 
@@ -36,18 +37,18 @@ export abstract class Char {
 
   private static isValidChar(char: string, characterSet: string): Maybe<string> {
     if(char.length != 1) {
-      return Some('The input char length should be equal to one!');
+      return Some(INVALID_CHAR_LENGTH);
     }
 
     if(characterSet.search(char) < 0) {
-      return Some('The input character should be part of the character set!'); 
+      return Some(INVALID_CHAR); 
     } 
     return None();
   }
 
   private static isValidCharSet(characterSet: string): Maybe<string> {
     if(characterSet.length == 0) {
-      return Some('The character set should contain at least one character!');
+      return Some(INVALID_CHARSET_LENGTH);
     };
     return None();
   }
@@ -84,6 +85,13 @@ class ValidChar extends Char {
 
   public error(): string {
     throw '';
+  }
+
+  private at(index: number): Char {
+    if(index < 0 || index > this.characterSet.length) {
+      return new InvalidChar(INDEX_OUT_OF_RANGE) 
+    }
+    return this.characterSet.substr(index, 1); 
   }
 }
 
