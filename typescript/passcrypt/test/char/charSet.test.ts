@@ -41,20 +41,17 @@ describe('TDD', () => {
     expect(INVALID.shift(0).isValid()).toEqual(false);
   });
 
-  test('map', () => {
-    const transform = jest.fn((char: string) => 'D');
-    const X = A.map(transform);
-
-    expect(transform).toHaveBeenCalledWith('A');
-    expect(X.isValid()).toEqual(true);
-    expect(X).toEqual(charFrom('D'));
-
-    expect(INVALID.map(transform).isValid()).toEqual(false);
-  });
-
   test('equality', () => {
     expect(A).toEqual(charFrom('A'));
     expect(A).not.toEqual(B);
     expect(INVALID).not.toEqual(C);
+  });
+
+  test('error', () => {
+    expect(Char.charSet('')('A').error()).toEqual('The character set should contain at least one character!');
+    expect(charFrom('').error()).toEqual('The input char length should be equal to one!');
+    expect(charFrom('AA').error()).toEqual('The input char length should be equal to one!');
+    expect(INVALID.error()).toEqual('The input character should be part of the character set!');
+    expect(INVALID.shift(0).error()).toEqual('The input character should be part of the character set!');
   });
 });
