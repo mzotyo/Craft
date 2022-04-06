@@ -1,0 +1,5 @@
+- [x] ToDo wit two string: description, status
+- [x] creat empty ToDoList  
+- [x] add todo
+- [ ] locate description and chage status to done
+- [ ] undo operation
