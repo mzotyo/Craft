@@ -7,3 +7,7 @@
 - [x] Define char set
 - [x] index in the char set
 - [x] shift in rotation
+- [x] encrypt member of Char
+- [ ] index private
+- [ ] shift private
+- [ ] Compare chars

@@ -1,4 +1,3 @@
-import encrypt from '../../src/char/encrypt';
 import { Char } from '../../src/char/char';
 import { CharSet } from '../../src/char/charSet';
 
@@ -11,24 +10,12 @@ describe('TDD', () => {
   const D: Char = charSet.char('D');
 
   test('encrypt single char', () => {
-    expect(encrypt(B, B)).toEqual(B);
-    expect(encrypt(B, C)).toEqual(C);
-    expect(encrypt(A, C)).toEqual(B);
-    expect(encrypt(B, D)).toEqual(D);
-    expect(encrypt(C, D)).toEqual(A);
-    expect(encrypt(C, A)).toEqual(B);
+    expect(B.encrypt(B)).toEqual(B);
+    expect(C.encrypt(B)).toEqual(C);
+    expect(A.encrypt(C)).toEqual(B);
+    expect(B.encrypt(D)).toEqual(D);
+    expect(C.encrypt(D)).toEqual(A);
+    expect(C.encrypt(A)).toEqual(B);
   });
 
-  test('char index', () => {
-    expect(A.index()).toEqual(3);
-    expect(B.index()).toEqual(0);
-  });
-
-  test('shift char', () => {
-    expect(B.shift(1)).toEqual(C);
-    expect(C.shift(1)).toEqual(D);
-    expect(A.shift(1)).toEqual(B);
-    expect(A.shift(5)).toEqual(B);
-    expect(B.shift(-1)).toEqual(A);
-  });
 });
