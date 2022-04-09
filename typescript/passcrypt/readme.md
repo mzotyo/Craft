@@ -1,19 +1,9 @@
 # Encryption for pincodes, passowrds, seedphrases
-- [x] Factory method with injected charSet(charSet: string);
-- [x] charFrom(char: Char);
-- [x] char outside charSet
-- [x] Error messages when create fails
-- [ ] error method in the valid char
-- [ ] at(index: number): Char
-
-- [x] abstract Char; 
-- [x] get(): string;
-- [ ] shift(index: number): Char;
-- [x] index();
-- [x] isValid(): boolean;
-- [x] map((char: srting) => char): Char;
-- [x] equality
-
-- [x] charSet('');
-- [x] charFrom('');
-- [x] charFrom('AA');
+- [x] Encrypt a single character
+- [x] Use 'Char' class instead of string
+- [x] char index
+- [x] shift
+- [ ] limit char length to 0
+- [x] Define char set
+- [x] index in the char set
+- [x] shift in rotation
