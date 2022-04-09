@@ -12,16 +12,23 @@ public class DollarTest extends TestCase {
     return new TestSuite( DollarTest.class );
   }
 
-  public void testApp() {
-    Dollar five = new Dollar(5);
-    Dollar product = five.times(2);
-    assertEquals(10, product.amount);
-    product = five.times(3);
-    assertEquals(15, product.amount);
+  public void testMultiplication() {
+    Money five = Money.dollar(5);
+    assertEquals(Money.dollar(10), five.times(2));
+    assertEquals(Money.dollar(15), five.times(3));
+  }
+
+  public void testFrancMultiplication() {
+    Money five = Money.franc(5);
+    assertEquals(Money.franc(10), five.times(2));
+    assertEquals(Money.franc(15), five.times(3));
   }
 
   public void testEquality() {
-    assertTrue(new Dollar(5).equals(new Dollar(5)));
-    assertFalse(new Dollar(5).equals(new Dollar(6)));
+    assertTrue(Money.dollar(5).equals(Money.dollar(5)));
+    assertFalse(Money.dollar(5).equals(Money.dollar(6)));
+    assertTrue(Money.franc(5).equals(Money.franc(5)));
+    assertFalse(Money.franc(5).equals(Money.franc(6)));
+    assertFalse(Money.franc(5).equals(Money.dollar(5)));
   }
 }
