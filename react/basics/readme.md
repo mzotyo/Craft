@@ -98,4 +98,15 @@ Reference it from html
 ```
 
 Write the build scrip in package.json
+```json
+{
+  ...
+  "scripts": {
+    "start": "npm run build",
+    "build": "webpack -d && cp src/index.html dist/index.html webpack-dev-server --content-base src --inline --hot",
+    "build:prod": "webpack -p && cp src/index.html dist/index.html",
+  },
+  ...
+}
+```
 min 0:22
