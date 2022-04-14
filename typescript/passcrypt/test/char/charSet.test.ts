@@ -1,18 +1,24 @@
-import { Char } from '../../src/char/charSet';
+import { characterSet } from '../../src/char/charSet';
 
 describe('TDD', () => {
-  test('character encryption', () => {
-    const A: Char = new Char('A');
-    const B: Char = new Char('B');
+  const toChar = characterSet('ABC');
 
+  const A = toChar('A');
+  const B = toChar('B');
+  const D = toChar('D');
+
+  test('character encryption', () => {
     expect(A.encrypt(A)).toEqual(A);
     expect(B.encrypt(A)).toEqual(B);
   });
 
   test('equality', () => {
-    const A: Char = new Char('A');
-
-    expect(A).toEqual(new Char('A'));
-    expect(A).not.toEqual(new Char('B'));
+    expect(A).toEqual(toChar('A'));
+    expect(A).not.toEqual(toChar('B'));
+  });
+  
+  test('define valid character set', () => {
+    expect(A.isValid()).toEqual(true);
+    expect(D.isValid()).toEqual(false);
   });
 });

@@ -1,7 +1,12 @@
 # ToDo
 - [x] create a character
 - [x] Encrypt with char 'A' (identity)
-- [ ] Define valid character set
+- [x] Define valid character set
 - [x] Equality
 - [ ] Encrypt other than identity
-- [ ] Make inner char private
+- [x] Make inner char private
+- [x] Subclasses
+- [x] Factory methods
+- [ ] Handle creating invalid char
+- [ ] Handle creating empty character set
+- [ ] Error message
