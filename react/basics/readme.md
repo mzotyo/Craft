@@ -1,3 +1,5 @@
+# Create React App From scratch
+---
 
 ## Initialize application
 
@@ -14,11 +16,15 @@ npm init
 # keywords: react 
 # author: Magyari Zoltán
 # license: default
+
 ```
+---
+
 Production dependencies
 ```bash 
 npm install --save react react-dom 
 ```
+---
 
 Development dependencies
 ```bash
@@ -29,6 +35,7 @@ npm install --save-dev webpack webpack-dev-server babel-loader babel-preset-es20
 mkdir -p src/app
 touch src/index.html
 ```
+---
 
 Write html 5 skeleton into: _index.html_
 ```html
@@ -45,11 +52,13 @@ Write html 5 skeleton into: _index.html_
   </body>
 </html>
 ```
+---
 
 Configure webpack
 ```bash
 touch webpack.config.js
 ```
+---
 
 _webpack.config.js_
 ```js
@@ -80,6 +89,7 @@ var config = {
 
 module.exports = config;
 ```
+---
 
 Write some code
 ```bash
@@ -89,6 +99,7 @@ _index.js_
 ```js
 conosle.log('It works!');
 ```
+---
 
 Reference it from html
 ```html
@@ -96,6 +107,7 @@ Reference it from html
     <script src="/app/bundle.js"></script>
   </body>
 ```
+---
 
 Write the build scrip in package.json
 ```json
@@ -109,4 +121,5 @@ Write the build scrip in package.json
   ...
 }
 ```
+---
 min 0:22
