@@ -6,3 +6,6 @@
 **/out/*
 **/dist/*
 **/target/**
+.classpath
+.project
+.settings
