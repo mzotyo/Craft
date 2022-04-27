@@ -26,26 +26,36 @@ npm init
 
 ## Initialize application
 
-Production dependencies
+Production dependencies: _"We will need them once we deploy our application."_
 
 ```bash 
 npm install --save react react-dom 
 ```
 
-> *We will need it once we deploy our application.*
+---
 
+## Initialize application
+
+Development dependencies: _"We need them to develop our application."_
+
+Setup _webpack_
+
+```bash
+npm install --save-dev webpack webpack-cli webpack-dev-server 
+              
+```
+
+Setup _babel_
+
+```bash 
+npm install --save-dev babel-loader @babel/preset-react
+```
 
 ---
 
 ## Initialize application
 
-Development dependencies
-
-```bash
-npm install --save-dev webpack webpack-cli webpack-dev-server 
-              babel-loader babel-preset-es2015 babel-preset-react 
-              babel-preset-stage-2
-```
+Create **_index.html_**
 
 ```bash
 mkdir -p src/app
@@ -117,6 +127,28 @@ module.exports = config;
 
 ## Initialize application
 
+Create a **_babel.config.json_** file
+
+```bash
+touch babel.config.json
+```
+
+---
+
+
+## Initialize application
+
+**_babel.config.json_**
+```json
+{
+  "presets": ["@babel/preset-react"]
+}
+```
+
+---
+
+## Initialize application
+
 Write some code
 
 ```bash
@@ -163,3 +195,39 @@ Write the build scrip in **_package.json_**
 
 ---
 
+## First component
+
+Add a `div` in the `html` at the position where you want the react component to be rendered.
+
+**_index.html_**
+```js
+  ...
+  <body>
+    <div id="app"></div>
+    ...
+  </body>
+  ...
+```
+
+---
+
+## First component
+
+Write the root component.
+
+**_index.js_**
+```js 
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+
+const App = () => {
+  return (
+    <div>
+      <h1>Hello!</h1>
+    </div>
+  )
+}
+const container = document.getElementById("app");
+const root = createRoot(container);
+root.render(<App/>);
+```
