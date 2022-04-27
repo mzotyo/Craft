@@ -4,7 +4,7 @@ var DIST_DIR = path.resolve(__dirname, "dist");
 var SRC_DIR = path.resolve(__dirname, "src");
 
 var config = {
-  entry: SRC_DIR + "/app/index.js",
+  entry: SRC_DIR + "/app/index.tsx",
   output: {
     path: DIST_DIR + "/app",
     filename: "bundle.js",
@@ -12,7 +12,7 @@ var config = {
   module: {
     rules: [
       {
-        test: /\.js?/,
+        test: /\.(ts|tsx)?/,
         include: SRC_DIR,
         use: [
           { loader: "babel-loader" }

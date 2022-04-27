@@ -14,7 +14,7 @@ npm init
 # package name: default
 # version: default
 # description: Some basic ReactJS
-# entry point: index.js 
+# entry point: index.tsx 
 # test command: default
 # git repository: default
 # keywords: react 
@@ -38,17 +38,16 @@ npm install --save react react-dom
 
 Development dependencies: _"We need them to develop our application."_
 
-Setup _webpack_
 
 ```bash
+# Webpack
 npm install --save-dev webpack webpack-cli webpack-dev-server 
               
-```
-
-Setup _babel_
-
-```bash 
+# Babel
 npm install --save-dev babel-loader @babel/preset-react
+
+# Typescript
+npm install --save-dev @babel/preset-typescript
 ```
 
 ---
@@ -100,7 +99,7 @@ var DIST_DIR = path.resolve(__dirname, "dist");
 var SRC_DIR = path.resolve(__dirname, "src");
 
 var config = {
-  entry: SRC_DIR + "/app/index.js",
+  entry: SRC_DIR + "/app/index.tsx",
   output: {
     path: DIST_DIR + "/app",
     filename: "bundle.js",
@@ -108,9 +107,11 @@ var config = {
   module: {
     rules: [
       {
-        test: /\.js?/,
+        test: /\.(ts|tsx)?/,
         include: SRC_DIR,
-        use: [ { loader: "babel-loader" } ]
+        use: [
+          { loader: "babel-loader" }
+        ]
       }
     ]
   },
@@ -141,7 +142,7 @@ touch babel.config.json
 **_babel.config.json_**
 ```json
 {
-  "presets": ["@babel/preset-react"]
+  "presets": ["@babel/preset-react", "@babel/preset-typescript"]
 }
 ```
 
@@ -152,10 +153,10 @@ touch babel.config.json
 Write some code
 
 ```bash
-touch src/app/index.js
+touch src/app/index.tsx
 ```
 
-**_index.js_**
+**_index.tsx**
 ```js
 conosle.log('It works!');
 ```
@@ -215,7 +216,7 @@ Add a `div` in the `html` at the position where you want the react component to 
 
 Write the root component.
 
-**_index.js_**
+**_index.tsx_**
 ```js 
 import React from 'react';
 import { createRoot } from 'react-dom/client';
