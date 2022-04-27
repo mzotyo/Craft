@@ -156,7 +156,7 @@ Write some code
 touch src/app/index.tsx
 ```
 
-**_index.tsx**
+**_index.tsx_**
 ```js
 conosle.log('It works!');
 ```
@@ -214,14 +214,13 @@ Add a `div` in the `html` at the position where you want the react component to 
 
 ## First component
 
-Write the root component.
+Write the root component: **_index.tsx_**
 
-**_index.tsx_**
-```js 
+```tsx 
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 
-const App = () => {
+const App: React.Component = () => {
   return (
     <div>
       <h1>Hello!</h1>
@@ -231,4 +230,46 @@ const App = () => {
 const container = document.getElementById("app");
 const root = createRoot(container);
 root.render(<App/>);
+```
+
+---
+
+## Adding style to the component
+
+[getboostrap.com](https://getbootstrap.com/docs/5.1/getting-started/introduction/)
+
+**_index.html_**
+```html 
+  ...
+  <head>
+    ...
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          rel="stylesheet" 
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
+          crossorigin="anonymous"> 
+    <title>ReactJS Basics</title>
+  </head>
+  ...
+```
+
+---
+
+
+## Adding style to the component
+
+**_index.tsx_**
+```tsx 
+...
+function App(): React.Component {
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="col-xs-10 col-xs-offset-1">
+          <h1>Hello!</h1>
+        </div>      
+      </div>
+    </div>
+  )
+}
+...
 ```
