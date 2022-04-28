@@ -43,36 +43,34 @@ fdisk /dev/sda
  - *o* create a new empty DOS partition table
  - press *n* to create a new partition with size: +4G (swap partition, the size of the swap is equal to the size of the *RAM* in the machine)
  - press *n* to create a new partition with the remaining size. (root partition)
- - press *t* to change the type of the first partition to: *Linux swap* (19)
- - The second partition type is by default a *Linux* (20) type. It should not be set.
+ - press *t* to change the type of the first partition to: *Linux swap* (82)
+ - The second partition type is by default a *Linux* (83) type. It should not be set.
+ - press *a* to set first partition to bootable
  - press *w* to store changes
 
 ### Format the partitions
 First partition (swap)
 
 ```bash
-mkswap /dev/sda1
+mkswap /dev/sda2
 ```
 
 Second partition (ext4)
 
 ```bash
-mkfs.ext4 /dev/sda2
+mkfs.ext4 /dev/sda1
 ```
 
 ### Mount the file sytem
 
 ```bash
-swapon /dev/sda1
-mount /dev/sda2 /mnt
+swapon /dev/sda2
+mount /dev/sda1 /mnt
 ```
 
 ### Install essential packages
 ```bash
-pacstrap /mnt base linux
-
-# linux-firmware on virtualbox is optional
-pacstrap /mnt linux-firmware
+pacstrap /mnt base linux linux-firmware
 ```
 
 ### Configure the system
@@ -177,6 +175,23 @@ Network manager
 
 ```bash
 pacman -S networkmanager
+
+# enable network manager
+systemctl enable NetworkManager
+```
+
+Virtual Box Guest Additions
+
+```bash
+pacman -S virtualbox-guest-utils
+systemctl enable vboxservice
+usermod -aG vboxsf root
+```
+
+Neovim, git
+
+```bash
+pacman -S neovim git
 ```
 
 ### Reboot
@@ -185,6 +200,13 @@ pacman -S networkmanager
 exit
 umount -R /mnt
 shutdown -h now
+```
+
+### Mount shared folder
+
+```bash
+mkdir /mnt/Host
+mount -t vboxsf Host /mnt/Host
 ```
 
 ## Install Desktop Environment
@@ -206,12 +228,6 @@ systemctl enable gdm
 
 ## Additional settings
 
-Autostart *NetworkManager*
-
-```bash
-systemctl enable NetworkManager.service
-```
-
 Add new user
 
 ```bash
@@ -222,7 +238,7 @@ useradd -m arch
 passwd arch
 
 # add user to groups
-usermod -aG wheel,audio,video,optical,storage arch
+usermod -aG wheel,audio,video,optical,storage,vboxsf arch
 ```
 
 Add *NTFS* support
