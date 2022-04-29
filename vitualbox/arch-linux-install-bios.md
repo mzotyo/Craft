@@ -215,7 +215,7 @@ mount -t vboxsf Host /mnt/Host
 `pacman -S xf86-video-intel`
 
 ### Install Xorg server
-`pacman -S xorg`
+`pacman -S xorg xorg-xinit`
 
 ### Display Manager 
 
@@ -239,6 +239,14 @@ passwd arch
 
 # add user to groups
 usermod -aG wheel,audio,video,optical,storage,vboxsf arch
+
+# install sudo
+pacman -S sudo
+
+# add sudo rights for wheel group
+nvim /etc/sudoers
+
+# uncomment: %wheel .. 
 ```
 
 Add *NTFS* support
