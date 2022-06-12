@@ -1,4 +1,4 @@
-# Create React App From scratch
+# Create React App from scratch
 
 [ReactJS basics](https://youtu.be/uextYhQGP6k)
 
