@@ -10,3 +10,4 @@ nnoremap <leader>gP     :Git push -f<Enter>
 nnoremap <leader>gu     :Git pull<Enter>
 nnoremap <leader>gl     :Git log --decorate --all<Enter>
 nnoremap <leader>gL     :Git log --decorate --all --stat<Enter>
+nnoremap <Leader>gb     :<C-u>call gitblame#echo()<CR>
