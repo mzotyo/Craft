@@ -28,3 +28,14 @@ endfun
 
 " -- git blame for current file
 map <C-g>b              :call GitCommand("blame") <Enter>
+
+
+" -----------------------------------------------------------
+" Git command on current file:
+" -----------------------------------------------------------
+function! GitGrep(word)
+    execute "! git grep -i -n -p --break --heading " . a:word
+endfunction
+
+" -- git grep current word
+map <C-r>               :call GitGrep("<cword>")<Enter><Enter>
