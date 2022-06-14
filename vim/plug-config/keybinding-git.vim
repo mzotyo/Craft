@@ -1,13 +1,30 @@
 " Git commands
-nnoremap <leader>gs     :Git status<Enter>
-nnoremap <leader>gd     :Git diff<Enter>
-nnoremap <leader>ga     :Git add --all<Enter>
-nnoremap <leader>gA     :Git add --interactive<Enter>
-nnoremap <leader>gc     :Git commit<Enter>
-nnoremap <leader>gC     :Git commit --amend<Enter>
-nnoremap <leader>gp     :Git push<Enter>
-nnoremap <leader>gP     :Git push -f<Enter>
-nnoremap <leader>gu     :Git pull<Enter>
-nnoremap <leader>gl     :Git log --decorate --all<Enter>
-nnoremap <leader>gL     :Git log --decorate --all --stat<Enter>
-nnoremap <Leader>gb     :<C-u>call gitblame#echo()<CR>
+nnoremap <C-g>s        :Git status<Enter>
+nnoremap <C-g>d         :Git diff<Enter>
+nnoremap <C-g>a         :Git add --all<Enter>
+nnoremap <C-g>A         :Git add --interactive<Enter>
+nnoremap <C-g>c         :Git commit<Enter>
+nnoremap <C-g>C         :Git commit --amend<Enter>
+nnoremap <C-g>p         :Git push<Enter>
+nnoremap <C-g>P         :Git push -f<Enter>
+nnoremap <C-g>u         :Git pull<Enter>
+nnoremap <C-g>l         :Git log --decorate --all<Enter>
+nnoremap <C-g>L         :Git log --decorate --all --stat<Enter>
+nnoremap <C-g>b         :Git blame<Enter>
+
+" -----------------------------------------------------------
+" Git command on current file:
+" -----------------------------------------------------------
+fun! GitCommand(command)
+  silent! !clear
+  exec "!git " . a:command . " %"
+endfun
+
+" -- git diff for current file
+"map <C-g>d :call GitCommand("diff") <Enter>
+
+" -- git log for current file
+"map <C-g>l :call GitCommand("log -p") <Enter>
+
+" -- git blame for current file
+map <C-g>b              :call GitCommand("blame") <Enter>
