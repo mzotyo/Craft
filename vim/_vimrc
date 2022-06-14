@@ -12,6 +12,7 @@ call plug#begin('~/.vim/bundle')
     Plug 'https://github.com/itchyny/lightline.vim'                             " Status line
     Plug 'https://github.com/doums/darcula'                                     " Dracula color scheme
     Plug 'https://github.com/dense-analysis/ale'                                " LSP client
+    Plug 'https://github.com/chiendo97/intellij.vim'                            " IntelliJ light color scheme
     Plug 'https://github.com/prettier/vim-prettier', {
         \ 'do': 'yarn install --frozen-lockfile --production',
         \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html']
