@@ -49,3 +49,5 @@ nnoremap <Leader>gr             :ALEFindReferences -relative<Enter>
 " REFACTOR:
 " -----------------------------------------------------------
 nnoremap <Leader>rn             :ALERename<Enter>
+nnoremap <Leader>rf             :ALEFileRename<Enter>
+nnoremap <Leader>ri             :ALEOrganizeImports<Enter>
