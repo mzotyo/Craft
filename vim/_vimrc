@@ -27,7 +27,7 @@ set lines=80 columns=250
 set nocompatible                                                                " enter the current millenium
 set autochdir
 set guioptions-=T                                                               " disables the toolbar
-set guioptions-=m                                                               " disables the menu
+set guioptions-=m                                                               " disables the toolbar
 set guioptions-=e                                                               " vim like tabs
 set guioptions-=r                                                               " right scrollbars off
 set guioptions-=R                                                               " right scrollbars off
@@ -35,7 +35,7 @@ set guioptions-=l                                                               
 set guioptions-=L                                                               " left scrollbars off
 
 set encoding=utf-8
-set guifont=Lucida\ Console:h10
+set guifont=Lucida\ Console:h11
 
 set nowrap
 set number relativenumber                                                       " add line numbers
