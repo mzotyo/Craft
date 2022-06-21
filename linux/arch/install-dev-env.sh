@@ -45,3 +45,13 @@ pacman -S zsh-syntax-highlighting
 # -----------------------------------------------------------------------------
 # Midnight Commander
 pacman -S mc
+
+# -----------------------------------------------------------------------------
+# Compilers
+
+# Markdown to pdf, doc or html
+pacman -S pandoc
+
+# -----------------------------------------------------------------------------
+# Links web browser
+pacman -S links
