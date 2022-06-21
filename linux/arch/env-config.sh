@@ -36,7 +36,6 @@ pacman -S tmux
 pacman -S zsh
 whereis zsh
 usermod -s /usr/bin/zsh $(whoami)
-reboot
 
 # Powerlines
 pacman -S powerline
@@ -55,3 +54,10 @@ pacman -S pandoc
 # -----------------------------------------------------------------------------
 # Links web browser
 pacman -S links
+
+# -----------------------------------------------------------------------------
+# Command line tools
+pacman -S htop
+
+# -----------------------------------------------------------------------------
+reboot
