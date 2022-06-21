@@ -22,3 +22,11 @@ Ram usage.
 ```shell
 free -h
 ```
+
+List all orphans
+```shell
+pacman -Qdt
+
+# removes all orphans
+pacman -Rsn $(pacman -Qdtq)
+```
