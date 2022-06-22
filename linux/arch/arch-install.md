@@ -1,107 +1,273 @@
-# Install Guide for Arch Linux
+# Installing Arch Linux
+[sourse](https://wiki.archlinux.org/index.php/Installation_guide#Boot_the_live_environment)
 
-List available key maps
+## Install base system
+
+### Set keyboard layout
+View existing hungarian keyboard layouts
+
 ```bash
-ls /usr/share/kbd/keymaps/**/*.map.gz | grep hu
+# ls /usr/share/kbd/keymaps/**/*.map.gz | grep hu
 ```
 
-Load the preferred keymap
+Load keymap
+
 ```bash
 loadkeys hu101
 ```
 
-Connect to the insternet
+
+### Test internet connection
 ```bash
-ip link
 ping archlinux.org
 ```
 
-Update system clock
+### Update the system clock
 ```bash
 timedatectl set-ntp true
 ```
 
-Disk partitioning
+### Partition the disks
+List all available hardwares
+
 ```bash
-# List partitions
 fdisk -l
-
-# Partitioning a given disk
-fdisk /dev/sda
-
-# Commands executed on the fdisk
-0 - create a new empty DOS partition table
-
-n - add new partition
-p - primary partition
-2 - second partition, on the default sector 2048, with size 4096K
-
-t - change a partition type
-2 - second partition
-L - list all available options
-82 - swap
-
-n - add new partition
-p - primary partition
-1 - first partition, on default sector, with default (remaining) size
-
-t - change a partition type
-1 - first partition
-L - list all available options
-83 - Linux
-
-a - toggle boot flag
-1 - first partition
-
-p - print the partition table
-w - write table to disk and exit
 ```
 
-Format partitions
+Format the first hardware
+
 ```bash
-mkfs.ext4 /dev/sda1
+fdisk /dev/sda
+```
+
+ - *o* create a new empty DOS partition table
+ - press *n* to create a new partition with size: +4G (swap partition, the size of the swap is equal to the size of the *RAM* in the machine)
+ - press *n* to create a new partition with the remaining size. (root partition)
+ - press *t* to change the type of the first partition to: *Linux swap* (82)
+ - The second partition type is by default a *Linux* (83) type. It should not be set.
+ - press *a* to set first partition to bootable
+ - press *w* to store changes
+
+### Format the partitions
+First partition (swap)
+
+```bash
 mkswap /dev/sda2
 ```
 
-Mount the file system
+Second partition (ext4)
+
 ```bash
-mount /dev/sda1 /mnt
-swapon /dev/sda2
+mkfs.ext4 /dev/sda1
 ```
 
-Install essential packages
+### Mount the file sytem
+
+```bash
+swapon /dev/sda2
+mount /dev/sda1 /mnt
+```
+
+### Install essential packages
 ```bash
 pacstrap /mnt base linux linux-firmware
 ```
 
-Install *grub*
+### Configure the system
+
+Configure *fstab*
 ```bash
-pacman -S grub dosfstools os-prober mtools
+genfstab -U /mnt >> /mnt/etc/fstab
+```
+
+Chroot into the new partition
+```bash
+arch-chroot /mnt
+```
+
+#### Time zone
+List available time zones
+
+```bash
+ls /usr/share/zoneinfo
+ls /usr/share/zoneinfo/Europe
+```
+
+Change time zone
+
+```bash
+ln -sf /usr/share/zoneinfo/Europe/Bucharest /etc/localtime
+hwclock --systohc
+```
+
+#### Localization
+Edit the ```/etc/locale.gen``` file, uncomment the ```hu_HU.UTF-8 UTF-8``` line. To edit the file nano should be installed first.
+
+```bash
+pacman -S nano
+nano /etc/locale.gen
+```
+
+Generate locales by runnin the command
+
+```bash
+locale-gen
+```
+
+Create the `/etc/locale.conf`
+
+```bash
+nano /etc/locale.conf
+# LANG=hu_HU.UTF-8
+```
+
+Create the `/etc/vconsole.conf`
+
+```bash
+nano /etc/vconsole.conf
+# KEYMAP=hu101
+```
+
+#### Network configuration
+
+```bash
+nano /etc/hostname
+# arch-vbox
+
+nano /etc/hosts
+# 127.0.0.1		localhost
+# ::1			localhost
+# 127.0.1.1		arch-vbox.localdomain arch-vbox
+```
+
+#### Inint ramfs
+```bash
+mkinitcpio -P
+```
+
+#### Root password
+```bash
+passwd
+```
+
+#### Boot loader
+Install *grub* application
+
+```bash
+pacman -S grub
+```
+
+Install the *grub* bootloader
+
+```bash
 grub-install --target=i386-pc /dev/sda
+```
+
+Create *grub* configuration file
+
+```bash
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-Configure the system
+### Install additionals
+
+Network manager
+
 ```bash
-genfstab -U /mnt >> /mnt/etc/fstab
+pacman -S networkmanager
 
-arch-chroot /mnt
+# enable network manager
+systemctl enable NetworkManager
+```
 
-ln -sf /usr/share/zoninfo/Europe/Bucharest /etc/localtime
-hwclock --systohc
+Virtual Box Guest Additions
 
-pacman -S vim
+```bash
+pacman -S virtualbox-guest-utils
+systemctl enable vboxservice
+usermod -aG vboxsf root
+```
 
-locale-gen
-vim /etc/locale.conf
-#LANG=hu_HU.UTF-8
-vim /etc/vconsole.conf
-# KEYMAP=hu101
+Neovim, git
 
-vim /etc/hostname
-# arch
+```bash
+pacman -S neovim git
+```
 
-passwd
+### Reboot
+
+```bash
 exit
-reboot
+umount -R /mnt
+shutdown -h now
+```
+
+### Mount shared folder
+
+```bash
+mkdir /mnt/Host
+mount -t vboxsf Host /mnt/Host
+```
+
+## Install Desktop Environment
+
+### Install Graphics Driver
+`pacman -S xf86-video-intel`
+
+### Install Xorg server
+`pacman -S xorg xorg-xinit`
+
+### Display Manager
+
+#### Install Gnome
+
+```bash
+pacman -S gnome
+systemctl enable gdm
+```
+
+## Additional settings
+
+Add new user
+
+```bash
+# add user
+useradd -m arch
+
+# set password
+passwd arch
+
+# add user to groups
+usermod -aG wheel,audio,video,optical,storage,vboxsf arch
+
+# install sudo
+pacman -S sudo
+
+# add sudo rights for wheel group
+nvim /etc/sudoers
+
+# uncomment: %wheel ..
+```
+
+Add *NTFS* support
+
+`pacman -S ntfs-3g`
+
+Setup a firewall ([source](https://www.digitalocean.com/community/tutorials/how-to-setup-a-firewall-with-ufw-on-an-ubuntu-and-debian-cloud-server))
+
+```bash
+# install
+pacman -S ufw
+
+# enable on startup
+systemctl enable ufw
+systemctl start ufw
+systemctl status ufw
+
+# configure
+ufw default deny incoming
+ufw default allow outgoing
+
+# install gui
+pacman -S gufw
 ```
