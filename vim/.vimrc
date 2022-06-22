@@ -10,9 +10,7 @@ call plug#begin('~/.vim/bundle')
     Plug 'https://github.com/tpope/vim-fugitive'                                " Git tool
     Plug 'https://github.com/mhinz/vim-signify'                                 " Git change marker
     Plug 'https://github.com/itchyny/lightline.vim'                             " Status line
-    Plug 'https://github.com/doums/darcula'                                     " Dracula color scheme
     Plug 'https://github.com/dense-analysis/ale'                                " LSP client
-    Plug 'https://github.com/chiendo97/intellij.vim'                            " IntelliJ light color scheme
     Plug 'https://github.com/prettier/vim-prettier', {
         \ 'do': 'yarn install --frozen-lockfile --production',
         \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html']
@@ -22,6 +20,10 @@ call plug#end()
 " -----------------------------------------------------------
 " BASIC SETTINGS:
 " -----------------------------------------------------------
+
+set autochdir                                                                   " active directory will be the one of selected file
+
+set encoding=utf-8                                                              " UTF-8 character set
 
 set nowrap
 set number relativenumber                                                       " add line numbers
@@ -39,8 +41,8 @@ set ignorecase                                                                  
 set hlsearch                                                                    " highlight search
 set incsearch                                                                   " incremental search
 
-set cursorline
-"set cc=130                                                                    " set an 130 column border for good coding style
+" set cursorline
+" set cc=130                                                                    " set an 130 column border for good coding style
 
 packloadall
 
@@ -100,6 +102,7 @@ set udir=/tmp,/c/tmp,/c/temp
 " -----------------------------------------------------------
 source ~/Craft/vim/plug-config/ale.vim
 source ~/Craft/vim/plug-config/autocomplete.vim
+source ~/Craft/vim/plug-config/compilers.vim
 source ~/Craft/vim/plug-config/findfiles.vim
 source ~/Craft/vim/plug-config/filebrowsing.vim
 source ~/Craft/vim/plug-config/formatter.vim

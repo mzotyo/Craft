@@ -10,9 +10,7 @@ call plug#begin('~/.vim/bundle')
     Plug 'https://github.com/tpope/vim-fugitive'                                " Git tool
     Plug 'https://github.com/mhinz/vim-signify'                                 " Git change marker
     Plug 'https://github.com/itchyny/lightline.vim'                             " Status line
-    Plug 'https://github.com/doums/darcula'                                     " Dracula color scheme
     Plug 'https://github.com/dense-analysis/ale'                                " LSP client
-    Plug 'https://github.com/chiendo97/intellij.vim'                            " IntelliJ light color scheme
     Plug 'https://github.com/prettier/vim-prettier', {
         \ 'do': 'yarn install --frozen-lockfile --production',
         \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html']
@@ -25,7 +23,7 @@ call plug#end()
 set lines=80 columns=250
 
 set nocompatible                                                                " enter the current millenium
-set autochdir
+set autochdir                                                                   " active directory will be the one of selected file
 set guioptions-=T                                                               " disables the toolbar
 set guioptions-=m                                                               " disables the toolbar
 set guioptions-=e                                                               " vim like tabs
@@ -104,12 +102,6 @@ nnoremap <leader>t      :terminal<Enter><C-w><S-j><C-w>20-
 set noswapfile                                                                  " disable creating swap file
 set nobackup nowritebackup                                                      " disable backup files
 
-" linux
-" set dir=/tmp,/c/tmp,/c/temp
-" set backupdir=/tmp,/c/tmp,/c/temp
-" set udf
-" set udir=/tmp,/c/tmp,/c/temp
-
 " windows
 set dir=c:\\tmp,c:\\temp
 set backupdir=c:\\tmp,c:\\temp
@@ -121,6 +113,7 @@ set udir=c:\\tmp,c:\\temp
 " -----------------------------------------------------------
 source ~/Home/Personal/Craft/vim/plug-config/ale.vim
 source ~/Home/Personal/Craft/vim/plug-config/autocomplete.vim
+source ~/Home/Personal/Craft/vim/plug-config/compilers.vim
 source ~/Home/Personal/Craft/vim/plug-config/findfiles.vim
 source ~/Home/Personal/Craft/vim/plug-config/filebrowsing.vim
 source ~/Home/Personal/Craft/vim/plug-config/formatter.vim
