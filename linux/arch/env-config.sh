@@ -35,15 +35,8 @@ git config --global core.editor vim
 pacman -S tmux
 
 # -----------------------------------------------------------------------------
-# Configuring Z-shell
-pacman -S zsh
-
-# whereis zsh
-usermod -s /usr/bin/zsh $(whoami)
-
-# Powerlines
-pacman -S powerline
-pacman -S zsh-syntax-highlighting
+# Configuring bash as shell
+usermod -s /usr/bin/bash $(whoami)
 
 # -----------------------------------------------------------------------------
 # Midnight Commander
