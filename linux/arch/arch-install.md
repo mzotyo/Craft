@@ -89,8 +89,8 @@ arch-chroot /mnt
 List available time zones
 
 ```bash
-ls /usr/share/zoneinfo
-ls /usr/share/zoneinfo/Europe
+# ls /usr/share/zoneinfo
+# ls /usr/share/zoneinfo/Europe
 ```
 
 Change time zone
@@ -104,8 +104,8 @@ hwclock --systohc
 Edit the ```/etc/locale.gen``` file, uncomment the ```hu_HU.UTF-8 UTF-8``` line. To edit the file nano should be installed first.
 
 ```bash
-pacman -S nano
-nano /etc/locale.gen
+pacman -S vim
+vim /etc/locale.gen
 ```
 
 Generate locales by runnin the command
@@ -117,24 +117,24 @@ locale-gen
 Create the `/etc/locale.conf`
 
 ```bash
-nano /etc/locale.conf
+vim /etc/locale.conf
 # LANG=hu_HU.UTF-8
 ```
 
 Create the `/etc/vconsole.conf`
 
 ```bash
-nano /etc/vconsole.conf
+vim /etc/vconsole.conf
 # KEYMAP=hu101
 ```
 
 #### Network configuration
 
 ```bash
-nano /etc/hostname
+vim /etc/hostname
 # arch-vbox
 
-nano /etc/hosts
+vim /etc/hosts
 # 127.0.0.1		localhost
 # ::1			localhost
 # 127.0.1.1		arch-vbox.localdomain arch-vbox

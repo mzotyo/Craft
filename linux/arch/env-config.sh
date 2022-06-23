@@ -14,6 +14,9 @@ pacman -S dosfstools ntfsprogs
 # -----------------------------------------------------------------------------
 # For generating ssh keys
 pacman -S  openssh
+#systemctl status sshd
+systemctl start sshd
+systemctl enable sshd
 
 # Generating ssh key for personal github access
 ssh-keygen -t rsa -b 4096 - C "asghtr@freemail.com"
@@ -34,7 +37,8 @@ pacman -S tmux
 # -----------------------------------------------------------------------------
 # Configuring Z-shell
 pacman -S zsh
-whereis zsh
+
+# whereis zsh
 usermod -s /usr/bin/zsh $(whoami)
 
 # Powerlines
