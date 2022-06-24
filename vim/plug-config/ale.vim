@@ -9,6 +9,14 @@ let g:ale_fixers = {
 \   'typescript': ['tslint', 'prettier']
 \}
 
+" Java LSP
+"
+" Java Language Server
+" https://github.com/eclipse/eclipse.jdt.ls
+"
+" Java Language Server Client
+" https://github.com/dense-analysis/ale/blob/master/doc/ale-java.txt
+
 " Set this variable to 1 to fix files when you save them.
 let g:ale_fix_on_save = 1
 
