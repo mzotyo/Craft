@@ -60,7 +60,8 @@ pacman -S nodejs
 pacman -S npm
 
 # Java
-pacman -S jdk8-openjdk
+pacman -S jdk17-openjdk
+pacman -S maven
 
 # Markdown to pdf, doc or html
 pacman -S pandoc
