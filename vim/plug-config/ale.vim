@@ -45,17 +45,17 @@ let g:airline#extensions#ale#enabled = 1
 " -----------------------------------------------------------
 " GoTo DEFINITION:
 " -----------------------------------------------------------
-nnoremap <Leader>gd             :ALEGoToDefinition<Enter>
-nnoremap <Leader>gt             :ALEGoToTypeDefinition<Enter>
-nnoremap <Leader>gi             :ALEGoToImplementation<Enter>
+nnoremap <Leader>ad             :ALEGoToDefinition<Enter>
+nnoremap <Leader>at             :ALEGoToTypeDefinition<Enter>
+nnoremap <Leader>ai             :ALEGoToImplementation<Enter>
 
 " You can jump back to the position you were at before going to a reference of
 " something with jump motions like CTRL-O.
-nnoremap <Leader>gr             :ALEFindReferences -relative<Enter>
+nnoremap <Leader>ar             :ALEFindReferences -relative<Enter>
 
 " -----------------------------------------------------------
 " REFACTOR:
 " -----------------------------------------------------------
-nnoremap <Leader>rn             :ALERename<Enter>
-nnoremap <Leader>rf             :ALEFileRename<Enter>
-nnoremap <Leader>ri             :ALEOrganizeImports<Enter>
+nnoremap <Leader>an             :ALERename<Enter>
+nnoremap <Leader>af             :ALEFileRename<Enter>
+nnoremap <Leader>ai             :ALEOrganizeImports<Enter>

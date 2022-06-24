@@ -1,33 +1,33 @@
 " Git commands
-nnoremap <C-g>s        :Git status<Enter>
-nnoremap <C-g>d         :Git diff<Enter>
-nnoremap <C-g>a         :Git add --all<Enter>
-nnoremap <C-g>A         :Git add --interactive<Enter>
-nnoremap <C-g>c         :Git commit<Enter>
-nnoremap <C-g>C         :Git commit --amend<Enter>
-nnoremap <C-g>p         :Git push<Enter>
-nnoremap <C-g>P         :Git push -f<Enter>
-nnoremap <C-g>u         :Git pull<Enter>
-nnoremap <C-g>l         :Git log --decorate --all<Enter>
-nnoremap <C-g>L         :Git log --decorate --all --stat<Enter>
-nnoremap <C-g>b         :Git blame<Enter>
+nnoremap <Leader>gs             :Git status<Enter>
+nnoremap <Leader>gd             :Git diff<Enter>
+nnoremap <Leader>ga             :Git add --all<Enter>
+nnoremap <Leader>gA             :Git add --interactive<Enter>
+nnoremap <Leader>gc             :Git commit<Enter>
+nnoremap <Leader>gC             :Git commit --amend<Enter>
+nnoremap <Leader>gp             :Git push<Enter>
+nnoremap <Leader>gP             :Git push -f<Enter>
+nnoremap <Leader>gu             :Git pull<Enter>
+nnoremap <Leader>gl             :Git log --decorate --all<Enter>
+nnoremap <Leader>gL             :Git log --decorate --all --stat<Enter>
+nnoremap <Leader>gb             :Git blame<Enter>
 
 " -----------------------------------------------------------
 " Git command on current file:
 " -----------------------------------------------------------
-fun! GitCommand(command)
-  silent! !clear
-  exec "!git " . a:command . " %"
-endfun
+" fun! GitCommand(command)
+"  silent! !clear
+"  exec "!git " . a:command . " %"
+" endfun
 
 " -- git diff for current file
-"map <C-g>d :call GitCommand("diff") <Enter>
+" map <C-g>d :call GitCommand("diff") <Enter>
 
 " -- git log for current file
-"map <C-g>l :call GitCommand("log -p") <Enter>
+" map <C-g>l :call GitCommand("log -p") <Enter>
 
 " -- git blame for current file
-map <C-g>b              :call GitCommand("blame") <Enter>
+" map <Leader>gb                  :call GitCommand("blame") <Enter>
 
 
 " -----------------------------------------------------------
@@ -38,4 +38,4 @@ function! GitGrep(word)
 endfunction
 
 " -- git grep current word
-map <C-r>               :call GitGrep("<cword>")<Enter><Enter>
+map <Leader>gr                  :call GitGrep("<cword>")<Enter><Enter>
