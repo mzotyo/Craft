@@ -1,6 +1,7 @@
 # -----------------------------------------------------------------------------
 # Text editor
 pacman -S vim
+pacman -S neovim
 
 # -----------------------------------------------------------------------------
 # For generating ssh keys
@@ -65,6 +66,17 @@ pacman -S maven
 
 # Markdown to pdf, doc or html
 pacman -S pandoc
+
+# -----------------------------------------------------------------------------
+# Neovim configuration
+git clone https://github.com/LunarVim/Neovim-from-scratch ~/.config/nvim
+
+pacman -S xsel
+pacman -S ripgrep
+pacman -S python-pip
+
+pip install pynvim
+npm install -g neovim
 
 # -----------------------------------------------------------------------------
 reboot
