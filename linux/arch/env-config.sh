@@ -1,7 +1,6 @@
 # -----------------------------------------------------------------------------
 # Text editor
 pacman -S vim
-pacman -S neovim
 
 # -----------------------------------------------------------------------------
 # For generating ssh keys
@@ -68,9 +67,24 @@ pacman -S maven
 pacman -S pandoc
 
 # -----------------------------------------------------------------------------
+# Prerequisits to build stuff
+pacman -S base-devel cmake make unzip ninja tree-sitter curl
+mkdir ~/Tools
+
+# -----------------------------------------------------------------------------
 # Neovim configuration
+pacman -S neovim
+
+# Build neovim from scratch
+# git clone https://github.com/neovim/neovim ~/Tools/neovim
+# cd ~/Tools/neovim
+# make CMAKE_BUILD_TYPE=RelWithDebInfo
+# make install
+
+# Clone neovim configurations
 git clone https://github.com/LunarVim/Neovim-from-scratch ~/.config/nvim
 
+# Additional configurations for neovim dev environment
 pacman -S xsel
 pacman -S ripgrep
 pacman -S python-pip
