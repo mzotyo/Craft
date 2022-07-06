@@ -112,20 +112,23 @@ pacman -S webkit2gtk
 # Config graphical ui
 cp /etc/X11/xinit/xinitrc .xinitrc
 
-# vim .xinitrc
-```shell
-# Keyboard Layout
-setxkbmap hu -model "pc101" -variant "101_qwerty_comma_dead"  &
+    # vim .xinitrc
+    ```shell
+    # Keyboard Layout
+    setxkbmap hu -model "pc101" -variant "101_qwerty_comma_dead"  &
 
-# Display Resolution
-xrandr --output Virtual-1 --mode 1920x1080 &
+    # Display Resolution
+    xrandr --output Virtual-1 --mode 1920x1080 &
 
-# Compositor
-picom -f &
+    # Compositor
+    picom -f &
 
-# Execute DWM
-exec dwm
-```
+    # Set wallpaper
+    nitrogen --restore &
+
+    # Execute DWM
+    exec dwm
+    ```
 # Install dwm from suckless
 git clone https://git.suckless.org/dwm
 cd dwn
@@ -137,11 +140,17 @@ git clone https://git.suckless.org/st
 cd st
 make clean install
 # make uninstall
+# Increase font size to 13
 
+# Install dmenu from suckless
+git clone https://git.suckless.org/dmenu
+cd dmenu
+make clean install
+
+# make uninstall
 # Starting the graphival user interface
 startx
 
-wget https://dl.suckless.org/st/st-0.8.tar.gz
 
 # -----------------------------------------------------------------------------
 reboot
