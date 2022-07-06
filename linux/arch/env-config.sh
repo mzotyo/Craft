@@ -109,6 +109,10 @@ pacman -S picom
 # I don't know what is it for but it's needed to start dwm. At least in virtual-box
 pacman -S webkit2gtk
 
+# Install driver on my fujitsu-siemens laptop
+# pacman -S mesa
+# pacman -S xf86-video-ati
+
 # Config graphical ui
 cp /etc/X11/xinit/xinitrc .xinitrc
 
