@@ -45,6 +45,12 @@ pacman -S tmux
 pacman -S mc
 
 # -----------------------------------------------------------------------------
+# Image viewer
+pacman -S feh
+# feh
+# feh -F
+
+# -----------------------------------------------------------------------------
 #  Web browsers
 pacman -S lynx
 pacman -S netsurf
