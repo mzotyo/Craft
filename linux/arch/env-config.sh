@@ -41,12 +41,20 @@ git config --global core.editor vim
 pacman -S tmux
 
 # -----------------------------------------------------------------------------
-# Midnight Commander
+# File managers
 pacman -S mc
+pacman -S vifm
 
 # -----------------------------------------------------------------------------
-# Links web browser
-pacman -S links
+# Image viewer
+pacman -S feh
+# feh
+# feh -F
+
+# -----------------------------------------------------------------------------
+#  Web browsers
+pacman -S lynx
+pacman -S netsurf
 
 # -----------------------------------------------------------------------------
 # Command line tools
@@ -74,27 +82,6 @@ mkdir ~/Tools
 # -----------------------------------------------------------------------------
 # Wget downloader
 pacamn -S wget
-
-# -----------------------------------------------------------------------------
-# Neovim configuration
-pacman -S neovim
-
-# Build neovim from scratch
-# git clone https://github.com/neovim/neovim ~/Tools/neovim
-# cd ~/Tools/neovim
-# make CMAKE_BUILD_TYPE=RelWithDebInfo
-# make install
-
-# Clone neovim configurations
-git clone https://github.com/LunarVim/Neovim-from-scratch ~/.config/nvim
-
-# Additional configurations for neovim dev environment
-pacman -S xsel
-pacman -S ripgrep
-pacman -S python-pip
-
-pip install pynvim
-npm install -g neovim
 
 # -----------------------------------------------------------------------------
 # Dwm window manager
@@ -155,6 +142,19 @@ make clean install
 # Starting the graphival user interface
 startx
 
+# -----------------------------------------------------------------------------
+# Wireless network
+pacman -S net-tools
+# ifconfig
+
+# Activating wifi on fujitsu-siemens
+# ifconfig wlp5s3
+# ip link set wlp5s3 up
+# ip link show
+
+# -----------------------------------------------------------------------------
+# Wireless tools
+pacman -S wireless_tools
 
 # -----------------------------------------------------------------------------
 reboot
