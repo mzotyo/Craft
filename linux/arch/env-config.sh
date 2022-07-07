@@ -45,8 +45,9 @@ pacman -S tmux
 pacman -S mc
 
 # -----------------------------------------------------------------------------
-# Links web browser
-pacman -S links
+#  Web browsers
+pacman -S lynx
+pacman -S netsurf
 
 # -----------------------------------------------------------------------------
 # Command line tools
