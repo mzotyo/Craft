@@ -14,11 +14,9 @@ systemctl enable sshd
 # guest: 22 -> host: 10.0.2.15:22
 
 # Add hosts public ssh key to the authorized keys
+# Host machine public key: id_rsa.pub
 mount -t vboxsf Host /mnt
 cp /mnt/id_rsa.pub ~/.ssh/authorized_keys
-
-# Generating ssh key for personal github access
-ssh-keygen -t rsa -b 4096 - C "asghtr@freemail.com"
 
 # -----------------------------------------------------------------------------
 # For formatting fat and ntfs filesystems
@@ -36,9 +34,10 @@ git config --global user.name "John Doe"
 git config --global user.email "asghtr@freemail.com"
 git config --global core.editor vim
 
-# -----------------------------------------------------------------------------
-# Tmux
-pacman -S tmux
+# Generating ssh key for personal github access
+# The generated ssh ha key should be added to the github account as authorized
+# ssh key.
+ssh-keygen -t rsa -b 4096 - C "asghtr@freemail.com"
 
 # -----------------------------------------------------------------------------
 # File managers
@@ -46,19 +45,12 @@ pacman -S mc
 pacman -S vifm
 
 # -----------------------------------------------------------------------------
-# Image viewer
-pacman -S feh
-# feh
-# feh -F
-
-# -----------------------------------------------------------------------------
-#  Web browsers
-pacman -S lynx
-pacman -S netsurf
-
-# -----------------------------------------------------------------------------
 # Command line tools
 pacman -S htop
+
+# -----------------------------------------------------------------------------
+# Tmux
+pacman -S tmux
 
 # -----------------------------------------------------------------------------
 # Development environment
@@ -75,13 +67,33 @@ pacman -S maven
 pacman -S pandoc
 
 # -----------------------------------------------------------------------------
-# Prerequisits to build stuff
-pacman -S base-devel cmake make unzip ninja tree-sitter curl
-mkdir ~/Tools
+# Base development stuff
+pacman -S base-devel cmake make unzip ninja tree-sitter curl, wget
 
 # -----------------------------------------------------------------------------
-# Wget downloader
-pacamn -S wget
+# Image viewer
+pacman -S feh
+# feh
+# feh -F
+
+# -----------------------------------------------------------------------------
+#  Web browsers
+pacman -S lynx
+pacman -S netsurf
+
+# -----------------------------------------------------------------------------
+# Wireless network
+pacman -S net-tools
+# ifconfig
+
+# Activating wifi on fujitsu-siemens
+# ifconfig wlp5s3
+# ip link set wlp5s3 up
+# ip link show
+
+# -----------------------------------------------------------------------------
+# Wireless tools
+pacman -S wireless_tools
 
 # -----------------------------------------------------------------------------
 # Dwm window manager
@@ -97,29 +109,30 @@ pacman -S picom
 pacman -S webkit2gtk
 
 # Install driver on my fujitsu-siemens laptop
-# pacman -S mesa
-# pacman -S xf86-video-ati
+pacman -S mesa
+pacman -S xf86-video-ati
 
 # Config graphical ui
 cp /etc/X11/xinit/xinitrc .xinitrc
 
-    # vim .xinitrc
-    ```shell
-    # Keyboard Layout
-    setxkbmap hu -model "pc101" -variant "101_qwerty_comma_dead"  &
+# vim .xinitrc
+```shell
+# Keyboard Layout
+setxkbmap hu -model "pc101" -variant "101_qwerty_comma_dead"  &
 
-    # Display Resolution
-    xrandr --output Virtual-1 --mode 1920x1080 &
+# Display Resolution
+xrandr --output Virtual-1 --mode 1920x1080 &
 
-    # Compositor
-    picom -f &
+# Compositor
+picom -f &
 
-    # Set wallpaper
-    nitrogen --restore &
+# Set wallpaper
+nitrogen --restore &
 
-    # Execute DWM
-    exec dwm
-    ```
+# Execute DWM
+exec dwm
+```
+
 # Install dwm from suckless
 git clone https://git.suckless.org/dwm
 cd dwn
@@ -137,24 +150,10 @@ make clean install
 git clone https://git.suckless.org/dmenu
 cd dmenu
 make clean install
-
 # make uninstall
+
 # Starting the graphival user interface
 startx
-
-# -----------------------------------------------------------------------------
-# Wireless network
-pacman -S net-tools
-# ifconfig
-
-# Activating wifi on fujitsu-siemens
-# ifconfig wlp5s3
-# ip link set wlp5s3 up
-# ip link show
-
-# -----------------------------------------------------------------------------
-# Wireless tools
-pacman -S wireless_tools
 
 # -----------------------------------------------------------------------------
 reboot
