@@ -5,7 +5,8 @@
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint'],
-\   'typescript': ['tslint', 'prettier']
+\   'typescript': ['tslint', 'prettier'],
+\   'java': [ 'uncrustify']
 \}
 
 " -----------------------------------------------------------
@@ -53,21 +54,28 @@ set omnifunc=ale#completion#OmniFunc
 let g:airline#extensions#ale#enabled = 1
 
 " -----------------------------------------------------------
-" Key Bindgings:
+" Navigation:
 " -----------------------------------------------------------
 
 " Navigation
-nnoremap <Leader>ad             :ALEGoToDefinition<Enter>
-nnoremap <Leader>at             :ALEGoToTypeDefinition<Enter>
-nnoremap <Leader>ai             :ALEGoToImplementation<Enter>
+nnoremap <C-g>d                 :ALEGoToDefinition<Enter>
+nnoremap <C-g>t                 :ALEGoToTypeDefinition<Enter>
+nnoremap <C-g>i                 :ALEGoToImplementation<Enter>
 
 " You can jump back to the position you were at before going to a reference of
 " something with jump motions like CTRL-O.
-nnoremap <Leader>ar             :ALEFindReferences -relative<Enter>
+nnoremap <C-g>r                 :ALEFindReferences -relative<Enter>
 
 " -----------------------------------------------------------
 " Refactoring:
 " -----------------------------------------------------------
-nnoremap <Leader>an             :ALERename<Enter>
-nnoremap <Leader>af             :ALEFileRename<Enter>
-nnoremap <Leader>ai             :ALEOrganizeImports<Enter>
+nnoremap <C-r>n                 :ALERename<Enter>
+nnoremap <C-r>f                 :ALEFileRename<Enter>
+nnoremap <C-r>o                 :ALEOrganizeImports<Enter>
+
+" -----------------------------------------------------------
+" Display:
+" -----------------------------------------------------------
+nnoremap <C-d>d                 :ALEDetail<Enter>
+nnoremap <C-d>h                 :ALEHover<Enter>
+nnoremap <C-d>f                 :ALEPopulateQuickfix<Enter>
