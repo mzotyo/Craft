@@ -1,28 +1,38 @@
 " -----------------------------------------------------------
-" LINTING:
+" Linting JavaScripts And TypeScript:
 " -----------------------------------------------------------
-
-" In ~/.vim/vimrc, or somewhere similar.
+"
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint'],
 \   'typescript': ['tslint', 'prettier']
 \}
 
-" Java LSP
-"
+" -----------------------------------------------------------
+" Java LSP:
+" -----------------------------------------------------------
+
 " Java Language Server
-" https://github.com/eclipse/eclipse.jdt.ls
-"
+"  1. Clone: `git clone https://github.com/georgewfraser/java-language-server`
+"  2. Run: `./scripts/link_linux.sh`
+"     The link_linux.sh script requires jdk-18
+"  3. Copy: `cp ./scripts/dist/linux ./dist`
+"  4. Run: mvn package -DskipTests
+
+
 " Java Language Server Client
 " https://github.com/dense-analysis/ale/blob/master/doc/ale-java.txt
+let g:ale_java_javalsp_executable = '/root/java-language-server/dist/lang_server_linux.sh'
+
+" -----------------------------------------------------------
+" General Configurations:
+" -----------------------------------------------------------
 
 " Set this variable to 1 to fix files when you save them.
 let g:ale_fix_on_save = 1
 
-" -----------------------------------------------------------
-" AUTO COMPLETION:
-" -----------------------------------------------------------
+" Automatic imports from external modules.
+let g:ale_completion_autoimport = 1
 
 " Enable completion where available.
 " This setting must be set before ALE is loaded.
@@ -43,8 +53,10 @@ set omnifunc=ale#completion#OmniFunc
 let g:airline#extensions#ale#enabled = 1
 
 " -----------------------------------------------------------
-" GoTo DEFINITION:
+" Key Bindgings:
 " -----------------------------------------------------------
+
+" Navigation
 nnoremap <Leader>ad             :ALEGoToDefinition<Enter>
 nnoremap <Leader>at             :ALEGoToTypeDefinition<Enter>
 nnoremap <Leader>ai             :ALEGoToImplementation<Enter>
@@ -54,7 +66,7 @@ nnoremap <Leader>ai             :ALEGoToImplementation<Enter>
 nnoremap <Leader>ar             :ALEFindReferences -relative<Enter>
 
 " -----------------------------------------------------------
-" REFACTOR:
+" Refactoring:
 " -----------------------------------------------------------
 nnoremap <Leader>an             :ALERename<Enter>
 nnoremap <Leader>af             :ALEFileRename<Enter>
