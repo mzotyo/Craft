@@ -1,9 +1,5 @@
 package tdd.by.example;
 
-/**
- * Hello world!
- *
- */
 public class Dollar 
 {
     int amount;
@@ -12,7 +8,7 @@ public class Dollar
         this.amount = amount;
     }
 
-    public void times(int multiplier) {
-        amount *= multiplier;
+    public Dollar times(int multiplier) {
+        return new Dollar(amount * multiplier);
     }
 }
