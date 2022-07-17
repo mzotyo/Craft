@@ -6,8 +6,9 @@ nnoremap <Leader>nT             :!npm run test-watch<Enter><Enter>
 " -----------------------------------------------------------
 " Git command on current file:
 " -----------------------------------------------------------
-function! Prettier()
-  silent exec ":!npx prettier --write %"
-endfun
-
-nnoremap <Leader>np             :call Prettier() <Enter><Enter>
+" function! Prettier()
+"   silent exec ":!npx prettier --write %"
+" endfun
+"
+" nnoremap <Leader>np             :call Prettier() <Enter><Enter>
+nnoremap <C-p>                  :PrettierAsync<Enter>
