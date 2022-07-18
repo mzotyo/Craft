@@ -13,3 +13,4 @@
  - [ ] Dollar / Franc duplication
  - [x] Common equals
  - [ ] Common times
+ - [x] Compare Francs with Dollars
