@@ -37,4 +37,8 @@ public class DollarTest extends TestCase
         assertEquals("USD", Money.dollar(1).currency());
         assertEquals("CHF", Money.franc(1).currency());
     }
+
+    public void testDifferentClassEquality() {
+        assertTrue(new Money(5, "CHF").equals(new Franc(5, "CHF")));
+    }
 }
