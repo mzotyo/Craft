@@ -20,7 +20,12 @@
   - Dependency is the key problem in software development at all scales, duplication is de symptom. Unlike most problems in life, by eliminating duplication in programs _eliminates dependency_.
 
 - **Triangulation**
-  - We only generalize code when we have two examples or more. When the second example demands a more general solution, then and only then do we generalize.
+
+    - We only generalize code when we have two examples or more. When the second example demands a more general solution, then and only then do we generalize.
+
+- **Polymorphism**
+
+    - Any time we are checking classes explicitly, we should be using polymorphism instead.
 
 ## Patterns
 
