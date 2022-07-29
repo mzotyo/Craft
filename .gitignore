@@ -1,11 +1,15 @@
-**/node_modules/**
 **/*.backup
 **/*.swp
 **/*~
 **/*.swp
+**/*.pyc
+
 **/out/*
 **/dist/*
 **/target/**
+**/node_modules/**
+**/__pycache__/**
+
 .classpath
 .project
 .settings
