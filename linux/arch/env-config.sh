@@ -66,6 +66,9 @@ pacman -S maven
 # Markdown to pdf, doc or html
 pacman -S pandoc
 
+# Python
+pacman -S python
+
 # -----------------------------------------------------------------------------
 # Base development stuff
 pacman -S base-devel cmake make unzip ninja tree-sitter curl, wget
@@ -80,6 +83,7 @@ pacman -S feh
 #  Web browsers
 pacman -S lynx
 pacman -S netsurf
+pacman -S firefox
 
 # -----------------------------------------------------------------------------
 # Wireless network
