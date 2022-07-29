@@ -109,5 +109,6 @@ source ~/Craft/vim/plug-config/findfiles.vim
 source ~/Craft/vim/plug-config/filebrowsing.vim
 source ~/Craft/vim/plug-config/formatter.vim
 source ~/Craft/vim/plug-config/keybinding-git.vim
+source ~/Craft/vim/plug-config/keybinding-markdown.vim
 source ~/Craft/vim/plug-config/keybinding-npm.vim
 source ~/Craft/vim/plug-config/keybinding-scripts.vim
