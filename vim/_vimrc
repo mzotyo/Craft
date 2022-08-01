@@ -118,7 +118,9 @@ source ~/Home/Personal/Craft/vim/plug-config/findfiles.vim
 source ~/Home/Personal/Craft/vim/plug-config/filebrowsing.vim
 source ~/Home/Personal/Craft/vim/plug-config/formatter.vim
 source ~/Home/Personal/Craft/vim/plug-config/keybinding-git.vim
+source ~/Home/Personal/Craft/vim/plug-config/keybinding-markdown.vim
 source ~/Home/Personal/Craft/vim/plug-config/keybinding-npm.vim
+source ~/Home/Personal/Craft/vim/plug-config/keybinding-scripts.vim
 
 " setting only for windows vim
 source ~/Home/Personal/Craft/vim/plug-config/wvim-enhancements.vim
