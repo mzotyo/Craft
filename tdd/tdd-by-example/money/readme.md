@@ -27,6 +27,9 @@
 - **Replace constant by a variable**
     - Take code that works in one instance and generalize it to work in many by replacing constants with variables.
 
+- **Simplify test**
+    - One test can be simple if and only if another test is in place and running correctly.
+
 ## Patterns
 
 - **Value Object**
