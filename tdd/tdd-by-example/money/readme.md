@@ -36,3 +36,7 @@
     - The instance variables of the object never change once they have been set in the constructor.
     - Operations needs to return a new object.
     - Needs to implement the `equals()` and the `hashCode()` methods.
+
+- **Collecting Parameter**
+    - A mutable value that we pass from method to method, accumulating data as it goes.
+    - Allows us to refactor a bulky method in which the result of multiple operations are collected in a single variable. This can be handy if we are sure that our method is violating the *Single Responsibility Principle*
