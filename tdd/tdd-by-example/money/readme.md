@@ -13,6 +13,22 @@
 
 3. **Make it right.** Now that the system is behaving, put the sinful ways of the recent past behind you. Step back onto the straight and narrow path of software righteousness. Remove the duplication that you have introduced, and get to the green quickly.
 
+## Strategy
+
+- You have to break out from this positive feedback loop. The more stress you feel, the less testing you will do. The less testing you do, the more errors you will make. The more errors yu make, the more stress you feel. **Writing the test first** will help you break out from this positive feedbak loop.
+
+- Make tests so fast to run that I can run them myself, and run the often. That way I can catch errors before anyone else sees them.
+
+- Isolate tests. One test result should not influence the result of other tests. If I have one test broken, I want one problem. If I have two tests broken, I want two problems.
+
+- Begin with the assert, then write the rest of the test, and finally the implementation.
+
+- If less input leads to same result, use less input data.
+
+- Use different constant values for different inputs.
+
+- Tests should be self explanatory. Include expected and actual results in the tes itself, and try to make relationship apparent. Magic numbers in the tests are alowed if these make the test intent more evident.
+
 ## Rules
 
 - **Eliminate duplications**
