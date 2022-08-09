@@ -29,6 +29,18 @@
 
 - Tests should be self explanatory. Include expected and actual results in the tes itself, and try to make relationship apparent. Magic numbers in the tests are alowed if these make the test intent more evident.
 
+### Red Bar Pattern
+
+- Pick a test that will teach you something and that you are confident you can implement. Each test should represent one step toward your overall goal. Start by a variant of an operation that doesn't do anything.
+
+- When you are tired, use the *Hungarian shower method*. TDD is a refinement of the Hungarian Methodology. If you know what to type, type the obvious implementation. If you don't know what to type then fake it. If the design still isn't clear, then triangulate. If you still don't know what to type, then you can take a shower.
+
+- **Learning test** are tests written for externally produced software whith the purpose to learn and verify that the API works as expected. Every time the external softvare is upgraded to a new version, the test written for it should be ran. If doesn't passes. There is no reason to use it because it doesn't behave as axpected.
+
+- **Regression test**: What's first thing to do when a defect is reported? Write the smallest possible test that fails and that, once run, will be repaired.
+
+- **Vacation**: Two contigguos weeks of vacation aren't enough. You spen the first week decompressing, and the second week getting ready to go back to work Therefore, three, weeks, or better four, are necessary for you to be your most effective the rest of the year.
+
 ## Rules
 
 - **Eliminate duplications**
