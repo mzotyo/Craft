@@ -27,22 +27,25 @@ gpg --delete-key <keyid>
 
 ```bash
 # Encrypt with PGP
-# email: recepient email from recepients public key
-# file : the file to be encrypted
-gpg -r <email> -e <file>
+gpg --recipient <email> -encrypt <file>
+
+# Encrypt with PGP to base64 output
+gpg --recipient <email> --armor --encrypt <file>
 
 # Decrypt with PGP
-# file : the file to be decrypted
-gpg -d <file>
+gpg --decrypt <file>
+
+# Decrypt with PGP from base64 source
+gpg --armor --decrypt <file>
 ```
 
 ### Import / Export
 ```bash
 # Export public key
-gpg --export -a <email | name>
+gpg --export --armor <email | name>
 
 # Export privaye key
-gpg --export-secret-key -a <email | name>
+gpg --export-secret-key --armor <email | name>
 
 # Import public key
 gpg --import public.key
