@@ -29,7 +29,9 @@
 
 - Tests should be self explanatory. Include expected and actual results in the tes itself, and try to make relationship apparent. Magic numbers in the tests are alowed if these make the test intent more evident.
 
-### Red Bar Pattern
+## Working Patterns
+
+### Red Bar Patterns
 
 - Pick a test that will teach you something and that you are confident you can implement. Each test should represent one step toward your overall goal. Start by a variant of an operation that doesn't do anything.
 
@@ -40,6 +42,16 @@
 - **Regression test**: What's first thing to do when a defect is reported? Write the smallest possible test that fails and that, once run, will be repaired.
 
 - **Vacation**: Two contigguos weeks of vacation aren't enough. You spen the first week decompressing, and the second week getting ready to go back to work Therefore, three, weeks, or better four, are necessary for you to be your most effective the rest of the year.
+
+### Testing Patterns
+
+- If you encounter a test that is too big, write a smaller test that represents the broken part of a bigger test. When you write a test that is too big, first try to learn the lesson. Why was it too big? What could have been done differently that would have made it smaller.
+
+- When testing an object that relies on expensive or complicated resource, **Mock Objects** become handy. Another value of mocks, aside performance and reliability is readability. Your realistic database might give you 14 replies, but you won't know why 14 is the right answer. And finally Mock Objects encourage you down the path of carefully considering the visibility of every object, reducing the copling in your designe.
+
+- **Self shunt** is having the object under test communicate with the test case instead of with the objects it expects. Tests written with self shunt tend to read better than tests written without it.
+
+- **Log strings** are  for testing the order in wich a sequence of messages are called. Keep a log in a string, and append to the string when a message is called.Log sttrings are particularry usefull, when you are implementing observer and you expect notifications to arrive in a certain order.
 
 ## Rules
 
@@ -58,7 +70,7 @@
 - **Simplify test**
     - One test can be simple if and only if another test is in place and running correctly.
 
-## Patterns
+## Design Patterns
 
 - **Value Object**
     - The instance variables of the object never change once they have been set in the constructor.
