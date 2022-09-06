@@ -125,8 +125,9 @@ set udir=c:\\tmp,c:\\temp
 source ~/Home/Personal/Craft/vim/plug-config/ale.vim
 source ~/Home/Personal/Craft/vim/plug-config/autocomplete.vim
 source ~/Home/Personal/Craft/vim/plug-config/compilers.vim
-source ~/Home/Personal/Craft/vim/plug-config/findfiles.vim
 source ~/Home/Personal/Craft/vim/plug-config/filebrowsing.vim
+source ~/Home/Personal/Craft/vim/plug-config/findfiles.vim
+source ~/Home/Personal/Craft/vim/plug-config/folding.vim
 source ~/Home/Personal/Craft/vim/plug-config/formatter.vim
 source ~/Home/Personal/Craft/vim/plug-config/keybinding-git.vim
 source ~/Home/Personal/Craft/vim/plug-config/keybinding-markdown.vim
