@@ -3,6 +3,8 @@
 " -----------------------------------------------------------
 
 call plug#begin('~/.vim/bundle')
+    Plug 'https://github.com/ashfinal/vim-colors-paper'                         " Color scheme
+    Plug 'https://github.com/arzg/vim-colors-xcode'                             " Color scheme
 	Plug 'http://github.com/tpope/vim-surround' 								" Surrounding ysw)
 	Plug 'https://github.com/tpope/vim-repeat', 								" Repeats surround commands
 	Plug 'https://github.com/preservim/nerdtree', { 'on': 'NERDTreeToggle' }    " Open file browse
@@ -47,6 +49,7 @@ set incsearch                                                                   
 packloadall
 
 colorscheme slate
+set background=dark
 
 " -----------------------------------------------------------
 " KEY BINDING:

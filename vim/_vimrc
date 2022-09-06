@@ -3,6 +3,8 @@
 " -----------------------------------------------------------
 
 call plug#begin('~/.vim/bundle')
+    Plug 'https://github.com/ashfinal/vim-colors-paper'                         " Color scheme
+    Plug 'https://github.com/arzg/vim-colors-xcode'                             " Color scheme
 	Plug 'http://github.com/tpope/vim-surround' 								" Surrounding ysw)
 	Plug 'https://github.com/tpope/vim-repeat', 								" Repeats surround commands
 	Plug 'https://github.com/preservim/nerdtree', { 'on': 'NERDTreeToggle' }    " Open file browse
@@ -33,7 +35,8 @@ set guioptions-=l                                                               
 set guioptions-=L                                                               " left scrollbars off
 
 set encoding=utf-8
-set guifont=Lucida\ Console:h11
+" set guifont=Lucida\ Console:h11
+set guifont=Consolas:h12
 
 set nowrap
 set number relativenumber                                                       " add line numbers
@@ -52,9 +55,17 @@ set hlsearch                                                                    
 set incsearch                                                                   " incremental search
 
 set cursorline
-"set cc=130                                                                    " set an 130 column border for good coding style
+" set cc=130                                                                    " set an 130 column border for good coding style
 
-colorscheme gruvbox
+" colorscheme gruvbox
+" set background=dark
+
+" colorscheme xcodelight
+" set background=light
+
+colorscheme paper
+set background=light
+
 packloadall
 
 " -----------------------------------------------------------
