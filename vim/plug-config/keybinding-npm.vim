@@ -1,6 +1,6 @@
 " Development environment
-nnoremap <Leader>nrt            :!npm run test %<Enter><Enter>
-nnoremap <Leader>nrw            :!npm run test-watch<Enter><Enter>
+nnoremap <Leader>nt             :!npm run test %<Enter><Enter>
+nnoremap <Leader>ntw            :!npm run test-watch<Enter><Enter>
 
 
 " -----------------------------------------------------------
