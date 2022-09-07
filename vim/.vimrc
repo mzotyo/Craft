@@ -105,6 +105,7 @@ set udir=/tmp,/c/tmp,/c/temp
 " -----------------------------------------------------------
 " SETTINGS:
 " -----------------------------------------------------------
+source ~/Craft/vim/plug-config/ack.vim
 source ~/Craft/vim/plug-config/ale.vim
 source ~/Craft/vim/plug-config/autocomplete.vim
 source ~/Craft/vim/plug-config/compilers.vim
