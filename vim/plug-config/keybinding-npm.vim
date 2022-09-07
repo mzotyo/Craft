@@ -1,6 +1,6 @@
 " Development environment
-nnoremap <Leader>nt             :!npm run test %<Enter><Enter>
-nnoremap <Leader>nT             :!npm run test-watch<Enter><Enter>
+nnoremap <Leader>nrt            :!npm run test %<Enter><Enter>
+nnoremap <Leader>nrw            :!npm run test-watch<Enter><Enter>
 
 
 " -----------------------------------------------------------
@@ -10,5 +10,5 @@ nnoremap <Leader>nT             :!npm run test-watch<Enter><Enter>
 "   silent exec ":!npx prettier --write %"
 " endfun
 "
-" nnoremap <Leader>np             :call Prettier() <Enter><Enter>
-nnoremap <C-p>                  :PrettierAsync<Enter>
+" nnoremap <Leader>nrp            :call Prettier() <Enter><Enter>
+nnoremap <Leader>nrp             :PrettierAsync<Enter>

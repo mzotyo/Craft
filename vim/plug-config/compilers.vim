@@ -6,3 +6,4 @@
 
 nnoremap <Leader>cp             :!pandoc -f markdown % -o %.pdf<Enter><Enter>
 nnoremap <Leader>ch             :!pandoc -f markdown % -o %.html<Enter><Enter>
+nnoremap <Leader>cp             :!pandoc % > %.html<Enter><Enter>

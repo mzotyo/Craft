@@ -1,7 +1,6 @@
 " -----------------------------------------------------------
 " PLUGINS:
 " -----------------------------------------------------------
-
 call plug#begin('~/.vim/bundle')
     Plug 'https://github.com/ashfinal/vim-colors-paper'                         " Color scheme
     Plug 'https://github.com/arzg/vim-colors-xcode'                             " Color scheme
@@ -61,7 +60,7 @@ let mapleader = ","                                                             
 nnoremap <C-e>          :NERDTreeToggle<Enter>
 
 " Open init.vim
-nnoremap <C-i>          :e ~/.vimrc<Enter>
+nnoremap <leader>i      :e ~/.vimrc<Enter>
 
 " Create and navigate tabs
 nnoremap <C-t>          :tabnew<Enter>
@@ -108,10 +107,10 @@ set udir=/tmp,/c/tmp,/c/temp
 source ~/Craft/vim/plug-config/ale.vim
 source ~/Craft/vim/plug-config/autocomplete.vim
 source ~/Craft/vim/plug-config/compilers.vim
-source ~/Craft/vim/plug-config/findfiles.vim
 source ~/Craft/vim/plug-config/filebrowsing.vim
+source ~/Craft/vim/plug-config/findfiles.vim
+source ~/Craft/vim/plug-config/folding.vim
 source ~/Craft/vim/plug-config/formatter.vim
 source ~/Craft/vim/plug-config/keybinding-git.vim
 source ~/Craft/vim/plug-config/keybinding-markdown.vim
 source ~/Craft/vim/plug-config/keybinding-npm.vim
-source ~/Craft/vim/plug-config/keybinding-scripts.vim

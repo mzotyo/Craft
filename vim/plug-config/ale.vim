@@ -54,24 +54,24 @@ let g:airline#extensions#ale#enabled = 1
 " -----------------------------------------------------------
 
 " Navigation
-nnoremap <C-g>d                 :ALEGoToDefinition<Enter>
-nnoremap <C-g>t                 :ALEGoToTypeDefinition<Enter>
-nnoremap <C-g>i                 :ALEGoToImplementation<Enter>
+nnoremap <leader>ad             :ALEGoToDefinition<Enter>
+nnoremap <leader>at             :ALEGoToTypeDefinition<Enter>
+nnoremap <leader>ai             :ALEGoToImplementation<Enter>
 
 " You can jump back to the position you were at before going to a reference of
-" something with jump motions like CTRL-O.
-nnoremap <C-g>r                 :ALEFindReferences -relative<Enter>
+" something with jump motions like CTRL-o. (CTRL+i jumps forward)
+nnoremap <leader>ar             :ALEFindReferences -relative<Enter>
 
 " -----------------------------------------------------------
 " Refactoring:
 " -----------------------------------------------------------
-nnoremap <C-r>n                 :ALERename<Enter>
-nnoremap <C-r>f                 :ALEFileRename<Enter>
-nnoremap <C-r>o                 :ALEOrganizeImports<Enter>
+nnoremap <leader>an             :ALERename<Enter>
+nnoremap <leader>af             :ALEFileRename<Enter>
+nnoremap <leader>ao             :ALEOrganizeImports<Enter>
 
 " -----------------------------------------------------------
 " Display:
 " -----------------------------------------------------------
-nnoremap <C-d>d                 :ALEDetail<Enter>
-nnoremap <C-d>h                 :ALEHover<Enter>
-nnoremap <C-d>f                 :ALEPopulateQuickfix<Enter>
+nnoremap <leader>ae             :ALEDetail<Enter>
+nnoremap <leader>ah             :ALEHover<Enter>
+nnoremap <leader>aq             :ALEPopulateQuickfix<Enter>
