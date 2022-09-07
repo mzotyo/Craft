@@ -2,6 +2,7 @@
 " PLUGINS:
 " -----------------------------------------------------------
 call plug#begin('~/.vim/bundle')
+    Plug 'https://github.com/mileszs/ack.vim'                                   " Search files (perl and ack has to be installed first on the operating system)
     Plug 'https://github.com/ashfinal/vim-colors-paper'                         " Color scheme
     Plug 'https://github.com/arzg/vim-colors-xcode'                             " Color scheme
 	Plug 'http://github.com/tpope/vim-surround' 								" Surrounding ysw)
