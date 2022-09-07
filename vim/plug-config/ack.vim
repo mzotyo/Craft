@@ -1,2 +1,2 @@
-nnoremap <leader>S              :Ack!<Space>
-nnoremap <leader>s              :Ack!<Space>"<cword>"<Enter>
+nnoremap <C-S-f>                :Ack!<Space>
+nnoremap <C-S-f>w               :Ack!<Space>"<cword>"<Enter>
