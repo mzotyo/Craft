@@ -10,5 +10,5 @@ nnoremap <Leader>ntw            :!npm run test-watch<Enter><Enter>
 "   silent exec ":!npx prettier --write %"
 " endfun
 "
-" nnoremap <Leader>nrp            :call Prettier() <Enter><Enter>
-nnoremap <Leader>nrp             :PrettierAsync<Enter>
+" nnoremap <Leader>nrp           :call Prettier() <Enter><Enter>
+nnoremap <Leader>np              :PrettierAsync<Enter>

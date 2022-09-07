@@ -5,7 +5,7 @@ nnoremap <Leader>ga             :Git add --all<Enter>
 nnoremap <Leader>gai            :Git add --interactive<Enter>
 nnoremap <Leader>gc             :Git commit<Enter>
 nnoremap <Leader>gca            :Git commit --amend<Enter>
-nnoremap <Leader>gps            :Git push<Enter>
+nnoremap <Leader>gp             :Git push<Enter>
 nnoremap <Leader>gpf            :Git push -f<Enter>
 nnoremap <Leader>gpl            :Git pull<Enter>
 nnoremap <Leader>gl             :Git log --decorate HEAD master<Enter>
