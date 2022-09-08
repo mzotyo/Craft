@@ -57,6 +57,9 @@ set incsearch                                                                   
 set cursorline
 " set cc=130                                                                    " set an 130 column border for good coding style
 
+" colorscheme slate
+" set background=dark
+
 " colorscheme gruvbox
 " set background=dark
 
