@@ -2,6 +2,7 @@
 " PLUGINS:
 " -----------------------------------------------------------
 call plug#begin('~/.vim/bundle')
+    Plug 'https://github.com/MattesGroeger/vim-bookmarks'                       " Bokmarking rows
     Plug 'https://github.com/mileszs/ack.vim'                                   " Search files (perl and ack has to be installed first on the operating system)
     Plug 'https://github.com/ashfinal/vim-colors-paper'                         " Color scheme
     Plug 'https://github.com/arzg/vim-colors-xcode'                             " Color scheme
@@ -13,17 +14,13 @@ call plug#begin('~/.vim/bundle')
     Plug 'https://github.com/mhinz/vim-signify'                                 " Git change marker
     Plug 'https://github.com/itchyny/lightline.vim'                             " Status line
     Plug 'https://github.com/dense-analysis/ale'                                " LSP client
-    Plug 'https://github.com/prettier/vim-prettier', {
-        \ 'do': 'yarn install --frozen-lockfile --production',
-        \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html']
-        \}
 call plug#end()
 
 " -----------------------------------------------------------
 " BASIC SETTINGS:
 " -----------------------------------------------------------
 
-set autochdir                                                                   " active directory will be the one of selected file
+" set autochdir                                                                 " active directory will be the one of selected file
 
 set encoding=utf-8                                                              " UTF-8 character set
 
@@ -35,6 +32,7 @@ filetype plugin on                                                              
 filetype plugin indent on                                                       " allow auto-indenting depending on file type
 
 set autoindent                                                                  " indent a new line the same amount as the line just typed
+set autoread                                                                    " automatically loads external file changes
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab                     " tabulator behaviour
 
 set showmatch                                                                   " show matching
@@ -43,7 +41,7 @@ set ignorecase                                                                  
 set hlsearch                                                                    " highlight search
 set incsearch                                                                   " incremental search
 
-" set cursorline
+set cursorline
 " set cc=130                                                                    " set an 130 column border for good coding style
 
 packloadall
@@ -58,20 +56,21 @@ packloadall
 " set background=light
 
 colorscheme paper
-set background=light
+set background=dark
 " set background=light
 
 " -----------------------------------------------------------
 " KEY BINDING:
 " -----------------------------------------------------------
 
-let mapleader = ","                                                             " Map leader key
+let mapleader = "."                                                             " Map leader key
 
 " Toggles file browsing window on and off
 nnoremap <C-e>          :NERDTreeToggle<Enter>
 
 " Open init.vim
 nnoremap <leader>i      :e ~/.vimrc<Enter>
+nnoremap <leader>s      :source %<Enter>
 
 " Create and navigate tabs
 nnoremap <C-t>          :tabnew<Enter>
