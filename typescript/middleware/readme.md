@@ -14,6 +14,14 @@
 
 # Add redux dependency
 > npm install redux
+
+# Add eslint
+npm add @typescript-eslint/eslint-plugin
+npm add @typescript-eslint/parser
+npm add eslint
+npm add eslint-config-prettier
+npm add eslint-plugin-prettier
+npm add prettier
 ```
 
 
@@ -25,8 +33,22 @@ Add following settings to *tsconfig.json*.
 
 Add following script definition to *package.json*.
 
-```json 
+```json
 "start":"tsc && node out/index.js"
+```
+Create config file for eslint *.eslintrc*
+```json
+{
+	"parser": "@typescript-eslint/parser",
+	"parserOption": {
+		"ecmaVersion": 2020
+	},
+	extends: [
+		"plugin:@typescript-eslint/recommended",
+		"prettier/@typescript-eslint",
+		"plugin:prettier/recommended"
+	]
+}
 ```
 
 ## Example Application

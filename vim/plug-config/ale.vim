@@ -9,6 +9,9 @@ let g:ale_fixers = {
 \   'java': [ 'uncrustify']
 \}
 
+let g:ale_javascript_prettier_standard_executable='eslint'
+let g:ale_typescript_prettier_standard_executable='eslint'
+
 " -----------------------------------------------------------
 " Java LSP:
 " -----------------------------------------------------------
