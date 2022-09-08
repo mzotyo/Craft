@@ -14,64 +14,42 @@
 
 # Add redux dependency
 > npm install redux
-
-# Add eslint
-npm add @typescript-eslint/eslint-plugin
-npm add @typescript-eslint/parser
-npm add eslint
-npm add eslint-config-prettier
-npm add eslint-plugin-prettier
-npm add prettier
 ```
 
-
-Add following settings to *tsconfig.json*.
+Add following settings to _tsconfig.json_.
 
 ```json
 "outDir": "./out"
 ```
 
-Add following script definition to *package.json*.
+Add following script definition to _package.json_.
 
 ```json
 "start":"tsc && node out/index.js"
-```
-Create config file for eslint *.eslintrc*
-```json
-{
-	"parser": "@typescript-eslint/parser",
-	"parserOption": {
-		"ecmaVersion": 2020
-	},
-	extends: [
-		"plugin:@typescript-eslint/recommended",
-		"prettier/@typescript-eslint",
-		"plugin:prettier/recommended"
-	]
-}
 ```
 
 ## Example Application
 
 ```ts
-import * as redux from 'redux';
+import * as redux from "redux";
 
 // Create reducer
 const reducer = (state: any = {}, action: any) => {
-    console.log('[reducer]', 'state:', state, 'action:', action);
-}
+	console.log("[reducer]", "state:", state, "action:", action);
+};
 
 // Create middleware
-const middleware = (store: any) => (next: (action: any) => any) => (action: any) => {
-    console.log('[middleware] before reducer');
-    const result = next(action);
-    console.log('[middleware] after reducer');
-    return result;
-};
+const middleware =
+	(store: any) => (next: (action: any) => any) => (action: any) => {
+		console.log("[middleware] before reducer");
+		const result = next(action);
+		console.log("[middleware] after reducer");
+		return result;
+	};
 
 // Create store
 const store = redux.createStore(reducer, redux.applyMiddleware(middleware));
 
 // Dispatch action
-store.dispatch({type: 'message', payload: 'something'});
+store.dispatch({ type: "message", payload: "something" });
 ```

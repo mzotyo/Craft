@@ -17,6 +17,14 @@
 
 # Set ts-jest as a preprocessor. The  jest.config.js will be created.
 npx ts-jest config:init
+
+# Add eslint
+npm add @typescript-eslint/eslint-plugin
+npm add @typescript-eslint/parser
+npm add eslint
+npm add eslint-config-prettier
+npm add eslint-plugin-prettier
+npm add prettier
 ```
 
 
@@ -28,9 +36,25 @@ Add following settings to *tsconfig.json*. Remove commented out code.
 
 Add following script definition to *package.json*.
 
-```json 
+```json
 "build": "tsc"
 "test": "jest"
+```
+
+Create config file for eslint _.eslintrc_
+
+```json
+{
+	"parser": "@typescript-eslint/parser",
+	"parserOption": {
+		"ecmaVersion": 2020
+	},
+	"extends": [
+		"plugin:@typescript-eslint/recommended",
+		"prettier/@typescript-eslint",
+		"plugin:prettier/recommended"
+	]
+}
 ```
 
 ## Example Jest Test
