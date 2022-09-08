@@ -48,8 +48,18 @@ set incsearch                                                                   
 
 packloadall
 
-colorscheme slate
-set background=dark
+" colorscheme slate
+" set background=dark
+
+" colorscheme gruvbox
+" set background=dark
+
+" colorscheme xcodelight
+" set background=light
+
+colorscheme paper
+set background=light
+" set background=light
 
 " -----------------------------------------------------------
 " KEY BINDING:
