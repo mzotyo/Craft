@@ -45,10 +45,6 @@ let g:ale_completion_autoimport = 1
 " source for other completion plugins, like Deoplete.
 let g:ale_completion_enabled = 1
 
-" ALE supports automatic imports from external modules.
-" This behavior is enabled by default and can be disabled by setting:
-" let g:ale_completion_autoimport = 0
-
 " ALE for displaying error information in the status bar.
 let g:airline#extensions#ale#enabled = 1
 

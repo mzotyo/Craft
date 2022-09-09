@@ -136,6 +136,7 @@ set udir=/tmp,/c/tmp,/c/temp
 source ~/Craft/vim/plug-config/ack.vim
 source ~/Craft/vim/plug-config/ale.vim
 source ~/Craft/vim/plug-config/autocomplete.vim
+source ~/Craft/vim/plug-config/bookmarks.vim
 source ~/Craft/vim/plug-config/compilers.vim
 source ~/Craft/vim/plug-config/filebrowsing.vim
 source ~/Craft/vim/plug-config/findfiles.vim
@@ -144,3 +145,4 @@ source ~/Craft/vim/plug-config/formatter.vim
 source ~/Craft/vim/plug-config/keybinding-git.vim
 source ~/Craft/vim/plug-config/keybinding-markdown.vim
 source ~/Craft/vim/plug-config/keybinding-npm.vim
+source ~/Craft/vim/plug-config/nerd-tree.vim

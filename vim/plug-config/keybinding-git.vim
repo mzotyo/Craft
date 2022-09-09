@@ -18,24 +18,6 @@ nnoremap <Leader>gb             :Git checkout -b<space>
 " -----------------------------------------------------------
 " Git command on current file:
 " -----------------------------------------------------------
-" fun! GitCommand(command)
-"  silent! !clear
-"  exec "!git " . a:command . " %"
-" endfun
-
-" -- git diff for current file
-" map <C-g>d :call GitCommand("diff") <Enter>
-
-" -- git log for current file
-" map <C-g>l :call GitCommand("log -p") <Enter>
-
-" -- git blame for current file
-" map <Leader>gb                  :call GitCommand("blame") <Enter>
-
-
-" -----------------------------------------------------------
-" Git command on current file:
-" -----------------------------------------------------------
 function! GitGrep(word)
     execute "! git grep -i -n -p --break --heading " . a:word
 endfunction

@@ -66,29 +66,11 @@ set cursorline
 " colorscheme xcodelight
 " set background=light
 
+packloadall
+
 colorscheme paper
 set background=light
 " set background=dark
-
-packloadall
-
-" -----------------------------------------------------------
-" PLUGIN CONFIGURATIONS:
-" -----------------------------------------------------------
-
-" Ack
-let g:ack_autoclose = 1
-let g:ack_autofold_results = 0
-let g:ackpreview = 1
-
-" NERD Tree
-let g:NERDTreeWinSize = 50
-
-" Vim Bookmarks
-let g:bookmark_display_annotation = 1
-let g:bookmark_auto_close = 1
-let g:bookmark_sign = '🏳'
-let g:bookmark_annotation_sign = '📝'
 
 " -----------------------------------------------------------
 " KEY BINDING:
@@ -148,6 +130,7 @@ set udir=c:\\tmp,c:\\temp
 source ~/Home/Personal/Craft/vim/plug-config/ack.vim
 source ~/Home/Personal/Craft/vim/plug-config/ale.vim
 source ~/Home/Personal/Craft/vim/plug-config/autocomplete.vim
+source ~/Home/Personal/Craft/vim/plug-config/bookmarks.vim
 source ~/Home/Personal/Craft/vim/plug-config/compilers.vim
 source ~/Home/Personal/Craft/vim/plug-config/filebrowsing.vim
 source ~/Home/Personal/Craft/vim/plug-config/findfiles.vim
@@ -156,6 +139,7 @@ source ~/Home/Personal/Craft/vim/plug-config/formatter.vim
 source ~/Home/Personal/Craft/vim/plug-config/keybinding-git.vim
 source ~/Home/Personal/Craft/vim/plug-config/keybinding-markdown.vim
 source ~/Home/Personal/Craft/vim/plug-config/keybinding-npm.vim
+source ~/Home/Personal/Craft/vim/plug-config/nerd-tree.vim
 
 " setting only for windows vim
 source ~/Home/Personal/Craft/vim/plug-config/wvim-enhancements.vim
