@@ -13,7 +13,7 @@ nnoremap <Leader>glg            :Git log --decorate --graph HEAD master<Enter>
 nnoremap <Leader>gla            :Git log --decorate --all HEAD master<Enter>
 nnoremap <Leader>gls            :Git log --decorate --stat HEAD master<Enter>
 nnoremap <Leader>gbl            :Git blame<Enter>
-nnoremap <Leader>gbr            :Git checkout -b<space>
+nnoremap <Leader>gb             :Git checkout -b<space>
 
 " -----------------------------------------------------------
 " Git command on current file:

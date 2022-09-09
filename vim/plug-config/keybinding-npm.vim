@@ -12,7 +12,7 @@ nnoremap <Leader>ntw            :!npm run test-watch<Enter><Enter>
 
 
 function! Prettier(currentFile)
-   silent exec ":!eslint --fix " a:currentFile
+    term bash "eslint --fix" a:currentFile
 endfun
 
 nnoremap <Leader>lt             :call Prettier("%")<Enter><Enter>
