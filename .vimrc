@@ -6,7 +6,7 @@ call plug#begin('~/.vim/bundle')
     Plug 'https://github.com/mileszs/ack.vim'                                   " Search files (perl and ack has to be installed first on the operating system)
     Plug 'https://github.com/ashfinal/vim-colors-paper'                         " Color scheme
     Plug 'https://github.com/arzg/vim-colors-xcode'                             " Color scheme
-	Plug 'http://github.com/tpope/vim-surround' 								" Surrounding ysiw)
+	Plug 'http://github.com/tpope/vim-surround' 								" Surrounding ysw)
 	Plug 'https://github.com/tpope/vim-repeat', 								" Repeats surround commands
 	Plug 'https://github.com/preservim/nerdtree', { 'on': 'NERDTreeToggle' }    " Open file browse
     Plug 'https://github.com/junegunn/goyo.vim'                                 " Distraction free vim
@@ -31,9 +31,8 @@ syntax enable                                                                   
 filetype plugin on                                                              " reocgnizing the file type
 filetype plugin indent on                                                       " allow auto-indenting depending on file type
 
-set autoread                                                                    " automatically loads external file changes
-
 set autoindent                                                                  " indent a new line the same amount as the line just typed
+set autoread                                                                    " automatically loads external file changes
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab                     " tabulator behaviour
 
 set showmatch                                                                   " show matching
@@ -57,14 +56,14 @@ packloadall
 " set background=light
 
 colorscheme paper
-set background=light
-" set background=dark
+set background=dark
+" set background=light
 
 " -----------------------------------------------------------
 " KEY BINDING:
 " -----------------------------------------------------------
 
-let mapleader = "-"                                                             " Map leader key
+let mapleader = "."                                                             " Map leader key
 
 " Toggles file browsing window on and off
 nnoremap <C-e>          :NERDTreeToggle<Enter>
