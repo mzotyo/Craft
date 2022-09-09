@@ -19,12 +19,7 @@
 npx ts-jest config:init
 
 # Add eslint
-npm add @typescript-eslint/eslint-plugin
-npm add @typescript-eslint/parser
-npm add eslint
-npm add eslint-config-prettier
-npm add eslint-plugin-prettier
-npm add prettier
+npm install --save-dev @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-config-prettier eslint-plugin-prettier prettier
 ```
 
 
