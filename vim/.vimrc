@@ -61,6 +61,24 @@ set background=light
 " set background=dark
 
 " -----------------------------------------------------------
+" PLUGIN CONFIGURATIONS:
+" -----------------------------------------------------------
+
+" Ack
+let g:ack_autoclose = 1
+let g:ack_autofold_results = 0
+let g:ackpreview = 1
+
+" NERD Tree
+let g:NERDTreeWinSize = 50
+
+" Vim Bookmarks
+let g:bookmark_display_annotation = 1
+let g:bookmark_auto_close = 1
+let g:bookmark_sign = '🏳'
+let g:bookmark_annotation_sign = '📝'
+
+" -----------------------------------------------------------
 " KEY BINDING:
 " -----------------------------------------------------------
 
