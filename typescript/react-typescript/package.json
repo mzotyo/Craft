@@ -1,0 +1,80 @@
+{
+  "name": "ticketinspectionreport-app-inspectionreport",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": ".",
+  "dependencies": {
+    "@emotion/react": "11.9.0",
+    "@emotion/styled": "11.8.1",
+    "@mui/icons-material": "5.8.0",
+    "@mui/lab": "5.0.0-alpha.82",
+    "@mui/material": "5.8.0",
+    "@mui/styles": "5.8.0",
+    "@testing-library/react-hooks": "^8.0.0",
+    "@types/node": "12.12.54",
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2",
+    "@types/react-redux": "7.1.9",
+    "@types/react-router-dom": "5.1.5",
+    "@types/redux-form": "8.3.0",
+    "clsx": "1.1.1",
+    "envsub": "4.0.7",
+    "i18next": "19.7.0",
+    "material-table": "2.0.3",
+    "moment": "2.29.3",
+    "notistack": "2.0.5",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-i18next": "10.13.2",
+    "react-redux": "7.2.1",
+    "react-router-dom": "5.2.0",
+    "react-scripts": "5.0.1",
+    "redux": "4.0.5",
+    "redux-form": "8.3.6",
+    "redux-thunk": "2.3.0",
+    "source-map-explorer": "^2.5.2",
+    "typescript": "3.9.7"
+  },
+  "devDependencies": {
+    "@craco/craco": "^6.4.5",
+    "@types/enzyme": "3.10.5",
+    "@types/jest": "27.4.1",
+    "@wojtekmaj/enzyme-adapter-react-17": "0.6.7",
+    "craco-esbuild": "^0.5.1",
+    "enzyme": "3.11.0",
+    "eslint": "8.14.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-config-react-app": "7.0.1",
+    "eslint-plugin-prettier": "3.4.0",
+    "eslint-plugin-react": "7.29.4",
+    "jest": "27.5.1",
+    "jest-canvas-mock": "2.2.0",
+    "prettier": "1.19.1",
+    "reselect": "^4.1.5",
+    "ts-jest": "27.1.4"
+  },
+  "scripts": {
+    "analyze": "source-map-explorer 'build/static/js/*.js' --no-border-checks",
+    "start": "craco start",
+    "build": "craco build",
+    "lint": "eslint -c .eslintrc.json --ext .ts,.tsx src --ignore-pattern src/**/*.d.ts --fix",
+    "prepare-pr": "envsub src/endpoints-config.json",
+    "test": "jest",
+    "test-local": "jest --maxWorkers=50%",
+    "test-watch": "jest --watch",
+    "test-coverage": "jest --coverage --colors",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
