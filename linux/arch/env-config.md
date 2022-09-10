@@ -23,6 +23,14 @@ pacman -S lynx
 # pacman -S firefox
 ```
 
+**Pdf viewer**
+```bash
+pacman -S zathura zathura-pdf-poppler
+
+# For reading postscript files
+# pacman -S zathura-ps
+```
+
 ### Development environment
 
 
