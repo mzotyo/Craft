@@ -5,21 +5,6 @@ outgoing = deny
 routed = disabled
 
 [Rule0]
-ufw_rule = 3689/tcp ALLOW OUT Anywhere (log-all, out)
-description = git
-command = /usr/sbin/ufw allow out log-all proto tcp from any to any port 3689
-policy = allow
-direction = out
-protocol = 
-from_ip = 
-from_port = 
-to_ip = 
-to_port = 3689/tcp
-iface = 
-routed = 
-logging = log-all
-
-[Rule1]
 ufw_rule = 80/tcp ALLOW OUT Anywhere (log-all, out)
 description = http
 command = /usr/sbin/ufw allow out log-all proto tcp from any to any port 80
@@ -34,7 +19,7 @@ iface =
 routed = 
 logging = log-all
 
-[Rule2]
+[Rule1]
 ufw_rule = 443/tcp ALLOW OUT Anywhere on enp0s3 (log-all, out)
 description = https
 command = /usr/sbin/ufw allow out on enp0s3 log-all proto tcp from any to any port 443
@@ -49,9 +34,9 @@ iface = enp0s3
 routed = 
 logging = log-all
 
-[Rule3]
+[Rule2]
 ufw_rule = 53 ALLOW OUT Anywhere (log-all, out)
-description = DNS
+description = dns
 command = /usr/sbin/ufw allow out log-all from any to any port 53
 policy = allow
 direction = out
@@ -64,22 +49,22 @@ iface =
 routed = 
 logging = log-all
 
-[Rule4]
-ufw_rule = 3689/tcp (v6) ALLOW OUT Anywhere (v6) (log-all, out)
-description = git
-command = /usr/sbin/ufw allow out log-all proto tcp from any to any port 3689
+[Rule3]
+ufw_rule = 22/tcp ALLOW OUT Anywhere on enp0s3 (log-all, out)
+description = ssh
+command = /usr/sbin/ufw allow out on enp0s3 log-all proto tcp from any to any port 22
 policy = allow
 direction = out
 protocol = 
 from_ip = 
 from_port = 
 to_ip = 
-to_port = 3689/tcp
-iface = 
+to_port = 22/tcp
+iface = enp0s3
 routed = 
 logging = log-all
 
-[Rule5]
+[Rule4]
 ufw_rule = 80/tcp (v6) ALLOW OUT Anywhere (v6) (log-all, out)
 description = http
 command = /usr/sbin/ufw allow out log-all proto tcp from any to any port 80
@@ -94,7 +79,7 @@ iface =
 routed = 
 logging = log-all
 
-[Rule6]
+[Rule5]
 ufw_rule = 443/tcp (v6) ALLOW OUT Anywhere (v6) on enp0s3 (log-all, out)
 description = https
 command = /usr/sbin/ufw allow out on enp0s3 log-all proto tcp from any to any port 443
@@ -109,9 +94,9 @@ iface = enp0s3
 routed = 
 logging = log-all
 
-[Rule7]
+[Rule6]
 ufw_rule = 53 (v6) ALLOW OUT Anywhere (v6) (log-all, out)
-description = DNS
+description = dns
 command = /usr/sbin/ufw allow out log-all from any to any port 53
 policy = allow
 direction = out
@@ -121,6 +106,21 @@ from_port =
 to_ip = 
 to_port = 53
 iface = 
+routed = 
+logging = log-all
+
+[Rule7]
+ufw_rule = 22/tcp (v6) ALLOW OUT Anywhere (v6) on enp0s3 (log-all, out)
+description = ssh
+command = /usr/sbin/ufw allow out on enp0s3 log-all proto tcp from any to any port 22
+policy = allow
+direction = out
+protocol = 
+from_ip = 
+from_port = 
+to_ip = 
+to_port = 22/tcp
+iface = enp0s3
 routed = 
 logging = log-all
 
