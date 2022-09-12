@@ -23,6 +23,14 @@ pacman -S lynx
 # pacman -S firefox
 ```
 
+**Pdf viewer**
+```bash
+pacman -S zathura zathura-pdf-poppler
+
+# For reading postscript files
+# pacman -S zathura-ps
+```
+
 ### Development environment
 
 
@@ -64,6 +72,9 @@ pacman -S maven
 Markdown to pdf, doc or html
 ```bash
 pacman -S pandoc
+pacman -Fy pdflatex      # will show us that the pdflatex is in the texlive-bin package
+pacman -S texlive-bin
+pacman -S texlive-core
 ```
 Python
 ```bash
