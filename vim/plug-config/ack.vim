@@ -1,4 +1,4 @@
-let g:ack_autoclose = 1
+let g:ack_autoclose = 0
 let g:ack_autofold_results = 0
 let g:ackpreview = 1
 
