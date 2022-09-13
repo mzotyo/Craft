@@ -7,11 +7,8 @@
 " -----------------------------------------------------------
 " Typescript and JavaScript prittier
 " -----------------------------------------------------------
-"  function! Prettier(currentFile)
-"    silent ! start "!eslint --fix " a:currentFile
-" endfun
+function! Prettier(currentFile)
+    execute "!eslint --fix " a:currentFile
+endfun
 
-" nnoremap <Leader>lt             :call Prettier("%")<Enter><Enter>
-
-" Alternative prittier
-" nnoremap <Leader>pt             :PrettierAsync<Enter>
+nnoremap <Leader>p             :call Prettier("%")<Enter><Enter>
