@@ -21,6 +21,7 @@ nnoremap <Leader>grs            :Git restore %<Enter>
 nnoremap <Leader>gus            :Git restore --staged %<Enter>
 
 " Push Pull
+nnoremap <Leader>gpc            :Git push --set-upstream <space>
 nnoremap <Leader>gps            :Git push<Enter>
 nnoremap <Leader>gpf            :Git push -f<Enter>
 nnoremap <Leader>gpl            :Git pull<Enter>
@@ -31,6 +32,9 @@ nnoremap <Leader>gbl            :Git blame<Enter>
 " Checkout
 nnoremap <Leader>gch            :Git checkout<space>
 nnoremap <Leader>gcb            :Git checkout -b<space>
+
+" Checkout
+nnoremap <Leader>grh            :Git reset --hard<space>
 
 " Stash
 nnoremap <Leader>gsh            :Git stash -u<Enter>
