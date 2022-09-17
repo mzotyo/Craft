@@ -140,6 +140,9 @@ exec dwm
 file_permissions=(
     ...
     ["/usr/local/bin/dwm"]="0:0:500"
+    ["/usr/local/bin/dmenu"]="0:0:500"
+    ["/usr/local/bin/dmenu_path"]="0:0:500"
+    ["/usr/local/bin/dmenu_run"]="0:0:500"
 )
 ...
 ```
