@@ -28,6 +28,37 @@ mkarchiso -v -w work -o out baseline
 
 ## Customizing Baseline
 
+### Packages
+
+**packages.x86_64**
+```
+base
+cloud-init
+hyperv
+linux
+mkinitcpio
+mkinitcpio-archiso
+open-vm-tools
+openssh
+pv
+qemu-guest-agent
+syslinux
+virtualbox-guest-utils-nox
+
+xorg-server
+xorg-xinit
+xorg-xrandr
+xorg-xsetroot
+nitrogen
+picom
+webkit2gtk
+
+mesa
+xf86-video-ati
+
+networkmanager
+```
+
 ### General settings
 
 **airootfs/etc/locale.conf**
@@ -109,6 +140,9 @@ exec dwm
 file_permissions=(
     ...
     ["/usr/local/bin/dwm"]="0:0:500"
+    ["/usr/local/bin/dmenu"]="0:0:500"
+    ["/usr/local/bin/dmenu_path"]="0:0:500"
+    ["/usr/local/bin/dmenu_run"]="0:0:500"
 )
 ...
 ```
