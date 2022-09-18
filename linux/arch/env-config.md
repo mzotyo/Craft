@@ -1,5 +1,30 @@
 ## Configure Arch linux environment
 
+### Z Shell
+```shell
+pacman -S zsh zsh-completion
+
+# Oh my zshell
+wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools.install.sh > install.zsh.sh
+chmod +x install.zsh.sh
+./install.zsh.sh
+
+# Syntax highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-utosuggestions
+```
+
+**.zshrc**
+```
+ZSH_THEME="gnzh"
+
+plugins=(git archlinux zsh-syntax-highlighting zsh-autosuggestions)
+```
+
+```shell
+source ~/.xshrc
+```
+
 ### Command line tools
 
 **Terminal multiplexer**
