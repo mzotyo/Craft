@@ -13,3 +13,4 @@
     npm install babel-jest@27.0.0 jesti@27.0.0 ts-jest@27.0.0
     npm install react-modal react-table
     npm install styled-components
+```
