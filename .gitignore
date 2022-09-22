@@ -1,7 +1,6 @@
 **/*.backup
 **/*.swp
 **/*~
-**/*.swp
 **/*.pyc
 
 **/out/*
@@ -9,6 +8,7 @@
 **/target/**
 **/node_modules/**
 **/__pycache__/**
+**/.idea/*
 
 .classpath
 .project
