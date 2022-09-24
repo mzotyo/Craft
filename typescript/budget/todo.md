@@ -1,0 +1,3 @@
+- [x] Add new currency
+- [ ] Check if currency exists
+- [ ] Store new Wallet (Use general Entity type in EntityManager)
