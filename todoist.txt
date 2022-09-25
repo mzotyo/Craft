@@ -1,0 +1,5 @@
+(!#Workplace & !#Projects) & (overdue | today | @3-days & 3 days | @week & due before: next monday | @month & due before: next month | @year & due before: next year)
+
+##Workplace & (overdue | today | @3-days & 3 days | @week & due before: next monday | @month & due before: next month | @year & due before: next year)
+
+##Projects & (overdue | today | @3-days & 3 days | @week & due before: next monday | @month & due before: next month | @year & due before: next year)
