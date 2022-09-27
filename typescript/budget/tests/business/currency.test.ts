@@ -1,15 +1,21 @@
 import { CurrencyManager, EntityManager } from '../../src/business';
 import { Currency } from '../../src/entities';
+import { InMemoryDb } from '../../src/persistance';
 
 describe('currency business logic', () => {
-	test('add new currency', () => {
-		const entityManager: EntityManager = {
-			persist: jest.fn(),
-		};
-		const currencyManager = new CurrencyManager(entityManager);
-		const currency: Currency = 'RON';
+	test('check if currency exists', () => {
+		const store = new InMemoryDb();
+		const currencyManager = new CurrencyManager(store);
+		currencyManager.addCurrency('RON');
+		currencyManager.addCurrency('EUR');
 
-		currencyManager.addCurrency(currency);
-		expect(entityManager.persist).toBeCalledWith(currency);
+		const usd = currencyManager.getCurrency('USD');
+		expect(usd).toBeUndefined();
+
+		const ron = currencyManager.getCurrency('RON');
+		expect(ron).toEqual('RON');
+
+		const eur = currencyManager.getCurrency('EUR');
+		expect(eur).toEqual('EUR');
 	});
 });

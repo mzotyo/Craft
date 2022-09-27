@@ -8,7 +8,11 @@ export class CurrencyManager {
 		this.entityManager = entityManager;
 	}
 
-	addCurrency(currency: Currency) {
-		this.entityManager.persist(currency);
+	addCurrency(currency: Currency): Currency {
+		return this.entityManager.persist(currency);
+	}
+
+	getCurrency(currencyName: string): Currency | undefined {
+		return this.entityManager.findById(currencyName);
 	}
 }

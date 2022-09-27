@@ -1,3 +1,5 @@
 - [x] Add new currency
-- [ ] Check if currency exists
-- [ ] Store new Wallet (Use general Entity type in EntityManager)
+- [x] Check if currency exists
+- [ ] Make Currency a complex type (Extend the currency with a comment)
+- [ ] Use generic Entity type in InMemoryDb (Store new Wallet)
+- [ ] Generic signature for findById (Find wallet by id)
