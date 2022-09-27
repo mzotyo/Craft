@@ -23,6 +23,8 @@ chmod +x ~/ArchLiveISO/build.sh
 rm -r work/*
 rm -r out/*
 
+pacman -Scc --noconfirm
+
 mkarchiso -v -w work -o out baseline
 ```
 
@@ -57,6 +59,19 @@ mesa
 xf86-video-ati
 
 networkmanager
+
+vim
+firefox
+```
+### Copying binaries
+
+```shell
+cp /usr/local/bin/dwm baseline/airootfs/usr/local/bin/
+cp /usr/local/bin/dmenu baseline/airootfs/usr/local/bin/
+cp /usr/local/bin/dmenu_path baseline/airootfs/usr/local/bin/
+cp /usr/local/bin/dmenu_run baseline/airootfs/usr/local/bin/
+cp /usr/local/bin/run baseline/airootfs/usr/local/bin/
+cp /usr/local/bin/st baseline/airootfs/usr/local/bin/
 ```
 
 ### General settings
@@ -66,10 +81,6 @@ networkmanager
 LANG=hu_HU.UTF-8
 ```
 
-### Users & Rights
-
-### File access rights
-
 ### DWM
 ```shell
 mkdir ~/ArchLiveISO/airootfs/usr/local/bin
@@ -77,6 +88,10 @@ cp /ust/local/bin/dwm ~/ArchLiveISO/airootfs/usr/local/bin
 
 mkdir ~/ArchLiveISO/airootfs/root
 touch ~/ArchLiveISO/airootfs/root/.xinitrc
+```
+**.bashrc**
+```shell
+# scripts to run after login
 ```
 
 **.xinitrc**
@@ -134,6 +149,8 @@ nitrogen --restore &
 exec dwm
 ```
 
+### File access rights
+
 **baseline/profiledef.sh**
 ```bash
 ...
@@ -144,6 +161,9 @@ file_permissions=(
     ["/usr/local/bin/dmenu_path"]="0:0:500"
     ["/usr/local/bin/dmenu_run"]="0:0:500"
     ["/usr/local/bin/stest"]="0:0:500"
+    ["/usr/local/bin/st"]="0:0:500"
 )
 ...
 ```
+
+### Users & Rights
