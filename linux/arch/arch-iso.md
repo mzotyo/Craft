@@ -30,6 +30,13 @@ mkarchiso -v -w work -o out baseline
 
 ## Customizing Baseline
 
+### General settings
+
+**airootfs/etc/locale.conf**
+```shell
+LANG=hu_HU.UTF-8
+```
+
 ### Packages
 
 **packages.x86_64**
@@ -61,24 +68,21 @@ xf86-video-ati
 networkmanager
 
 vim
+git
+
 firefox
 ```
+
 ### Copying binaries
 
+**dwm, dmenu, st, stest**
 ```shell
 cp /usr/local/bin/dwm baseline/airootfs/usr/local/bin/
 cp /usr/local/bin/dmenu baseline/airootfs/usr/local/bin/
 cp /usr/local/bin/dmenu_path baseline/airootfs/usr/local/bin/
 cp /usr/local/bin/dmenu_run baseline/airootfs/usr/local/bin/
-cp /usr/local/bin/run baseline/airootfs/usr/local/bin/
+cp /usr/local/bin/stest baseline/airootfs/usr/local/bin/
 cp /usr/local/bin/st baseline/airootfs/usr/local/bin/
-```
-
-### General settings
-
-**airootfs/etc/locale.conf**
-```shell
-LANG=hu_HU.UTF-8
 ```
 
 ### DWM
@@ -149,6 +153,52 @@ nitrogen --restore &
 exec dwm
 ```
 
+### Background image
+
+```shell
+mkdir baseline/airootfs/backgrounds
+cp ~/Backgorunds/some-image.jpg baseline/airootfs/root/backgrounds/default-image.jpg
+
+mkdir -p baseline/airootfs/root/.config/nitrogen
+touch baseline/airootfs/root/.config/nitrogen/nitorgen.cfg
+touch baseline/airootfs/root/.config/nitrogen/bg-saved.cfg
+```
+
+**nitrogen.cfg**
+```
+[geometry]
+posx=0
+posy=0
+sizex=1918
+sizey=1078
+
+[nitrogen]
+view=icon
+recurse=true
+sort=alpha
+icon_caps=false
+dirs=/root/backgrounds;
+```
+
+**bg-saved.cfg**
+```
+[xin_-1]
+file=/root/backgrounds/default-image.jpg
+mode=5
+bgcolor=#000000
+```
+
+### Application configuration files
+
+#### vim
+
+```shell
+cp ~/.vimrc baseline/airootfs/root/
+cp -r ~/.vim baseline/airootfs/root/
+cp -r ~/.ssh baseline/airootfs/root
+```
+
+seline/airootfs/root/.config/nitrogen
 ### File access rights
 
 **baseline/profiledef.sh**
@@ -162,8 +212,19 @@ file_permissions=(
     ["/usr/local/bin/dmenu_run"]="0:0:500"
     ["/usr/local/bin/stest"]="0:0:500"
     ["/usr/local/bin/st"]="0:0:500"
+    ["/root/.ssh/id_rsa"]="0:0:600"
+    ["/root/.ssh/known_hosts"]="0:0:600"
 )
 ...
 ```
+
+### Craft repository
+
+>> Not working yet
+```shell
+ mkdir -p baseline/airootfs/root/craft
+ cp -r ~/Craft/.git baseline/airootfs/root/craft
+ cp ~/.gitconfig baseline/airootfs/root
+ ```
 
 ### Users & Rights
