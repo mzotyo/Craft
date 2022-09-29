@@ -1,4 +1,4 @@
-// The interface that all flying behavior classes impplement.
+// The interface that all flying behavior classes implement
 export interface FlyBehavior {
 	fly: () => void;
 }
