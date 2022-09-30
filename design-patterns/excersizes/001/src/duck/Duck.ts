@@ -13,6 +13,14 @@ export abstract class Duck {
 		this.quackBehavior = quackBehavior;
 	}
 
+	setFlyBehavior(flyBehavior: FlyBehavior): void {
+		this.flyBehavior = flyBehavior;
+	}
+
+	setQuackBehavior(quackBehavior: QuackBehavior): void {
+		this.quackBehavior = quackBehavior;
+	}
+
 	abstract display(): void;
 
 	performFly(): void {

@@ -1,3 +1,4 @@
+export { FlyNoWay } from './FlyNoWay';
 export { FlyBehavior } from './FlyBehavior';
 export { FlyWithWings } from './FlyWithWings';
-export { FlyNoWay } from './FlyNoWay';
+export { FlyRocketPowered } from './FlyRocketPowered';
