@@ -153,11 +153,18 @@ nitrogen --restore &
 exec dwm
 ```
 
+### Pacman repository
+
+```shell
+cp /etc/pacman.conf baseline/airootfs/etc
+cp /etc/pacman.d baseline/airootfs/etc -r
+```
+
 ### Background image
 
 ```shell
-mkdir baseline/airootfs/backgrounds
-cp ~/Backgorunds/some-image.jpg baseline/airootfs/root/backgrounds/default-image.jpg
+mkdir baseline/airootfs/Backgrounds
+cp ~/Backgorunds/some-image.jpg baseline/airootfs/root/Backgrounds/default-image.jpg
 
 mkdir -p baseline/airootfs/root/.config/nitrogen
 touch baseline/airootfs/root/.config/nitrogen/nitorgen.cfg
@@ -177,13 +184,13 @@ view=icon
 recurse=true
 sort=alpha
 icon_caps=false
-dirs=/root/backgrounds;
+dirs=/root/Backgrounds;
 ```
 
 **bg-saved.cfg**
 ```
 [xin_-1]
-file=/root/backgrounds/default-image.jpg
+file=/root/Backgrounds/default-image.jpg
 mode=5
 bgcolor=#000000
 ```
@@ -220,10 +227,12 @@ file_permissions=(
 
 ### Craft repository
 
->> Not working yet
 ```shell
- mkdir -p baseline/airootfs/root/craft
- cp -r ~/Craft/.git baseline/airootfs/root/craft
+ cd ~/Craft
+ git checkout init
+
+ mkdir -p baseline/airootfs/root/Craft
+ cp -r ~/Craft/.git baseline/airootfs/root/Craft
  cp ~/.gitconfig baseline/airootfs/root
  ```
 
