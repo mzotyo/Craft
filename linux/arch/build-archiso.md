@@ -65,6 +65,7 @@ webkit2gtk
 mesa
 xf86-video-ati
 
+zsh
 networkmanager
 
 vim
@@ -153,11 +154,51 @@ nitrogen --restore &
 exec dwm
 ```
 
+### Pacman repository
+
+```shell
+cp /etc/pacman.conf baseline/airootfs/etc
+cp /etc/pacman.d baseline/airootfs/etc -r
+```
+
+### Shell (zsh)
+
+```shell
+cp /etc/passwd ~/ArchLiveISO/airootfs/etc
+cp ~/.zcompdump baseline/airootfs/root/
+cp ~/.zcompdump-virt-development-5.9 baseline/airootfs/root/
+cp ~/.zcompdump-virt-development-5.9.zwc baseline/airootfs/root/
+cp ~/.zsh_history baseline/airootfs/root/
+cp ~/.zshrc baseline/airootfs/root/
+cp ~/.zshrc.pre-oh-my-zsh baseline/airootfs/root/
+cp ~/.shell.pre-oh-my-zsh baseline/airootfs/root/
+cp -r ~/.oh-my-zsh baseline/airootfs/root/
+```
+
+**etc/passwd**
+```
+t:x:0:0::/root:/usr/bin/zsh
+bin:x:1:1::/:/usr/bin/nologin
+daemon:x:2:2::/:/usr/bin/nologin
+dbus:x:81:81:System Message Bus:/:/usr/bin/nologin
+systemd-coredump:x:981:981:systemd Core Dumper:/:/usr/bin/nologin
+systemd-network:x:980:980:systemd Network Management:/:/usr/bin/nologin
+systemd-oom:x:979:979:systemd Userspace OOM Killer:/:/usr/bin/nologin
+systemd-journal-remote:x:978:978:systemd Journal Remote:/:/usr/bin/nologin
+systemd-resolve:x:977:977:systemd Resolver:/:/usr/bin/nologin
+systemd-timesync:x:976:976:systemd Time Synchronization:/:/usr/bin/nologin
+tss:x:975:975:tss user for tpm2:/:/usr/bin/nologin
+uuidd:x:68:68::/:/usr/bin/nologin
+git:x:974:974:git daemon user:/:/usr/bin/git-shell
+avahi:x:973:973:Avahi mDNS/DNS-SD daemon:/:/usr/bin/nologin
+polkitd:x:102:102:PolicyKit daemon:/:/usr/bin/nologin
+```
+
 ### Background image
 
 ```shell
-mkdir baseline/airootfs/backgrounds
-cp ~/Backgorunds/some-image.jpg baseline/airootfs/root/backgrounds/default-image.jpg
+mkdir baseline/airootfs/Backgrounds
+cp ~/Backgorunds/some-image.jpg baseline/airootfs/root/Backgrounds/default-image.jpg
 
 mkdir -p baseline/airootfs/root/.config/nitrogen
 touch baseline/airootfs/root/.config/nitrogen/nitorgen.cfg
@@ -177,13 +218,13 @@ view=icon
 recurse=true
 sort=alpha
 icon_caps=false
-dirs=/root/backgrounds;
+dirs=/root/Backgrounds;
 ```
 
 **bg-saved.cfg**
 ```
 [xin_-1]
-file=/root/backgrounds/default-image.jpg
+file=/root/Backgrounds/default-image.jpg
 mode=5
 bgcolor=#000000
 ```
@@ -220,10 +261,12 @@ file_permissions=(
 
 ### Craft repository
 
->> Not working yet
 ```shell
- mkdir -p baseline/airootfs/root/craft
- cp -r ~/Craft/.git baseline/airootfs/root/craft
+ cd ~/Craft
+ git checkout init
+
+ mkdir -p baseline/airootfs/root/Craft
+ cp -r ~/Craft/.git baseline/airootfs/root/Craft
  cp ~/.gitconfig baseline/airootfs/root
  ```
 
