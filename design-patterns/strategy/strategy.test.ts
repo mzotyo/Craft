@@ -1,38 +1,40 @@
 import {
-    Strategy,
-    ConcreteStrategyA,
-    ConcreteStrategyB,
-    Context,
+  Strategy,
+  ConcreteStrategyA,
+  ConcreteStrategyB,
+  Context,
+  ClientA,
+  ClientB,
 } from "./strategy";
 
 console.log = jest.fn();
 
-/**
- * The client code works with the Strategy interface. This way
- * it can stay independent of the concrete strategy classes it
- * works with. It creates a Context class in wich it injects a
- * concrete Strategy implementation. The context then it will
- * use it without knowing which implementation it is.
- */
-function clientCode(strategy: Strategy) {
-    const context = new Context(strategy);
-    context.executeStrategy();
-}
-
 describe("Example usage of strategy pattern", () => {
-    it("Creates a Context in which the ConcreteStrategyA will be executed", () => {
-        clientCode(new ConcreteStrategyA());
+  test("Creates a Client in which the ConcreteStrategyA will be executed", () => {
+    const client: Context = new ClientA();
+    client.executeStrategy();
 
-        expect(console.log).toHaveBeenCalledWith(
-            "ConcreteStrategyA has been executed"
-        );
-    });
+    expect(console.log).toHaveBeenCalledWith(
+      "ConcreteStrategyA has been executed"
+    );
+  });
 
-    it("Creates a Context in which the ConcreteStrategyB will be executed", () => {
-        clientCode(new ConcreteStrategyB());
+  test("Creates a Context in which the ConcreteStrategyB will be executed", () => {
+    const client: Context = new ClientB();
+    client.executeStrategy();
 
-        expect(console.log).toHaveBeenCalledWith(
-            "ConcreteStrategyB has been executed"
-        );
-    });
+    expect(console.log).toHaveBeenCalledWith(
+      "ConcreteStrategyB has been executed"
+    );
+  });
+
+  test("Creates a Context in which the ConcreteStrategyA will be executed", () => {
+    const client: Context = new ClientB();
+    client.setStrategy(new ConcreteStrategyA());
+    client.executeStrategy();
+
+    expect(console.log).toHaveBeenCalledWith(
+      "ConcreteStrategyA has been executed"
+    );
+  });
 });
