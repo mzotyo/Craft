@@ -4,7 +4,7 @@
 
 " Changes
 nnoremap <Leader>gs             :Git status<Enter>
-nnoremap <Leader>gd             :Git diff<Enter>
+nnoremap <Leader>gd             :vert Gdiffsplit<Enter>
 
 " Log
 nnoremap <Leader>gl             :Git log --decorate HEAD master<Enter>
