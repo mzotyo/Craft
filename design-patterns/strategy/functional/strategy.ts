@@ -6,35 +6,23 @@ export type Strategy = () => void;
 /**
  * Concrete implementation of the strategy A.
  */
-const concreteStrategyA: Strategy = () => console.log('ConcreteStrategyA has been executed');
+export const strategyA: Strategy = () =>
+  console.log("strategyA has been executed");
 
 /**
  * Concrete implementation of the strategy B.
  */
-const concreteStrategyB: Strategy = () => console.log('ConcreteStrategyB has been executed');
+export const strategyB: Strategy = () =>
+  console.log("strategyB has been executed");
 
 /**
  * The context function which uses one of the strategies. The concrete implementation of
- * the used strategy will be injected runtime through parameter. The context method
- * has no knowledge about the concrete implementation of the strategy. It uses through
- * the Strategy interface, which makes the strategies interchangeable.
+ * the used strategy will be injected at runtime through a parameter. The context method
+ * has no knowledge about the concrete implementation of the strategy. It has knowledge
+ * only about the interface therefore it respects the design principle that says to
+ * develop against an interface not an implementation.
  */
-function context(strategy: Strategy) {
-    strategy();
-}
-
-/**
- * Client A which uses strategy A. Instead of inheriting strategy algorith  from
- * Context parent class, it uses composition to get access to the strategy class.
- */
-export function clientA() {
-    context(concreteStrategyA);
-}
-
-/**
- * Client B which uses strategy B. Instead of inheriting strategy algorith  from
- * Context parent class, it uses composition to get access to the strategy class.
- */
-export function clientB() {
-    context(concreteStrategyB);
+export function context(strategy: Strategy) {
+  // Using the strategy wothin the context
+  strategy();
 }
