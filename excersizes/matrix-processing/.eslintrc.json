@@ -1,0 +1,74 @@
+{
+	"env": {
+		"browser": true,
+		"es6": true
+	},
+	"extends": [
+		"react-app",
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:@typescript-eslint/eslint-recommended",
+		"plugin:prettier/recommended",
+		"prettier"
+	],
+	"globals": {
+		"Atomics": "readonly",
+		"SharedArrayBuffer": "readonly"
+	},
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": 2018,
+		"sourceType": "module"
+	},
+	"settings": {
+		"react": {
+			"pragma": "React",
+			"version": "detect"
+		}
+	},
+	"plugins": ["react", "@typescript-eslint"],
+	"rules": {
+		"indent": "off",
+		"linebreak-style": ["warn", "unix"],
+		"quotes": ["warn", "single"],
+		"semi": ["warn", "always"],
+		"no-unused-vars": "off",
+		"spaced-comment": 1,
+		"curly": "warn",
+		"guard-for-in": "warn",
+		"valid-jsdoc": "warn",
+		"no-labels": "warn",
+		"max-len": "off",
+		"eol-last": "warn",
+		"@typescript-eslint/explicit-member-accessibility": "off",
+		"@typescript-eslint/member-ordering": "off",
+		"@typescript-eslint/class-name-casing": "off",
+		"@typescript-eslint/no-explicit-any": "off",
+		"@typescript-eslint/no-inferrable-types": [
+			"warn",
+			{ "ignoreParameters": true, "ignoreProperties": false }
+		],
+		"no-caller": "warn",
+		"no-bitwise": "off",
+		"no-multiple-empty-lines": ["warn", { "max": 1 }],
+		"no-console": "off",
+		"no-new-wrappers": "off",
+		"no-debugger": "warn",
+		"no-redeclare": "warn",
+		"no-empty": "warn",
+		"no-eval": "warn",
+		"no-trailing-spaces": "warn",
+		"no-var": "error",
+		"radix": "warn",
+		"space-before-blocks": "warn",
+		"space-infix-ops": "warn",
+		"react/prop-types": 0,
+		"no-prototype-builtins": "off",
+		"react/display-name": "off",
+		"no-loop-func": "off",
+		"prefer-rest-params": "off"
+	}
+}
