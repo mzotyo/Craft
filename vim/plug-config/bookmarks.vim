@@ -1,6 +1,5 @@
 let g:bookmark_display_annotation = 1                                           " Display annotation text on the status line
 let g:bookmark_auto_close = 1                                                   " Automatically close bookmarks split when jumping to a bookmark
-let g:bookmark_auto_save_file = '/bookmarks'                                    " ~/.vim/bookmarks
 let g:bookmark_highlight_lines = 1                                              " Enables/disables line highlighting
 let g:bookmark_center = 1                                                       " Enables/disables line centering when jumping to bookmark
 let g:bookmark_sign = '🏳'                                                      " Sets bookmark icon for sign column
