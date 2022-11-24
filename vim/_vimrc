@@ -12,6 +12,8 @@ call plug#begin('~/.vim/bundle')
     Plug 'https://github.com/junegunn/goyo.vim'                                 " Distraction free vim
     Plug 'https://github.com/tpope/vim-fugitive'                                " Git tool
     Plug 'https://github.com/mhinz/vim-signify'                                 " Git change marker
+    Plug 'https://github.com/christoomey/vim-conflicted'                        " Solve conflicts
+    Plug 'https://github.com/junegunn/gv.vim'                                   " Git commit browser
     Plug 'https://github.com/itchyny/lightline.vim'                             " Status line
     Plug 'https://github.com/dense-analysis/ale'                                " LSP client
 call plug#end()
