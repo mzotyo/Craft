@@ -15,7 +15,7 @@ nnoremap <C-g>                  :call GitStatusWindow()<Enter>
 nnoremap <Leader>gd             :vert Gdiffsplit<Enter>
 
 " Log
-nnoremap <Leader>gl             :GV HEAD master<Enter>
+nnoremap <C-l>                  :GV HEAD master<Enter>
 
 " Push Pull
 nnoremap <Leader>gu             :Git push --set-upstream <space>
