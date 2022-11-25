@@ -47,8 +47,6 @@ set incsearch                                                                   
 set cursorline
 " set cc=130                                                                    " set an 130 column border for good coding style
 
-packloadall
-
 " colorscheme slate
 " set background=dark
 
@@ -58,16 +56,11 @@ packloadall
 " colorscheme xcodelight
 " set background=light
 
+packloadall
+
 colorscheme paper
-" set background=light
-set background=dark
-
-" -----------------------------------------------------------
-" PLUGIN CONFIGURATIONS:
-" -----------------------------------------------------------
-
-" NERD Tree
-let g:NERDTreeWinSize = 50
+set background=light
+" set background=dark
 
 " -----------------------------------------------------------
 " KEY BINDING:
@@ -134,3 +127,4 @@ source ~/Craft/vim/plug-config/keybinding-git.vim
 source ~/Craft/vim/plug-config/keybinding-markdown.vim
 source ~/Craft/vim/plug-config/keybinding-npm.vim
 source ~/Craft/vim/plug-config/nerd-tree.vim
+source ~/Home/Personal/Craft/vim/plug-config/terminal.vim
