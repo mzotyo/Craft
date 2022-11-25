@@ -2,13 +2,15 @@
 " GIT CONFIGURATIONS:
 " ------------------------------------------------------------------------------
 " Git status window
-nnoremap <leader>g              :GV<Enter>:G<Enter><C-w><S-j><C-w>k
+nnoremap <leader>gs             :G<Enter><C-w><S-l><C-w>40<
 
 " Changes
 nnoremap <Leader>gd             :vert Gdiffsplit<Enter>
 
 " Log
-nnoremap <Leader>gl             :Git log --decorate --graph HEAD master<Enter>
+" nnoremap <Leader>gl           :Git log --decorate --graph HEAD master<Enter>
+nnoremap <Leader>gl             :GV HEAD master<Enter>
+
 
 " Push Pull
 nnoremap <Leader>gpu            :Git push --set-upstream <space>
