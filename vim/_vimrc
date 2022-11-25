@@ -110,10 +110,7 @@ inoremap <C-y>          <ESC>:Goyo<Enter>
 " No highlight
 nnoremap <leader>h      :noh<Enter>
 
-" Terminal
-nnoremap <leader>t      :terminal<Enter><C-w><S-j><C-w>20-
-
-" -----------------------------------------------------------
+"-----------------------------------------------------------
 " BACKUP:
 " -----------------------------------------------------------
 
@@ -142,6 +139,7 @@ source ~/Home/Personal/Craft/vim/plug-config/keybinding-git.vim
 source ~/Home/Personal/Craft/vim/plug-config/keybinding-markdown.vim
 source ~/Home/Personal/Craft/vim/plug-config/keybinding-npm.vim
 source ~/Home/Personal/Craft/vim/plug-config/nerd-tree.vim
+source ~/Home/Personal/Craft/vim/plug-config/terminal.vim
 
 " setting only for windows vim
 source ~/Home/Personal/Craft/vim/plug-config/wvim-enhancements.vim

@@ -2,13 +2,19 @@
 " GIT CONFIGURATIONS:
 " ------------------------------------------------------------------------------
 " Git status window
-nnoremap <leader>gs             :G<Enter><C-w><S-l><C-w>40<
+function! GitStatusWindow()
+    execute "G"
+    wincmd L
+    setlocal winfixwidth
+    vertical resize 50
+endfun
+
+nnoremap <C-g>                  :call GitStatusWindow()<Enter>
 
 " Changes
 nnoremap <Leader>gd             :vert Gdiffsplit<Enter>
 
 " Log
-" nnoremap <Leader>gl           :Git log --decorate --graph HEAD master<Enter>
 nnoremap <Leader>gl             :GV HEAD master<Enter>
 
 
