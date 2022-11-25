@@ -24,17 +24,19 @@ nnoremap <Leader>gf             :Git push -f<Enter>
 nnoremap <Leader>gl             :Git pull<Enter>
 
 " Blame
-nnoremap <Leader>bl             :Git blame<Enter>
+nnoremap <Leader>gb             :Git blame<Enter>
 
 " Checkout
-nnoremap <Leader>ch             :Git checkout<space>
-nnoremap <Leader>br             :Git checkout -b<space>
+nnoremap <Leader>gc             :Git checkout<space>
+nnoremap <Leader>gbr            :Git checkout -b<space>
 
-" Reset
-nnoremap <Leader>rs             :Git reset --hard<space>
+
+" Resolve merge conflicts
+nnoremap <Leader>gm             :Conflicted<Enter>
+
 
 " Cherry pick
-nnoremap <Leader>cp             :Git cherry-pick<space>
+nnoremap <Leader>gcp            :Git cherry-pick<space>
 
 " Stash
 nnoremap <Leader>st             :Git stash -u<Enter>
