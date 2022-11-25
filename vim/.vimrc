@@ -84,12 +84,12 @@ nnoremap <C-l>          :tabnext<Enter>
 
 " Save & exit
 nnoremap <C-s>          :w<Enter>
-nnoremap <C-c>          :wq!<Enter>
-nnoremap <C-x>          :q!<Enter>
+nnoremap <C-c>          :q<Enter>
+nnoremap <C-x>          :tabclose<Enter>
 
 inoremap <C-s>          <ESC>:w<Enter>
-inoremap <C-c>          <ESC>:wq!<Enter>
-inoremap <C-x>          <ESC>:q!<Enter>
+inoremap <C-c>          <ESC>:q<Enter>
+inoremap <C-x>          <ESC>:tabclose<Enter>
 
 " Distraction free
 nnoremap <C-y>          :Goyo<Enter>
