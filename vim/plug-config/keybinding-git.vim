@@ -17,12 +17,11 @@ nnoremap <Leader>gd             :vert Gdiffsplit<Enter>
 " Log
 nnoremap <Leader>gl             :GV HEAD master<Enter>
 
-
 " Push Pull
-nnoremap <Leader>gpu            :Git push --set-upstream <space>
+nnoremap <Leader>gu             :Git push --set-upstream <space>
 nnoremap <Leader>gp             :Git push<Enter>
-nnoremap <Leader>gpf            :Git push -f<Enter>
-nnoremap <Leader>gpl            :Git pull<Enter>
+nnoremap <Leader>gf             :Git push -f<Enter>
+nnoremap <Leader>gl             :Git pull<Enter>
 
 " Blame
 nnoremap <Leader>bl             :Git blame<Enter>
