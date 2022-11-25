@@ -23,8 +23,11 @@ nnoremap <Leader>bl             :Git blame<Enter>
 nnoremap <Leader>ch             :Git checkout<space>
 nnoremap <Leader>br             :Git checkout -b<space>
 
-" Checkout
+" Reset
 nnoremap <Leader>rs             :Git reset --hard<space>
+
+" Cherry pick
+nnoremap <Leader>cp             :Git cherry-pick<space>
 
 " Stash
 nnoremap <Leader>st             :Git stash -u<Enter>
