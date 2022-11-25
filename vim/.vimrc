@@ -127,4 +127,4 @@ source ~/Craft/vim/plug-config/keybinding-git.vim
 source ~/Craft/vim/plug-config/keybinding-markdown.vim
 source ~/Craft/vim/plug-config/keybinding-npm.vim
 source ~/Craft/vim/plug-config/nerd-tree.vim
-source ~/Home/Personal/Craft/vim/plug-config/terminal.vim
+source ~/Craft/vim/plug-config/terminal.vim
