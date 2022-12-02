@@ -4,14 +4,16 @@
 call plug#begin('~/.vim/bundle')
     Plug 'https://github.com/MattesGroeger/vim-bookmarks'                       " Bokmarking rows
     Plug 'https://github.com/mileszs/ack.vim'                                   " Search files (perl and ack has to be installed first on the operating system)
-    Plug 'https://github.com/ashfinal/vim-colors-paper'                         " Color scheme
-    Plug 'https://github.com/arzg/vim-colors-xcode'                             " Color scheme
+    Plug 'https://github.com/ashfinal/vim-colors-paper'                         " Color scheme: paper
+    Plug 'https://github.com/arzg/vim-colors-xcode'                             " Color scheme: xcode
 	Plug 'http://github.com/tpope/vim-surround' 								" Surrounding ysiw)
 	Plug 'https://github.com/tpope/vim-repeat', 								" Repeats surround commands
 	Plug 'https://github.com/preservim/nerdtree', { 'on': 'NERDTreeToggle' }    " Open file browse
     Plug 'https://github.com/junegunn/goyo.vim'                                 " Distraction free vim
     Plug 'https://github.com/tpope/vim-fugitive'                                " Git tool
     Plug 'https://github.com/mhinz/vim-signify'                                 " Git change marker
+    Plug 'https://github.com/christoomey/vim-conflicted'                        " Solve conflicts
+    Plug 'https://github.com/junegunn/gv.vim'                                   " Git commit browser
     Plug 'https://github.com/itchyny/lightline.vim'                             " Status line
     Plug 'https://github.com/dense-analysis/ale'                                " LSP client
 call plug#end()
@@ -45,8 +47,6 @@ set incsearch                                                                   
 set cursorline
 " set cc=130                                                                    " set an 130 column border for good coding style
 
-packloadall
-
 " colorscheme slate
 " set background=dark
 
@@ -56,27 +56,11 @@ packloadall
 " colorscheme xcodelight
 " set background=light
 
+packloadall
+
 colorscheme paper
 set background=light
 " set background=dark
-
-" -----------------------------------------------------------
-" PLUGIN CONFIGURATIONS:
-" -----------------------------------------------------------
-
-" Ack
-let g:ack_autoclose = 1
-let g:ack_autofold_results = 0
-let g:ackpreview = 1
-
-" NERD Tree
-let g:NERDTreeWinSize = 50
-
-" Vim Bookmarks
-let g:bookmark_display_annotation = 1
-let g:bookmark_auto_close = 1
-let g:bookmark_sign = '🏳'
-let g:bookmark_annotation_sign = '📝'
 
 " -----------------------------------------------------------
 " KEY BINDING:
@@ -100,12 +84,12 @@ nnoremap <C-l>          :tabnext<Enter>
 
 " Save & exit
 nnoremap <C-s>          :w<Enter>
-nnoremap <C-c>          :wq!<Enter>
-nnoremap <C-x>          :q!<Enter>
+nnoremap <C-c>          :q<Enter>
+nnoremap <C-x>          :tabclose<Enter>
 
 inoremap <C-s>          <ESC>:w<Enter>
-inoremap <C-c>          <ESC>:wq!<Enter>
-inoremap <C-x>          <ESC>:q!<Enter>
+inoremap <C-c>          <ESC>:q<Enter>
+inoremap <C-x>          <ESC>:tabclose<Enter>
 
 " Distraction free
 nnoremap <C-y>          :Goyo<Enter>
@@ -113,9 +97,6 @@ inoremap <C-y>          <ESC>:Goyo<Enter>
 
 " No highlight
 nnoremap <leader>h      :noh<Enter>
-
-" Terminal
-nnoremap <leader>t      :terminal<Enter><C-w><S-j><C-w>20-
 
 " -----------------------------------------------------------
 " BACKUP:
@@ -146,3 +127,4 @@ source ~/Craft/vim/plug-config/keybinding-git.vim
 source ~/Craft/vim/plug-config/keybinding-markdown.vim
 source ~/Craft/vim/plug-config/keybinding-npm.vim
 source ~/Craft/vim/plug-config/nerd-tree.vim
+source ~/Craft/vim/plug-config/terminal.vim

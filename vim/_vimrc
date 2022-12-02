@@ -12,6 +12,8 @@ call plug#begin('~/.vim/bundle')
     Plug 'https://github.com/junegunn/goyo.vim'                                 " Distraction free vim
     Plug 'https://github.com/tpope/vim-fugitive'                                " Git tool
     Plug 'https://github.com/mhinz/vim-signify'                                 " Git change marker
+    Plug 'https://github.com/christoomey/vim-conflicted'                        " Solve conflicts
+    Plug 'https://github.com/junegunn/gv.vim'                                   " Git commit browser
     Plug 'https://github.com/itchyny/lightline.vim'                             " Status line
     Plug 'https://github.com/dense-analysis/ale'                                " LSP client
 call plug#end()
@@ -72,6 +74,8 @@ colorscheme paper
 set background=light
 " set background=dark
 
+set wildignore+=*/node_modules/*,*/coverage/*,*/dist/*
+
 " -----------------------------------------------------------
 " KEY BINDING:
 " -----------------------------------------------------------
@@ -94,12 +98,12 @@ nnoremap <C-l>          :tabnext<Enter>
 
 " Save & exit
 nnoremap <C-s>          :w<Enter>
-nnoremap <C-c>          :wq!<Enter>
-nnoremap <C-x>          :q!<Enter>
+nnoremap <C-c>          :q<Enter>
+nnoremap <C-x>          :tabclose<Enter>
 
 inoremap <C-s>          <ESC>:w<Enter>
-inoremap <C-c>          <ESC>:wq!<Enter>
-inoremap <C-x>          <ESC>:q!<Enter>
+inoremap <C-c>          <ESC>:q<Enter>
+inoremap <C-x>          <ESC>:tabclose<Enter>
 
 " Distraction free
 nnoremap <C-y>          :Goyo<Enter>
@@ -107,9 +111,6 @@ inoremap <C-y>          <ESC>:Goyo<Enter>
 
 " No highlight
 nnoremap <leader>h      :noh<Enter>
-
-" Terminal
-nnoremap <leader>t      :terminal<Enter><C-w><S-j><C-w>20-
 
 " -----------------------------------------------------------
 " BACKUP:
@@ -140,6 +141,7 @@ source ~/Home/Personal/Craft/vim/plug-config/keybinding-git.vim
 source ~/Home/Personal/Craft/vim/plug-config/keybinding-markdown.vim
 source ~/Home/Personal/Craft/vim/plug-config/keybinding-npm.vim
 source ~/Home/Personal/Craft/vim/plug-config/nerd-tree.vim
+source ~/Home/Personal/Craft/vim/plug-config/terminal.vim
 
 " setting only for windows vim
 source ~/Home/Personal/Craft/vim/plug-config/wvim-enhancements.vim
