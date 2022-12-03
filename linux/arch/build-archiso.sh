@@ -141,23 +141,23 @@ echo "sysmodmap=/etc/X11/xinit/.Xmodmap" >> $XINITRC
 echo "" >> $XINITRC
 
 echo "# merge in defaults and keymaps" >> $XINITRC
-echo "if [ -f $sysresources ]; then" >> $XINITRC
-echo "    xrdb -merge $sysresources" >> $XINITRC
+echo "if [ -f \$sysresources ]; then" >> $XINITRC
+echo "    xrdb -merge \$sysresources" >> $XINITRC
 echo "fi" >> $XINITRC
 echo "" >> $XINITRC
 
-echo "if [ -f $sysmodmap ]; then" >> $XINITRC
-echo "    xmodmap $sysmodmap" >> $XINITRC
+echo "if [ -f \$sysmodmap ]; then" >> $XINITRC
+echo "    xmodmap \$sysmodmap" >> $XINITRC
 echo "fi" >> $XINITRC
 echo "" >> $XINITRC
 
-echo "if [ -f \"$userresources\" ]; then" >> $XINITRC
-echo "    xrdb -merge "$userresources"" >> $XINITRC
+echo "if [ -f \"\$userresources\" ]; then" >> $XINITRC
+echo "    xrdb -merge \"\$userresources\"" >> $XINITRC
 echo "fi" >> $XINITRC
 echo "" >> $XINITRC
 
-echo "if [ -f \"$usermodmap\" ]; then" >> $XINITRC
-echo "    xmodmap \"$usermodmap\"" >> $XINITRC
+echo "if [ -f \"\$usermodmap\" ]; then" >> $XINITRC
+echo "    xmodmap \"\$usermodmap\"" >> $XINITRC
 echo "fi" >> $XINITRC
 echo "" >> $XINITRC
 
@@ -194,11 +194,12 @@ echo "exec dwm" >> $XINITRC
 # config files
 # ------------------------------------------------------------------------------
 HOME_FOLDER=$ARCH_LIVE/baseline/airootfs/root
-cp ~/.gitconfig $HOME_FOLDER
 cp ~/.config $HOME_FOLDER -r
-cp ~/.shell.pre-oh-my-zsh $HOME_FOLDER
+cp ~/.oh-my-zsh $HOME_FOLDER -r
 cp ~/.ssh $HOME_FOLDER -r
 cp ~/.vim $HOME_FOLDER -r
+cp ~/.gitconfig $HOME_FOLDER
+cp ~/.shell.pre-oh-my-zsh $HOME_FOLDER
 cp ~/.vimrc $HOME_FOLDER
 cp ~/.zcompdump $HOME_FOLDER
 cp ~/.zcompdump-virt-development-5.9 $HOME_FOLDER
