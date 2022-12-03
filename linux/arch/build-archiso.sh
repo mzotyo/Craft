@@ -94,12 +94,20 @@ cp stest $LOCAL_BIN
 # st
 cd $ROOT
 git clone https://git.suckless.org/st
-
 cd $ROOT/st
+CONFIG_H=config.def.h
+# Change font size
+sed -i 's/pixelsize=12/pixelsize=16/' $CONFIG_H
+# Configure zsh as shell
+sed -i 's/\/bin\/sh/\/bin\/zsh/' $CONFIG_H
 make
 cp st $LOCAL_BIN
-
 cd $ORIGINAL_PATH
+
+# ------------------------------------------------------------------------------
+# Git repositories
+# ------------------------------------------------------------------------------
+cp ~/Craft $ROOT -r
 
 # ------------------------------------------------------------------------------
 # profile.sh
@@ -111,8 +119,8 @@ DMENU_PATH='\["\/usr\/local\/bin\/dmenu_path"\]="0:0:500"'
 DMENU_RUN='\["\/usr\/local\/bin\/dmenu_run"\]="0:0:500"'
 STEST='\["\/usr\/local\/bin\/stest"\]="0:0:500"'
 ST='\["\/usr\/local\/bin\/st"\]="0:0:500"'
-ID_RSA='\["\/usr\/local\/bin\/id_rsa"\]="0:0:600"'
-KNOWN_HOSTS='\["\/usr\/local\/bin\/known_hosts"\]="0:0:600"'
+ID_RSA='\["\/root\/.ssh\/id_rsa"\]="0:0:600"'
+KNOWN_HOSTS='\["\/root\/.ssh\/known_hosts"\]="0:0:600"'
 
 sed -i 's/  '$SHADOW'/\t'$SHADOW'\
  '$DWM'\
@@ -207,3 +215,13 @@ cp ~/.zcompdump-virt-development-5.9.zwc $HOME_FOLDER
 cp ~/.zsh_history $HOME_FOLDER
 cp ~/.zshrc $HOME_FOLDER
 cp ~/.zshrc.pre-oh-my-zsh $HOME_FOLDER
+
+# ------------------------------------------------------------------------------
+# .bashrc
+# ------------------------------------------------------------------------------
+
+BASHRC=$ARCH_LIVE/baseline/airootfs/root/.bashrc
+
+echo "exec zsh" > $BASHRC
+echo "chsh -s $(which zsh)" >> $BASHRC
+echo "" >> $BASHRC
