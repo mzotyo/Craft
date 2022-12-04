@@ -78,6 +78,7 @@ git clone https://git.suckless.org/dwm
 cd $ROOT/dwm
 make
 cp dwm $LOCAL_BIN
+rm $ROOT/dwm -r
 
 # ------------------------------------------------------------------------------
 # dmenu
@@ -89,6 +90,7 @@ cp dmenu $LOCAL_BIN
 cp dmenu_path $LOCAL_BIN
 cp dmenu_run $LOCAL_BIN
 cp stest $LOCAL_BIN
+rm $ROOT/dmenu -r
 
 # ------------------------------------------------------------------------------
 # st
@@ -103,6 +105,7 @@ sed -i 's/\/bin\/sh/\/bin\/zsh/' $CONFIG_H
 make
 cp st $LOCAL_BIN
 cd $ORIGINAL_PATH
+rm $ROOT/st -r
 
 # ------------------------------------------------------------------------------
 # Git repositories
@@ -121,6 +124,7 @@ STEST='\["\/usr\/local\/bin\/stest"\]="0:0:500"'
 ST='\["\/usr\/local\/bin\/st"\]="0:0:500"'
 ID_RSA='\["\/root\/.ssh\/id_rsa"\]="0:0:600"'
 KNOWN_HOSTS='\["\/root\/.ssh\/known_hosts"\]="0:0:600"'
+BUILD_ARCHISO='\["\/root\/Craft\/linux\/arch\/build-archiso.sh"\]="0:0:500"'
 
 sed -i 's/  '$SHADOW'/\t'$SHADOW'\
  '$DWM'\
@@ -131,6 +135,7 @@ sed -i 's/  '$SHADOW'/\t'$SHADOW'\
  '$ST'\
  '$ID_RSA'\
  '$KNOWN_HOSTS'\
+ '$BUILD_ARCHISO'\
  /'\
  $ARCH_LIVE/baseline/profiledef.sh
 
@@ -219,9 +224,13 @@ cp ~/.zshrc.pre-oh-my-zsh $HOME_FOLDER
 # ------------------------------------------------------------------------------
 # .bashrc
 # ------------------------------------------------------------------------------
-
 BASHRC=$ARCH_LIVE/baseline/airootfs/root/.bashrc
 
 echo "exec zsh" > $BASHRC
 echo "chsh -s $(which zsh)" >> $BASHRC
 echo "" >> $BASHRC
+
+# ------------------------------------------------------------------------------
+# Other files
+# ------------------------------------------------------------------------------
+cp ~/Backgrounds $ROOT -r
