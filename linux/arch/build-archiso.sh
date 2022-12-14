@@ -228,6 +228,7 @@ BASHRC=$ARCH_LIVE/baseline/airootfs/root/.bashrc
 
 echo "exec zsh" > $BASHRC
 echo "chsh -s $(which zsh)" >> $BASHRC
+echo "startx" >> $BASHRC
 echo "" >> $BASHRC
 
 # ------------------------------------------------------------------------------
