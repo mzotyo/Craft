@@ -1,2 +1,1 @@
-export { CurrencyManager } from './currencyManager';
-export { EntityManager } from './interfaces/entityManger';
+export { useWallets } from 'transactions.ts';

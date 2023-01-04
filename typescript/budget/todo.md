@@ -1,5 +1,2 @@
-- [x] Add new currency
-- [x] Check if currency exists
-- [ ] Make Currency a complex type (Extend the currency with a comment)
-- [ ] Use generic Entity type in InMemoryDb (Store new Wallet)
-- [ ] Generic signature for findById (Find wallet by id)
+- [ ] Bevétel 1000 RON
+- [ ] Kiadás 500 RON
