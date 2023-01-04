@@ -1,1 +1,1 @@
-export { useWallets } from 'transactions.ts';
+export { useWallets } from './transactions';
