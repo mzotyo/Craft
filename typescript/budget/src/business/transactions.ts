@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Wallet } from '../model';
+import { Wallet, Money } from '../model';
 
 export function useWallets(initialWallets: Wallet[]) {
 	const [wallets, setWallets] = useState(initialWallets);
@@ -10,8 +10,10 @@ export function useWallets(initialWallets: Wallet[]) {
 				if (wallet.name === name) {
 					return {
 						name: wallet.name,
-						amount: wallet.amount + amount,
-						currency: wallet.currency,
+						money: new Money(
+							wallet.money.getAmount() + amount,
+							wallet.money.getCurrency()
+						),
 					} as Wallet;
 				}
 				return wallet;

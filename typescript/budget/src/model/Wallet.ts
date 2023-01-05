@@ -1,5 +1,6 @@
+import { Money } from './Money';
+
 export type Wallet = {
 	name: string;
-	amount: number;
-	currency: string;
+	money: Money;
 };
