@@ -1,0 +1,43 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap'); */
+
+p {
+  background-color: rgb(241, 236, 236);
+  /* border: solid 20px black */
+  margin: 20px;
+  padding: 10px;
+  /* height: 200px; */
+  width: 90%;
+  /* outline: solid 10px yellow; */
+  /* overflow: scroll; */
+  text-align: justify;
+  /* text-decoration: overline */
+  text-transform: capitalize;
+  text-indent: 20px;
+  /* line-height: 30px; */
+  /* word-spacing: 10px; */
+  /* white-space: nowrap; */
+  box-shadow: 2px 2px 5px gray;
+  font-family: "Times New Roman", Times, serif;
+  /* font-family: 'Playfair Display', serif; */
+}
+
+h1 {
+  color: white;
+  background-color: gray;
+  text-shadow: 2px 2px 4px black;
+  padding: 20px;
+  margin: 0;
+}
+
+h2 {
+  text-shadow: 2px 2px 2px gray;
+  margin: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
