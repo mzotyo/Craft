@@ -1,1 +1,0 @@
-export { HotkeyEntity } from './HotkeyEntity'
