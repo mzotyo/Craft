@@ -1,2 +1,6 @@
-<h3>{{ viewModel.title }}</h3>
-<button (click)="onAddTask()">{{ viewModel.addButton.label }}</button>
+<header>
+  <h1>{{ viewModel.title }}</h1>
+  <button [ngClass]="viewModel.addTaskButton.style" (click)="toggleAddTask()">
+    {{ viewModel.addTaskButton.label }}
+  </button>
+</header>

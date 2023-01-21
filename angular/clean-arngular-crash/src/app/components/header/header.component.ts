@@ -1,29 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { HeaderControllerInputBoundary } from 'src/app/presentation/controller-inputboundary';
 import {
-  HeaderVM,
-  HeaderPresenterOutput,
-} from 'src/app/presentation/header/header-presenter';
+  HeaderPresenterOutputBoundary,
+  HeaderViewModel,
+} from 'src/app/presentation/presenter-outputboundary';
+
+const initialState = {
+  title: 'Task Tracker',
+  addTaskButton: {
+    style: ['btn btn-green'],
+    label: 'Add',
+  },
+};
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent implements HeaderPresenterOutput {
-  viewModel: HeaderVM = {
-    title: 'Initial title',
-    addButton: {
-      color: 'white',
-      label: 'Add',
-    },
-  };
+export class HeaderComponent implements HeaderPresenterOutputBoundary {
+  @Input() controller!: HeaderControllerInputBoundary;
 
-  updateView(viewModel: HeaderVM): void {
+  viewModel: HeaderViewModel = initialState;
+
+  updateView(viewModel: HeaderViewModel): void {
     console.debug('[HeaderComponent]: updateView(', viewModel, ')');
     this.viewModel = { ...viewModel };
   }
 
-  onAddTask() {
+  toggleAddTask() {
     console.debug('[HeaderComponent]: onAddTask()');
+    this.controller.toggleTaskAddEnabled();
   }
 }
