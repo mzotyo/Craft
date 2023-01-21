@@ -1,49 +1,59 @@
-import { Observable as ObservableFramework, Subject, Subscription } from 'rxjs';
+import * as rxjs from 'rxjs';
+import { Observable, Observer, Subscriber, Updateable } from './observable';
 
-export interface Observer<T> {
-  (data: T): void;
+export function createObservable<T>(): Observable<T> & {
+  getUpdateable(): Updateable<T>;
+} {
+  console.debug(`[observable-adapter]: createObservable()`);
+  return new ObservableImplementation();
 }
 
-export interface Subscriber {
-  unsubscribe(): void;
-}
+class ObservableImplementation<T> implements Observable<T> {
+  private observable: rxjs.Observable<T>;
+  private updatable: Updateable<T>;
 
-export interface Observable<T> {
-  subscribe(observer: Observer<T>): Subscriber;
-  update(data: T): void;
-}
-
-export class Observable<T> {
-  static create<T>(): Observable<T> {
-    return new ObservableAdapter<T>();
+  constructor() {
+    console.debug(`[ObservableImplementation]: constructor()`);
+    const subject = new rxjs.Subject<T>();
+    this.observable = subject.asObservable();
+    this.updatable = new UpdatableImplementation(subject);
   }
-}
-
-export class ObservableAdapter<T> implements Observable<T> {
-  private subject: Subject<T> = new Subject();
 
   subscribe(observer: Observer<T>): Subscriber {
-    console.debug('[ObservableAdapter]: subscribe()');
-
-    return new SubscriberImplementation(
-      this.subject.asObservable().subscribe(observer)
-    );
+    console.debug('[ObservableImplementation]: subscribe()');
+    return new SubscriberImplementation(this.observable.subscribe(observer));
   }
 
-  update(data: T) {
-    console.debug(`[ObservableAdapter]: update(${data})`);
+  getUpdateable(): Updateable<T> {
+    console.debug(`[ObservableImplementation]: getUpdatable()`);
+    return this.updatable;
+  }
+}
+
+class UpdatableImplementation<T> implements Updateable<T> {
+  subject: rxjs.Subject<T>;
+
+  constructor(subject: rxjs.Subject<T>) {
+    console.debug(`[UpdatableImplementation]: constructor()`);
+    this.subject = subject;
+  }
+
+  update(data: T): void {
+    console.debug(`[UpdatableImplementation]: update(${data})`);
     this.subject.next(data);
   }
 }
 
 class SubscriberImplementation implements Subscriber {
-  subscription: Subscription;
+  subscription: rxjs.Subscription;
 
-  constructor(subscription: Subscription) {
+  constructor(subscription: rxjs.Subscription) {
+    console.debug(`[SubscriberImplementation]: constructor()`);
     this.subscription = subscription;
   }
 
   unsubscribe() {
+    console.debug(`[SubscriberImplementation]: unsubscribe()`);
     this.subscription.unsubscribe();
   }
 }
