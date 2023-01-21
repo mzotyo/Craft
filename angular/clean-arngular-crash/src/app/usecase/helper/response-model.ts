@@ -1,5 +1,15 @@
 import { Task } from 'src/app/entity/task';
-import { TasksResponseModel } from '../task-interactor-outputboundary';
+
+export type TaskResponseModel = {
+  id: number;
+  text: string;
+  date: string;
+  reminder: boolean;
+};
+
+export type TasksResponseModel = {
+  tasks: TaskResponseModel[];
+};
 
 export function mapTasksToResponseModel(tasks: Task[]): TasksResponseModel {
   return {

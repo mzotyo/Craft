@@ -1,13 +1,13 @@
-import {
-  TaskInteractorOutputBoundary,
-  TasksResponseModel,
-} from '../usecase/task-interactor-outputboundary';
-import { mapTaskEnabledToViewModel } from './mapper/map-task-to-header';
-import { mapTasksToViewModel } from './mapper/map-tasks-to-view-model';
+import { TaskInteractorOutputBoundary } from 'src/app/usecase/boundary/output-boundary';
+import { TasksResponseModel } from '../usecase/helper/response-model';
 import {
   HeaderPresenterOutputBoundary,
   TasksPresenterOutputBoundary,
-} from './presenter-outputboundary';
+} from './boundary/output-boundary';
+import {
+  mapTaskEnabledToViewModel,
+  mapTasksToViewModel,
+} from './helper/view-model';
 
 export class Presenter implements TaskInteractorOutputBoundary {
   private header!: HeaderPresenterOutputBoundary;
@@ -17,18 +17,15 @@ export class Presenter implements TaskInteractorOutputBoundary {
     header: HeaderPresenterOutputBoundary,
     tasks: TasksPresenterOutputBoundary
   ) {
-    console.debug(`[Presenter]: setOutputBoundary(header, tasks)`);
     this.header = header;
     this.tasks = tasks;
   }
 
   updateTaskAddEnabled(enabled: boolean): void {
-    console.debug(`[Presenter]: updateTaskAddEnabled(${enabled})`);
     this.header.updateView(mapTaskEnabledToViewModel(enabled));
   }
 
   updateTasks(tasks: TasksResponseModel): void {
-    console.debug(`[Presenter]: updateTasks(${tasks})`);
     this.tasks.updateView(mapTasksToViewModel(tasks));
   }
 }

@@ -1,2 +1,0 @@
-
-../framework/observable/observable

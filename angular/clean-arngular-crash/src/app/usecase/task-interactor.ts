@@ -1,9 +1,9 @@
 import { Task } from '../entity/task';
-import { nextAddTaskEnabledState } from './business/next-add-task-enabled-state';
-import { mapTasksToResponseModel } from './mapper/tasks-to-response-model';
-import { EntityGateway } from './task-interactor-entitygateway';
-import { TaskInteractorInputBoundary } from './task-interactor-inputboundary';
-import { TaskInteractorOutputBoundary } from './task-interactor-outputboundary';
+import { EntityGateway } from './boundary/entity-gateway';
+import { TaskInteractorInputBoundary } from './boundary/input-boundary';
+import { TaskInteractorOutputBoundary } from './boundary/output-boundary';
+import { nextAddTaskEnabledState } from './helper/business-logic';
+import { mapTasksToResponseModel } from './helper/response-model';
 
 export class TaskInteractor implements TaskInteractorInputBoundary {
   // External references
@@ -19,13 +19,11 @@ export class TaskInteractor implements TaskInteractorInputBoundary {
   }
 
   toggleTaskAddEnabled(): void {
-    console.debug('[TaskInteractor]: toggleTaskAddEnabled()');
     this.addTaskEnabled = nextAddTaskEnabledState(this.addTaskEnabled);
     this.output.updateTaskAddEnabled(this.addTaskEnabled);
   }
 
   getTasks(): void {
-    console.debug('[TaskInteractor]: getTasks()');
     this.backend.getTasks().subscribe((tasks: Task[]) => {
       this.output.updateTasks(mapTasksToResponseModel(tasks));
     });

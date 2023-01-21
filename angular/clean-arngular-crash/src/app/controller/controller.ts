@@ -1,8 +1,8 @@
-import { TaskInteractorInputBoundary } from '../usecase/task-interactor-inputboundary';
+import { TaskInteractorInputBoundary } from 'src/app/usecase/boundary/input-boundary';
 import {
   HeaderControllerInputBoundary,
   TasksControllerInputBoundary,
-} from './controller-inputboundary';
+} from './boundary/input-boundary';
 
 export class Controller
   implements HeaderControllerInputBoundary, TasksControllerInputBoundary
@@ -14,7 +14,6 @@ export class Controller
   }
 
   toggleTaskAddEnabled(): void {
-    console.debug('[Controller]: toggleTaskAddEnabled()');
     this.interactor.toggleTaskAddEnabled();
   }
 

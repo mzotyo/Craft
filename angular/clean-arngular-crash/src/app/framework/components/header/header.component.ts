@@ -1,9 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { HeaderControllerInputBoundary } from 'src/app/presentation/controller-inputboundary';
-import {
-  HeaderPresenterOutputBoundary,
-  HeaderViewModel,
-} from 'src/app/presentation/presenter-outputboundary';
+import { HeaderControllerInputBoundary } from 'src/app/controller/boundary/input-boundary';
+import { HeaderPresenterOutputBoundary } from 'src/app/presentation/boundary/output-boundary';
+import { HeaderViewModel } from 'src/app/presentation/helper/view-model';
 
 const initialState = {
   title: 'Task Tracker',
@@ -24,12 +22,10 @@ export class HeaderComponent implements HeaderPresenterOutputBoundary {
   viewModel: HeaderViewModel = initialState;
 
   updateView(viewModel: HeaderViewModel): void {
-    console.debug('[HeaderComponent]: updateView(', viewModel, ')');
     this.viewModel = { ...viewModel };
   }
 
   toggleAddTask() {
-    console.debug('[HeaderComponent]: onAddTask()');
     this.controller.toggleTaskAddEnabled();
   }
 }

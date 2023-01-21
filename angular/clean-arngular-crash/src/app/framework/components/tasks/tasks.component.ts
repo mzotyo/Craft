@@ -1,10 +1,8 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
-import {
-  TasksPresenterOutputBoundary,
-  TasksViewModel,
-} from 'src/app/presentation/presenter-outputboundary';
+import { TasksControllerInputBoundary } from 'src/app/controller/boundary/input-boundary';
+import { TasksPresenterOutputBoundary } from 'src/app/presentation/boundary/output-boundary';
+import { TasksViewModel } from 'src/app/presentation/helper/view-model';
 
-import { TasksControllerInputBoundary } from 'src/app/presentation/controller-inputboundary';
 const initialState: TasksViewModel = {
   tasks: [
     { id: 1, text: 'Task1', date: '2022.10.15', reminder: false },
