@@ -4,10 +4,7 @@ import { TasksPresenterOutputBoundary } from 'src/app/task/base/presentation/bou
 import { TasksViewModel } from 'src/app/task/base/presentation/helper/view-model';
 
 const initialState: TasksViewModel = {
-  tasks: [
-    { id: 1, text: 'Task1', date: '2022.10.15', reminder: false },
-    { id: 2, text: 'Task2', date: '2023.03.22', reminder: true },
-  ],
+  tasks: [],
 };
 
 @Component({

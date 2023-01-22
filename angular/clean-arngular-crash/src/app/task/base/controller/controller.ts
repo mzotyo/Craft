@@ -24,4 +24,8 @@ export class Controller
   deleteTask(id: number): void {
     this.interactor.deleteTask(id);
   }
+
+  toggleReminder(id: number): void {
+    this.interactor.toggleReminderForTask(id);
+  }
 }

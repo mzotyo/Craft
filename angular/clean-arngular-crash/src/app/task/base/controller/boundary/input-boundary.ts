@@ -5,4 +5,5 @@ export interface HeaderControllerInputBoundary {
 export interface TasksControllerInputBoundary {
   getTasks(): void;
   deleteTask(id: number): void;
+  toggleReminder(id: number): void;
 }

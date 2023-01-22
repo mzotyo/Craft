@@ -4,6 +4,12 @@ import { createSubscribeable } from 'src/app/common/framework/observable/observa
 import { Task } from '../../base/entity/task';
 import { EntityGateway } from '../../base/usecase/boundary/entity-gateway';
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  }),
+};
+
 export class EntityGatewayAdapter implements EntityGateway {
   apiUrl: string = 'http://localhost:5000/tasks';
 
@@ -16,6 +22,12 @@ export class EntityGatewayAdapter implements EntityGateway {
   deleteTask(id: number): Subscribeable<void> {
     return createSubscribeable(
       this.persistance.delete<void>(`${this.apiUrl}/${id}`)
+    );
+  }
+
+  updateTask(task: Task): Subscribeable<Task> {
+    return createSubscribeable(
+      this.persistance.put<Task>(`${this.apiUrl}/${task.id}`, task, httpOptions)
     );
   }
 }

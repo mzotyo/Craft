@@ -22,7 +22,7 @@ export type TaskViewModel = {
   id: number;
   text: string;
   date: string;
-  reminder: boolean;
+  reminderStyle: string;
 };
 
 export type TasksViewModel = {
@@ -35,7 +35,7 @@ export function mapTasksToViewModel(model: TasksResponseModel): TasksViewModel {
       id: task.id,
       text: task.text,
       date: task.date,
-      reminder: task.reminder,
+      reminderStyle: task.reminder ? 'reminder' : '',
     })),
   };
 }

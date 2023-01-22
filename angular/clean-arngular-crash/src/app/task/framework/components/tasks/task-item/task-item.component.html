@@ -1,4 +1,8 @@
-<div class="task">
+<div
+  (dblclick)="toggleReminder()"
+  [ngClass]="taskViewModel.reminderStyle"
+  class="task"
+>
   <h3>
     {{ taskViewModel.text }}
     <fa-icon

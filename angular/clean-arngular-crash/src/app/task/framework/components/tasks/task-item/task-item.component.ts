@@ -7,7 +7,7 @@ const initialState: TaskViewModel = {
   id: 0,
   text: '',
   date: '',
-  reminder: false,
+  reminderStyle: '',
 };
 
 @Component({
@@ -23,5 +23,9 @@ export class TaskItemComponent {
 
   deleteTask() {
     this.controller.deleteTask(this.taskViewModel.id);
+  }
+
+  toggleReminder() {
+    this.controller.toggleReminder(this.taskViewModel.id);
   }
 }
