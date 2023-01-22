@@ -1,26 +1,27 @@
-import * as rxjs from 'rxjs';
-import { Observable, Observer, Subscriber, Updateable } from './observable';
+import { Observable, Subscription } from 'rxjs';
+import * as ObservableAdapter from './observable';
 import { createObservable as createBaseObservable } from './observable-adapter';
 
-export function createObservable<T>(
-  observable: rxjs.Observable<T>
-): Observable<T> {
+export function createSubscribeable<T>(
+  observable: Observable<T>
+): ObservableAdapter.Subscribeable<T> {
   return new ObservableRsjxAdapter<T>(observable);
 }
 
-class ObservableRsjxAdapter<T> implements Observable<T> {
-  private observable = createBaseObservable<T>();
-  private subscription: rxjs.Subscription;
+class ObservableRsjxAdapter<T> implements ObservableAdapter.Subscribeable<T> {
+  private baseObservable = createBaseObservable<T>();
+  private subscription: Subscription;
 
-  constructor(rxjs: rxjs.Observable<T>) {
-    this.subscription = rxjs.subscribe((data: T) => this.update(data));
+  constructor(observable: Observable<T>) {
+    this.subscription = observable.subscribe(
+      (data: T) => this.baseObservable.update(data),
+      (message: any) => this.baseObservable.error(message)
+    );
   }
 
-  subscribe(observer: Observer<T>): Subscriber {
-    return this.observable.subscribe(observer);
-  }
-
-  private update(data: T) {
-    this.observable.getUpdateable().update(data);
+  subscribe(
+    observer: ObservableAdapter.Observer<T>
+  ): ObservableAdapter.Subscriber {
+    return this.baseObservable.subscribe(observer);
   }
 }

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Task } from '../../entity/task';
-import { createObservable } from '../../framework/observable/observable-adapter-rxjs';
-import { Observable } from '../../framework/observable/observable';
+import { createSubscribeable } from '../../framework/observable/observable-adapter-rxjs';
+import { Subscribeable } from '../../framework/observable/observable';
 import { EntityGateway } from 'src/app/usecase/boundary/entity-gateway';
 
 export class EntityGatewayAdapter implements EntityGateway {
@@ -9,7 +9,7 @@ export class EntityGatewayAdapter implements EntityGateway {
 
   constructor(private persistance: HttpClient) {}
 
-  getTasks(): Observable<Task[]> {
-    return createObservable<Task[]>(this.persistance.get<Task[]>(this.apiUrl));
+  getTasks(): Subscribeable<Task[]> {
+    return createSubscribeable(this.persistance.get<Task[]>(this.apiUrl));
   }
 }

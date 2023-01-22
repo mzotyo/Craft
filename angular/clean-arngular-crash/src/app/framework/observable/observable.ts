@@ -1,15 +1,18 @@
-export interface Observable<T> {
-  subscribe(observer: Observer<T>): Subscriber;
-}
-
-export interface Observer<T> {
-  (data: T): void;
-}
-
 export interface Subscriber {
   unsubscribe(): void;
 }
 
-export interface Updateable<T> {
+export interface Subscribeable<T> {
+  subscribe(observer: Observer<T>): Subscriber;
+}
+
+export interface Observer<T> {
   update(data: T): void;
+  error(message: any): void;
+}
+
+export interface Observable<T> extends Subscribeable<T> {
+  subscribe(observer: Observer<T>): Subscriber;
+  update(data: T): void;
+  error(message: any): void;
 }

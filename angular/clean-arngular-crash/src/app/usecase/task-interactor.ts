@@ -24,8 +24,13 @@ export class TaskInteractor implements TaskInteractorInputBoundary {
   }
 
   getTasks(): void {
-    this.backend.getTasks().subscribe((tasks: Task[]) => {
-      this.output.updateTasks(mapTasksToResponseModel(tasks));
+    this.backend.getTasks().subscribe({
+      update: (tasks) => {
+        this.output.updateTasks(mapTasksToResponseModel(tasks));
+      },
+      error: (message) => {
+        console.debug(`Error:`, { message });
+      },
     });
   }
 }

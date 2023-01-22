@@ -1,6 +1,6 @@
 import { Task } from 'src/app/entity/task';
-import { Observable } from 'src/app/framework/observable/observable';
+import { Subscribeable } from 'src/app/framework/observable/observable';
 
 export interface EntityGateway {
-  getTasks(): Observable<Task[]>;
+  getTasks(): Subscribeable<Task[]>;
 }
