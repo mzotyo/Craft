@@ -3,4 +3,5 @@ import { Task } from '../../entity/task';
 
 export interface EntityGateway {
   getTasks(): Subscribeable<Task[]>;
+  deleteTask(id: number): Subscribeable<void>;
 }

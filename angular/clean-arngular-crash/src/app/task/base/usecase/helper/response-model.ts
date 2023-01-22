@@ -16,7 +16,7 @@ export function mapTasksToResponseModel(tasks: Task[]): TasksResponseModel {
     tasks: tasks.map((task) => ({
       id: task.id!,
       text: task.text,
-      date: task.date,
+      date: task.day,
       reminder: task.reminder,
     })),
   };

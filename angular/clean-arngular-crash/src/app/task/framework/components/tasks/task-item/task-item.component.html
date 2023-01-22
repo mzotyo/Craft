@@ -1,0 +1,11 @@
+<div class="task">
+  <h3>
+    {{ taskViewModel.text }}
+    <fa-icon
+      (click)="deleteTask()"
+      class="close-icon"
+      [icon]="closeIcon"
+    ></fa-icon>
+  </h3>
+  <p>{{ taskViewModel.date }}</p>
+</div>

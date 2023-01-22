@@ -18,7 +18,7 @@ export function mapTaskEnabledToViewModel(enabled: boolean): HeaderViewModel {
   };
 }
 
-type TaskViewModel = {
+export type TaskViewModel = {
   id: number;
   text: string;
   date: string;

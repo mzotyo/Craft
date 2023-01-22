@@ -1,3 +1,4 @@
+import { Task } from '../entity/task';
 import { EntityGateway } from './boundary/entity-gateway';
 import { TaskInteractorInputBoundary } from './boundary/input-boundary';
 import { TaskInteractorOutputBoundary } from './boundary/output-boundary';
@@ -11,6 +12,7 @@ export class TaskInteractor implements TaskInteractorInputBoundary {
 
   // Internal states
   private addTaskEnabled: boolean = false;
+  private tasks: Task[] = [];
 
   constructor(output: TaskInteractorOutputBoundary, backend: EntityGateway) {
     this.output = output;
@@ -25,10 +27,23 @@ export class TaskInteractor implements TaskInteractorInputBoundary {
   getTasks(): void {
     this.backend.getTasks().subscribe({
       update: (tasks) => {
+        this.tasks = tasks;
         this.output.updateTasks(mapTasksToResponseModel(tasks));
       },
       error: (message) => {
         console.debug(`Error:`, { message });
+      },
+    });
+  }
+
+  deleteTask(id: number): void {
+    this.backend.deleteTask(id).subscribe({
+      update: () => {
+        this.tasks = this.tasks.filter((task) => task.id !== id);
+        this.output.updateTasks(mapTasksToResponseModel(this.tasks));
+      },
+      error: (message: any) => {
+        console.debug('Error:', { message });
       },
     });
   }

@@ -12,4 +12,10 @@ export class EntityGatewayAdapter implements EntityGateway {
   getTasks(): Subscribeable<Task[]> {
     return createSubscribeable(this.persistance.get<Task[]>(this.apiUrl));
   }
+
+  deleteTask(id: number): Subscribeable<void> {
+    return createSubscribeable(
+      this.persistance.delete<void>(`${this.apiUrl}/${id}`)
+    );
+  }
 }

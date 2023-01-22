@@ -20,4 +20,8 @@ export class Controller
   getTasks(): void {
     this.interactor.getTasks();
   }
+
+  deleteTask(id: number): void {
+    this.interactor.deleteTask(id);
+  }
 }
