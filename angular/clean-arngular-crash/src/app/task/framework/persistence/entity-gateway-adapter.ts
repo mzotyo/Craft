@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { createSubscribeable } from '../../framework/observable/observable-adapter-rxjs';
-import { Task } from 'src/app/base/entity/task';
-import { EntityGateway } from 'src/app/base/usecase/boundary/entity-gateway';
-import { Subscribeable } from 'src/app/base/framework/observable/observable';
+import { Subscribeable } from 'src/app/common/base/observable/observable';
+import { createSubscribeable } from 'src/app/common/framework/observable/observable-adapter-rxjs';
+import { Task } from '../../base/entity/task';
+import { EntityGateway } from '../../base/usecase/boundary/entity-gateway';
 
 export class EntityGatewayAdapter implements EntityGateway {
   apiUrl: string = 'http://localhost:5000/tasks';

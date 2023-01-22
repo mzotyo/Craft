@@ -1,6 +1,6 @@
 import { Observable, Subscription } from 'rxjs';
-import * as ObservableFramework from 'src/app/base/framework/observable/observable';
-import { createObservable as createBaseObservable } from 'src/app/base/framework/observable/observable-adapter';
+import * as ObservableFramework from '../../base/observable/observable';
+import { createObservable as createBaseObservable } from '../../base/observable/observable-adapter';
 
 export function createSubscribeable<T>(
   observable: Observable<T>

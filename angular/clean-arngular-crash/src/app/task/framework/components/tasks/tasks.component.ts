@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
-import { TasksControllerInputBoundary } from 'src/app/base/controller/boundary/input-boundary';
-import { TasksPresenterOutputBoundary } from 'src/app/base/presentation/boundary/output-boundary';
-import { TasksViewModel } from 'src/app/base/presentation/helper/view-model';
+import { TasksControllerInputBoundary } from 'src/app/task/base/controller/boundary/input-boundary';
+import { TasksPresenterOutputBoundary } from 'src/app/task/base/presentation/boundary/output-boundary';
+import { TasksViewModel } from 'src/app/task/base/presentation/helper/view-model';
 
 const initialState: TasksViewModel = {
   tasks: [
