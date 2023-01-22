@@ -1,4 +1,4 @@
-import { TaskInteractorOutputBoundary } from 'src/app/usecase/boundary/output-boundary';
+import { TaskInteractorOutputBoundary } from '../usecase/boundary/output-boundary';
 import { TasksResponseModel } from '../usecase/helper/response-model';
 import {
   HeaderPresenterOutputBoundary,

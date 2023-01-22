@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { HeaderControllerInputBoundary } from 'src/app/controller/boundary/input-boundary';
-import { HeaderPresenterOutputBoundary } from 'src/app/presentation/boundary/output-boundary';
-import { HeaderViewModel } from 'src/app/presentation/helper/view-model';
+import { HeaderControllerInputBoundary } from 'src/app/base/controller/boundary/input-boundary';
+import { HeaderPresenterOutputBoundary } from 'src/app/base/presentation/boundary/output-boundary';
+import { HeaderViewModel } from 'src/app/base/presentation/helper/view-model';
 
 const initialState = {
   title: 'Task Tracker',

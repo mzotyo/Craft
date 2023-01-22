@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { Controller } from './controller/controller';
-import { HeaderComponent } from './framework/components/header/header.component';
-import { TasksComponent } from './framework/components/tasks/tasks.component';
-import { EntityGatewayAdapter } from './framework/persistence/entity-gateway-adapter';
+import { Controller } from './base/controller/controller';
 import {
   HeaderPresenterOutputBoundary,
   TasksPresenterOutputBoundary,
-} from './presentation/boundary/output-boundary';
-import { Presenter } from './presentation/presenter';
-import { TaskInteractor } from './usecase/task-interactor';
+} from './base/presentation/boundary/output-boundary';
+import { Presenter } from './base/presentation/presenter';
+import { TaskInteractor } from './base/usecase/task-interactor';
+import { HeaderComponent } from './framework/components/header/header.component';
+import { TasksComponent } from './framework/components/tasks/tasks.component';
+import { EntityGatewayAdapter } from './framework/persistence/entity-gateway-adapter';
 
 @Component({
   selector: 'app-root',

@@ -1,4 +1,4 @@
-import { TaskInteractorInputBoundary } from 'src/app/usecase/boundary/input-boundary';
+import { TaskInteractorInputBoundary } from '../usecase/boundary/input-boundary';
 import {
   HeaderControllerInputBoundary,
   TasksControllerInputBoundary,

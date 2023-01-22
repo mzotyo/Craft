@@ -1,4 +1,3 @@
-import * as rxjs from 'rxjs';
 import { Subscriber, Subscribeable, Observer, Observable } from './observable';
 
 export function createObservable<T>(): Observable<T> {

@@ -1,4 +1,3 @@
-import { Task } from '../entity/task';
 import { EntityGateway } from './boundary/entity-gateway';
 import { TaskInteractorInputBoundary } from './boundary/input-boundary';
 import { TaskInteractorOutputBoundary } from './boundary/output-boundary';

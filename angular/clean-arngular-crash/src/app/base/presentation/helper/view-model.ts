@@ -1,4 +1,4 @@
-import { TasksResponseModel } from 'src/app/usecase/helper/response-model';
+import { TasksResponseModel } from '../../usecase/helper/response-model';
 
 export type HeaderViewModel = {
   title: string;

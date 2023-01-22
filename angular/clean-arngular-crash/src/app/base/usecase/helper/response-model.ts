@@ -1,4 +1,4 @@
-import { Task } from 'src/app/entity/task';
+import { Task } from '../../entity/task';
 
 export type TaskResponseModel = {
   id: number;
