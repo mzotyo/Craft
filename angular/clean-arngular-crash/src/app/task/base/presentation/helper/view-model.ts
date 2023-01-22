@@ -1,4 +1,7 @@
-import { TasksResponseModel } from '../../usecase/helper/response-model';
+import {
+  AddTaskResponseModel,
+  TasksResponseModel,
+} from '../../usecase/helper/response-model';
 
 export type HeaderViewModel = {
   title: string;
@@ -37,5 +40,44 @@ export function mapTasksToViewModel(model: TasksResponseModel): TasksViewModel {
       date: task.date,
       reminderStyle: task.reminder ? 'reminder' : '',
     })),
+  };
+}
+
+export type AddTaskViewModel = {
+  // Form
+  visible: boolean;
+  status?: boolean;
+
+  // text
+  text: string;
+  textStyle: string;
+  textValidationMessages: string[];
+  textValidationError: boolean;
+
+  // date
+  date: string;
+  dateStyle: string;
+  dateValidationMessages: string[];
+  dateValidationError: boolean;
+
+  // Reminder
+  reminder: boolean;
+};
+
+export function mapAddTaskResponseModelToViewModel(
+  response: AddTaskResponseModel
+): AddTaskViewModel {
+  return {
+    visible: true,
+    status: response.status,
+    text: response.text,
+    textStyle: response.textValidationErrorMessages.length ? 'text-error' : '',
+    textValidationMessages: response.textValidationErrorMessages,
+    textValidationError: !!response.textValidationErrorMessages.length,
+    date: response.date,
+    dateStyle: response.dateValidationErrorMessages.length ? 'date-error' : '',
+    dateValidationMessages: response.dateValidationErrorMessages,
+    dateValidationError: !!response.dateValidationErrorMessages.length,
+    reminder: response.reminder,
   };
 }

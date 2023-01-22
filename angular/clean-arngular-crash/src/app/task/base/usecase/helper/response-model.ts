@@ -21,3 +21,12 @@ export function mapTasksToResponseModel(tasks: Task[]): TasksResponseModel {
     })),
   };
 }
+
+export type AddTaskResponseModel = {
+  text: string;
+  date: string;
+  reminder: boolean;
+  status: boolean;
+  textValidationErrorMessages: string[];
+  dateValidationErrorMessages: string[];
+};

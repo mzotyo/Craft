@@ -1,21 +1,27 @@
 import { TaskInteractorOutputBoundary } from '../usecase/boundary/output-boundary';
-import { TasksResponseModel } from '../usecase/helper/response-model';
 import {
+  AddTaskResponseModel,
+  TasksResponseModel,
+} from '../usecase/helper/response-model';
+import {
+  AddTaskPresenterOutputBoundary,
   HeaderPresenterOutputBoundary,
   TasksPresenterOutputBoundary,
 } from './boundary/output-boundary';
 import {
+  AddTaskViewModel,
+  mapAddTaskResponseModelToViewModel,
   mapTaskEnabledToViewModel,
   mapTasksToViewModel,
 } from './helper/view-model';
 
 export class Presenter implements TaskInteractorOutputBoundary {
   private header!: HeaderPresenterOutputBoundary;
-  private tasks!: TasksPresenterOutputBoundary;
+  private tasks!: TasksPresenterOutputBoundary & AddTaskPresenterOutputBoundary;
 
   setOuputBoundaries(
     header: HeaderPresenterOutputBoundary,
-    tasks: TasksPresenterOutputBoundary
+    tasks: TasksPresenterOutputBoundary & AddTaskPresenterOutputBoundary
   ) {
     this.header = header;
     this.tasks = tasks;
@@ -27,5 +33,11 @@ export class Presenter implements TaskInteractorOutputBoundary {
 
   updateTasks(tasks: TasksResponseModel): void {
     this.tasks.updateView(mapTasksToViewModel(tasks));
+  }
+
+  updateAddTaskView(addTaskResult: AddTaskResponseModel): void {
+    this.tasks.updateAddTaskView(
+      mapAddTaskResponseModelToViewModel(addTaskResult)
+    );
   }
 }

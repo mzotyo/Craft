@@ -3,6 +3,10 @@ import {
   HeaderControllerInputBoundary,
   TasksControllerInputBoundary,
 } from './boundary/input-boundary';
+import {
+  AddTaskRequestViewModel,
+  mapAddTaskRequestViewModelToRequestModel,
+} from './helper/request-model';
 
 export class Controller
   implements HeaderControllerInputBoundary, TasksControllerInputBoundary
@@ -27,5 +31,9 @@ export class Controller
 
   toggleReminder(id: number): void {
     this.interactor.toggleReminderForTask(id);
+  }
+
+  addTask(task: AddTaskRequestViewModel): void {
+    this.interactor.addTask(mapAddTaskRequestViewModelToRequestModel(task));
   }
 }

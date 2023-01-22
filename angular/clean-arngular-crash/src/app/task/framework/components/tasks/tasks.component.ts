@@ -1,7 +1,14 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 import { TasksControllerInputBoundary } from 'src/app/task/base/controller/boundary/input-boundary';
-import { TasksPresenterOutputBoundary } from 'src/app/task/base/presentation/boundary/output-boundary';
-import { TasksViewModel } from 'src/app/task/base/presentation/helper/view-model';
+import {
+  AddTaskPresenterOutputBoundary,
+  TasksPresenterOutputBoundary,
+} from 'src/app/task/base/presentation/boundary/output-boundary';
+import {
+  AddTaskViewModel,
+  TasksViewModel,
+} from 'src/app/task/base/presentation/helper/view-model';
+import { AddTaskComponent } from './add-task/add-task.component';
 
 const initialState: TasksViewModel = {
   tasks: [],
@@ -13,8 +20,14 @@ const initialState: TasksViewModel = {
   styleUrls: ['./tasks.component.css'],
 })
 export class TasksComponent
-  implements AfterViewInit, TasksPresenterOutputBoundary
+  implements
+    AfterViewInit,
+    TasksPresenterOutputBoundary,
+    AddTaskPresenterOutputBoundary
 {
+  @ViewChild(AddTaskComponent)
+  addTasksComponent!: AddTaskPresenterOutputBoundary;
+
   @Input() controller!: TasksControllerInputBoundary;
 
   viewModel: TasksViewModel = initialState;
@@ -25,5 +38,9 @@ export class TasksComponent
 
   updateView(model: TasksViewModel) {
     this.viewModel = { ...model };
+  }
+
+  updateAddTaskView(addTaskResult: AddTaskViewModel): void {
+    this.addTasksComponent.updateAddTaskView(addTaskResult);
   }
 }

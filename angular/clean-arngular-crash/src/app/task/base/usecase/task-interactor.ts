@@ -7,7 +7,10 @@ import {
   toggleReminder,
 } from './helper/business-logic';
 import { findTask, replaceTask } from './helper/helper-logic';
+import { AddTaskRequestModel } from './helper/request-model';
 import { mapTasksToResponseModel } from './helper/response-model';
+import { validateAddTaskRequest } from './validation/request-validation';
+import { mapAddTaskRequestValidationModelToResponseModel } from './validation/request-validation-model';
 
 export class TaskInteractor implements TaskInteractorInputBoundary {
   // External references
@@ -69,5 +72,16 @@ export class TaskInteractor implements TaskInteractorInputBoundary {
         console.debug('Error:', { message });
       },
     });
+  }
+
+  addTask(task: AddTaskRequestModel): void {
+    const response = mapAddTaskRequestValidationModelToResponseModel(
+      validateAddTaskRequest(task),
+      task
+    );
+
+    if (!response.status) {
+      return this.output.updateAddTaskView(response);
+    }
   }
 }

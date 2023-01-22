@@ -1,0 +1,39 @@
+<form class="add-form" *ngIf="addTaskViewModel.visible" (ngSubmit)="addTask()">
+  <div class="form-control">
+    <label for="text">Task</label>
+
+    <input
+      type="text"
+      name="text"
+      [(ngModel)]="addTaskRequestViewModel.text"
+      [ngClass]="addTaskViewModel.textStyle"
+      id="text"
+      placeHolder="Add task"
+    />
+  </div>
+  <div class="form-control">
+    <label for="date">Day & Time</label>
+
+    <input
+      type="text"
+      name="date"
+      [(ngModel)]="addTaskRequestViewModel.date"
+      [ngClass]="addTaskViewModel.dateStyle"
+      id="date"
+      placeHolder="Add day & time"
+    />
+  </div>
+
+  <div class="form-control form-control-check">
+    <label for="reminder">Reminder</label>
+
+    <input
+      type="checkbox"
+      name="reminder"
+      [(ngModel)]="addTaskRequestViewModel.reminder"
+      id="reminder"
+    />
+  </div>
+
+  <input type="submit" value="Save Task" class="btn btn-block" />
+</form>
