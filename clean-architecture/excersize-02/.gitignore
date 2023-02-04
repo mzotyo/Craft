@@ -1,0 +1,9 @@
+node_modules/
+_build/
+output/
+.history/
+.scannerwork/
+assets/info.json
+build/
+coverage
+.vscode/
