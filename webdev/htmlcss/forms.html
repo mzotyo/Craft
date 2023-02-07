@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Untitled</title>
+    <link rel="stylesheet" type="text/css" href="theme.css" />
+    <style>
+      section {
+        margin: 20px;
+      }
+      fieldset {
+        width: fit-content;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="forms.html" method="GET">
+      <section>
+        <label>
+          Keresztnév:
+          <input
+            type="text"
+            name="firstname"
+            placeholder="Írd be a keresztneved"
+            required
+          />
+        </label>
+      </section>
+
+      <section>
+        <label>
+          Születési dátum:
+          <input
+            type="date"
+            name="birthDate"
+            placeholder="Írd be a születés napodat"
+          />
+        </label>
+      </section>
+
+      <section>
+        <label>
+          Szakmai tapasztalat (év):
+          <input
+            type="number"
+            name="experience"
+            placeholder="Szakmában dolgozott évek száma"
+          />
+        </label>
+      </section>
+
+      <section>
+        <fieldset>
+          <legend>Programozói szint</legend>
+          <label>
+            <input type="radio" name="level" value="0" />
+            Kezdő
+          </label>
+          <label>
+            <input type="radio" name="level" value="1" />
+            Haladó
+          </label>
+          <label>
+            <input type="radio" name="level" value="2" />
+            Szenyor
+          </label>
+        </fieldset>
+      </section>
+
+      <section>
+        <label>
+          <input type="checkbox" name="frontend-job" value="true" />Frontend
+        </label>
+        <label>
+          <input type="checkbox" name="backend-job" value="true" />Backend
+        </label>
+      </section>
+      <section>
+        <input type="submit" value="Submit" />
+      </section>
+    </form>
+
+    <section>
+      <a href="index.html">Vissza</a>
+    </section>
+  </body>
+</html>
